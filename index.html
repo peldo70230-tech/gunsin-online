@@ -363,7 +363,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     <div class="trio">
       <div><div class="k">Server time</div><div class="v" id="server-clock">--:--:--</div><div class="s">CET</div></div>
       <div><div class="k">Next event</div><div class="v word" id="next-name">—</div><div class="s" id="next-in">&nbsp;</div></div>
-      <div><div class="k">Server status</div><div class="v word"><span class="status-dot" id="status-dot"></span><span id="status-text">Online</span></div><div class="s">Port 30001</div></div>
+      <div><div class="k">Server status</div><div class="v word"><span class="status-dot" id="status-dot"></span><span id="status-text">Online</span></div><div class="s">EU server</div></div>
     </div>
     <div class="actions">
       <a class="btn primary" href="#news">Latest news</a>
@@ -473,13 +473,13 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
           </section>
           <section class="dcard d-shop">
             <h3 class="acc-h">Coin shop</h3>
-            <p class="shop-note">Buy <b>Unique Coins</b> with PayPal or bank transfer. They are delivered to the selected character automatically.</p>
+            <p class="shop-note">Buy <b>Donation Coins</b> with PayPal or bank transfer. They are delivered to the selected character automatically.</p>
             <div class="packs" id="shop-packs" role="radiogroup" aria-label="Package">
               <button type="button" class="pack" data-euro="10" aria-pressed="true"><b>50</b><span>10 €</span></button>
               <button type="button" class="pack" data-euro="20" aria-pressed="false"><b>100</b><span>20 €</span></button>
               <button type="button" class="pack" data-euro="50" aria-pressed="false"><b>250</b><span>50 €</span></button>
             </div>
-            <div class="shop-gold" id="shop-gold">50 Unique Coins</div>
+            <div class="shop-gold" id="shop-gold">50 Donation Coins</div>
             <div id="pp-buttons" class="pp-buttons"></div>
             <button class="btn" id="shop-buy" type="button" disabled>Order by bank transfer</button>
             <p class="acc-sub center" id="shop-status">Online payments are not enabled yet.</p>
@@ -824,7 +824,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   function showLogin() { document.getElementById("acc-panel").classList.remove("wide"); document.getElementById("acc-login").hidden = false; document.getElementById("acc-view").hidden = true; }
   function needRelogin(j) { if (j && j.relogin) { setTok(null); showLogin(); stat("acc-login-status", j.error, true); return true; } return false; }
   var ME = null;
-  function fmt(n) { return (n == null || n === "") ? "–" : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+  function fmtNum(n) { return (n == null || n === "") ? "–" : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
   function showChar(c) {
     document.getElementById("ch-avatar").textContent = c ? c.cls.charAt(0) : "?";
     document.getElementById("ch-lv").textContent = "Lv. " + (c ? c.level : "–");
@@ -834,7 +834,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     var pct = c && c.exp != null ? Math.max(0, Math.min(100, c.exp)) : null;
     document.getElementById("ch-expfill").style.width = (pct || 0) + "%";
     document.getElementById("ch-exp").textContent = "EXP: " + (pct == null ? "–" : pct + "%");
-    [["st-hp", "hp"], ["st-mp", "mp"], ["st-kill", "kills"], ["st-death", "deaths"], ["st-contr", "contribute"], ["st-honor", "honor"]].forEach(function (x) { document.getElementById(x[0]).textContent = c ? fmt(c[x[1]]) : "–"; });
+    [["st-hp", "hp"], ["st-mp", "mp"], ["st-kill", "kills"], ["st-death", "deaths"], ["st-contr", "contribute"], ["st-honor", "honor"]].forEach(function (x) { document.getElementById(x[0]).textContent = c ? fmtNum(c[x[1]]) : "–"; });
     document.querySelectorAll(".d-quick [data-act]").forEach(function (b) { b.disabled = !c; });
   }
   function renderMe(j) {
@@ -877,14 +877,14 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   /* Coin shop (bank transfer) */
   var shopEuro = "10", PACKS = { "10": 50, "20": 100, "50": 250 }, shopOn = false;
   function shopSel(e) { shopEuro = e; document.querySelectorAll(".pack").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-euro") === e ? "true" : "false"); });
-    document.getElementById("shop-gold").textContent = fmt(PACKS[e]) + " Unique Coins"; }
+    document.getElementById("shop-gold").textContent = fmtNum(PACKS[e]) + " Donation Coins"; }
   document.querySelectorAll(".pack").forEach(function (b) { b.addEventListener("click", function () { shopSel(b.getAttribute("data-euro")); }); });
   function loadShop() {
     apiCall("/shop", {}).then(function (j) {
       if (!j || !j.ok) return;
       shopOn = !!j.enabled;
       if (j.paypal) loadPayPal(j.paypal);
-      if (j.packages) j.packages.forEach(function (p) { PACKS[String(p.euro)] = p.amount; var b = document.querySelector('.pack[data-euro="' + p.euro + '"] b'); if (b) b.textContent = fmt(p.amount); });
+      if (j.packages) j.packages.forEach(function (p) { PACKS[String(p.euro)] = p.amount; var b = document.querySelector('.pack[data-euro="' + p.euro + '"] b'); if (b) b.textContent = fmtNum(p.amount); });
       shopSel(shopEuro);
       document.getElementById("shop-buy").disabled = !shopOn;
       document.getElementById("shop-status").textContent = (shopOn || j.paypal) ? "" : "Online payments are not enabled yet.";
@@ -909,7 +909,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
         onApprove: function (data) {
           stat("shop-status", "Completing payment…");
           return apiCall("/pp/capture", { token: TOKEN, orderID: data.orderID }).then(function (j) {
-            if (j.ok) stat("shop-status", "Payment complete! " + j.amount + " Unique Coins will arrive to " + j.character + " (log in to receive them).");
+            if (j.ok) stat("shop-status", "Payment complete! " + j.amount + " Donation Coins will arrive to " + j.character + " (log in to receive them).");
             else stat("shop-status", j.error || "Payment failed.", true);
             loadMe();
           }).catch(function (x) { stat("shop-status", (x && x.msg) || "Payment failed.", true); });
