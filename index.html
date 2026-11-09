@@ -121,6 +121,24 @@ a { color: inherit; }
 .glfx { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; mix-blend-mode: screen; }
 .webgl .stage .fog, .webgl .stage canvas.fx { display: none; }
 
+
+/* Account panel */
+[hidden] { display: none !important; }
+#acc-panel { max-width: 980px; }
+#acc-panel .acc-login { max-width: 420px; margin: 0 auto; }
+.acc-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.acc-k { font: 12px/1 var(--f-display); letter-spacing: .18em; color: var(--ash); }
+.acc-name { font: 26px/1.2 var(--f-display); letter-spacing: .06em; margin-top: 6px; }
+.acc-sub { font-size: 14px; color: var(--ash); margin: 4px 0 0; }
+.acc-h { font: 15px/1.2 var(--f-display); letter-spacing: .16em; color: var(--brass); margin: 22px 0 10px; font-weight: normal; }
+.acc-card .acc-h { margin-top: 0; }
+.acc-chars { max-height: 30vh; margin-top: 0; }
+.acc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px; }
+.acc-col { display: grid; gap: 18px; align-content: start; }
+.acc-card { border: 1px solid var(--line); background: rgba(0,0,0,.22); padding: 18px; gap: 12px; align-content: start; }
+.acc-card .status { text-align: left; min-height: 0; }
+@media (max-width: 760px) { .acc-grid { grid-template-columns: 1fr; } .acc-head { flex-wrap: wrap; } }
+
 /* Home */
 .home { text-align: center; max-width: 980px; width: 100%; }
 .home .han { font: 800 clamp(64px, 13vw, 150px)/1 var(--f-han); margin: 0; text-shadow: 0 6px 40px rgba(0,0,0,.6); letter-spacing: .04em; }
@@ -255,6 +273,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     <li><a href="#news">News</a></li>
     <li><a href="#download">Download</a></li>
     <li><a href="#register">Register</a></li>
+    <li><a href="#account">Account</a></li>
     <li><a href="#ranking">Ranking</a></li>
     <li><a href="#rules">Rules</a></li>
   </ul>
@@ -266,6 +285,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   <li><a href="#news"><span>News</span><i></i></a></li>
   <li><a href="#download"><span>Download</span><i></i></a></li>
   <li><a href="#register"><span>Create account</span><i></i></a></li>
+  <li><a href="#account"><span>Account</span><i></i></a></li>
   <li><a href="#ranking"><span>Ranking</span><i></i></a></li>
   <li><a href="#rules"><span>Rules</span><i></i></a></li>
 </ul>
@@ -349,6 +369,55 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
         <p class="status" id="reg-status" role="status"></p>
         <p class="reg-note" id="reg-note">Problems? Ask on <a id="reg-discord-btn" href="#register">Discord</a>.</p>
       </form>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="account">
+  <div class="stage" data-scene="duel" style="--fog:rgba(255,120,80,.35)" aria-hidden="true"><img class="bgimg" data-d="0.15" src="assets/warrior_bg.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
+  <div class="panel" id="acc-panel">
+    <h2>MY ACCOUNT</h2>
+    <div class="body">
+      <form class="form acc-login" id="acc-login" novalidate>
+        <div class="field"><label for="acc-user">Username</label><input id="acc-user" autocomplete="username" maxlength="16"></div>
+        <div class="field"><label for="acc-pass">Password</label><input id="acc-pass" type="password" autocomplete="current-password" maxlength="16"></div>
+        <button class="btn primary" type="submit">Log in</button>
+        <p class="status" id="acc-login-status" role="status"></p>
+        <p class="reg-note">No account yet? <a href="#register">Create one</a>.</p>
+      </form>
+      <div class="acc-view" id="acc-view" hidden>
+        <div class="acc-head">
+          <div><div class="acc-k">Logged in as</div><div class="acc-name" id="acc-name"></div><div class="acc-sub" id="acc-sub"></div></div>
+          <button class="btn small" id="acc-logout" type="button">Log out</button>
+        </div>
+        <h3 class="acc-h">Characters</h3>
+        <div class="rank-wrap acc-chars" id="acc-chars"></div>
+        <div class="acc-grid">
+          <form class="form acc-card" id="acc-pw" novalidate>
+            <h3 class="acc-h">Change password</h3>
+            <div class="field"><label for="pw-old">Current password</label><input id="pw-old" type="password" autocomplete="current-password" maxlength="16"></div>
+            <div class="field"><label for="pw-new">New password</label><input id="pw-new" type="password" autocomplete="new-password" maxlength="16" placeholder="4–16 letters or numbers"></div>
+            <div class="field"><label for="pw-new2">Repeat new password</label><input id="pw-new2" type="password" autocomplete="new-password" maxlength="16"></div>
+            <button class="btn" type="submit">Save password</button>
+            <p class="status" id="pw-status" role="status"></p>
+          </form>
+          <div class="acc-col">
+            <form class="form acc-card" id="acc-mail" novalidate>
+              <h3 class="acc-h">Email</h3>
+              <div class="field"><label for="mail-new">Email for password recovery</label><input id="mail-new" type="email" maxlength="80"></div>
+              <button class="btn" type="submit">Save email</button>
+              <p class="status" id="mail-status" role="status"></p>
+            </form>
+            <form class="form acc-card" id="acc-2nd" novalidate>
+              <h3 class="acc-h">Secondary password</h3>
+              <p class="acc-sub" id="pw2-info">Forgot the 8-digit in-game password? Remove it and set a new one at your next login.</p>
+              <div class="field"><label for="pw2-pass">Confirm with your password</label><input id="pw2-pass" type="password" autocomplete="current-password" maxlength="16"></div>
+              <button class="btn" type="submit">Remove secondary password</button>
+              <p class="status" id="pw2-status" role="status"></p>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -439,6 +508,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     var cv = st.querySelector("canvas"); var k = Math.min(1, 1400 / sw); cv.width = Math.round(sw * k); cv.height = Math.round(sh * k); }
   function sizeAll() { stages.forEach(sizeStage); }
   sizeAll(); window.addEventListener("resize", sizeAll);
+  if (window.ResizeObserver) { var rsT = null, ro = new ResizeObserver(function () { clearTimeout(rsT); rsT = setTimeout(function () { window.dispatchEvent(new Event("resize")); }, 60); }); document.querySelectorAll(".scene").forEach(function (s) { ro.observe(s); }); }
   window.addEventListener("pointermove", function (e) { if (e.pointerType === "touch") return; mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5; }, { passive: true });
   window.addEventListener("deviceorientation", function (e) { if (e.gamma == null) return; mx = Math.max(-.5, Math.min(.5, e.gamma / 60)); my = Math.max(-.5, Math.min(.5, (e.beta - 45) / 60)); }, { passive: true });
   if ("IntersectionObserver" in window) {
@@ -633,6 +703,71 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     }).catch(function (x) { say((x && x.msg) || "Registration failed.", true); })
       .then(function () { sb.disabled = false; });
   });
+
+  /* ---------- User panel ---------- */
+  var TOKEN = null; try { TOKEN = sessionStorage.getItem("gunsin_tok"); } catch (e) {}
+  function setTok(t) { TOKEN = t; try { if (t) sessionStorage.setItem("gunsin_tok", t); else sessionStorage.removeItem("gunsin_tok"); } catch (e) {} }
+  function apiCall(path, body) {
+    return loadApi().then(function (api) {
+      if (!api) throw { msg: "The account service is offline right now. Please try again later." };
+      return fetch(api + path, { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(body || {}) })
+        .then(function (r) { return r.json().catch(function () { return { ok: false, error: "Server error (" + r.status + ")." }; }); },
+              function () { throw { msg: "Can't reach the account service. Please try again in a few minutes." }; });
+    });
+  }
+  function stat(id, t, err) { var e = document.getElementById(id); e.textContent = t; e.classList.toggle("err", !!err); }
+  function showLogin() { document.getElementById("acc-login").hidden = false; document.getElementById("acc-view").hidden = true; }
+  function needRelogin(j) { if (j && j.relogin) { setTok(null); showLogin(); stat("acc-login-status", j.error, true); return true; } return false; }
+  function renderMe(j) {
+    document.getElementById("acc-login").hidden = true; document.getElementById("acc-view").hidden = false;
+    document.getElementById("acc-name").textContent = j.user;
+    document.getElementById("acc-sub").textContent = (j.email ? j.email : "No email set") + (j.created ? " · registered " + j.created : "");
+    document.getElementById("mail-new").value = j.email || "";
+    document.getElementById("pw2-info").textContent = j.has2nd ? "Forgot the 8-digit in-game password? Remove it and set a new one at your next login." : "You have no secondary password set right now.";
+    var el = document.getElementById("acc-chars");
+    if (!j.chars || !j.chars.length) { el.innerHTML = '<div class="empty"><b>No characters yet</b>Create one in the game.</div>'; return; }
+    var h = '<table class="rank"><thead><tr><th>Character</th><th>Class</th><th>Level</th><th>Guild</th><th>Honor</th><th>Kills</th></tr></thead><tbody>';
+    j.chars.forEach(function (c) { h += "<tr><td>" + esc(c.name) + "</td><td>" + esc(c.cls) + "</td><td>" + esc(c.level) + "</td><td>" + esc(c.guild || "–") + "</td><td>" + esc(c.honor) + "</td><td>" + esc(c.kills) + "</td></tr>"; });
+    el.innerHTML = h + "</tbody></table>";
+  }
+  function loadMe() {
+    if (!TOKEN) return showLogin();
+    apiCall("/me", { token: TOKEN }).then(function (j) { if (needRelogin(j)) return; if (j.ok) renderMe(j); else { showLogin(); stat("acc-login-status", j.error || "Error.", true); } })
+      .catch(function (x) { showLogin(); stat("acc-login-status", x.msg || "Error.", true); });
+  }
+  document.getElementById("acc-login").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var u = document.getElementById("acc-user").value.trim(), p = document.getElementById("acc-pass").value;
+    if (!u || !p) return stat("acc-login-status", "Enter your username and password.", true);
+    stat("acc-login-status", "Logging in…");
+    apiCall("/login", { user: u, pass: p }).then(function (j) {
+      if (!j.ok) return stat("acc-login-status", j.error || "Login failed.", true);
+      setTok(j.token); document.getElementById("acc-pass").value = ""; stat("acc-login-status", ""); loadMe();
+    }).catch(function (x) { stat("acc-login-status", x.msg || "Login failed.", true); });
+  });
+  document.getElementById("acc-logout").addEventListener("click", function () { if (TOKEN) apiCall("/logout", { token: TOKEN }).catch(function () {}); setTok(null); showLogin(); });
+  function formCall(formId, statusId, path, build, done) {
+    document.getElementById(formId).addEventListener("submit", function (e) {
+      e.preventDefault(); var b = build(); if (!b) return;
+      b.token = TOKEN; stat(statusId, "Saving…");
+      apiCall(path, b).then(function (j) { if (needRelogin(j)) return; if (j.ok) { stat(statusId, "Saved."); if (done) done(); } else stat(statusId, j.error || "Error.", true); })
+        .catch(function (x) { stat(statusId, x.msg || "Error.", true); });
+    });
+  }
+  formCall("acc-pw", "pw-status", "/password", function () {
+    var o = document.getElementById("pw-old").value, n = document.getElementById("pw-new").value, n2 = document.getElementById("pw-new2").value;
+    if (!/^[A-Za-z0-9]{4,16}$/.test(n)) { stat("pw-status", "New password must be 4–16 letters or numbers.", true); return null; }
+    if (n !== n2) { stat("pw-status", "New passwords do not match.", true); return null; }
+    return { old: o, "new": n };
+  }, function () { document.getElementById("acc-pw").reset(); stat("pw-status", "Password changed. Use the new one in the game."); });
+  formCall("acc-mail", "mail-status", "/email", function () {
+    var m = document.getElementById("mail-new").value.trim();
+    if (m && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) { stat("mail-status", "That email address doesn't look right.", true); return null; }
+    return { email: m };
+  }, loadMe);
+  formCall("acc-2nd", "pw2-status", "/reset2nd", function () { return { pass: document.getElementById("pw2-pass").value }; },
+    function () { document.getElementById("acc-2nd").reset(); stat("pw2-status", "Removed. Set a new 8-digit password at your next login."); loadMe(); });
+  loadMe();
 })();
 </script>
 
