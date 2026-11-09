@@ -250,6 +250,7 @@ footer .toplist img { display: block; height: 40px; width: auto; border: 1px sol
 .trio .s { margin-top: 6px; font-size: 14px; color: var(--ash); }
 .status-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--good); box-shadow: 0 0 10px var(--good); margin-right: 8px; vertical-align: middle; }
 .status-dot.off { background: var(--bad); box-shadow: 0 0 10px var(--bad); }
+.status-dot.wait { background: var(--ash); box-shadow: none; }
 .home .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
 .scroll-hint { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); font: 12px/1 var(--f-display); letter-spacing: .24em; color: var(--ash); text-decoration: none; }
 .scroll-hint::after { content: ""; display: block; width: 1px; height: 28px; margin: 10px auto 0; background: linear-gradient(var(--brass), transparent); }
@@ -408,7 +409,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     <div class="trio">
       <div><div class="k">Server time</div><div class="v" id="server-clock">--:--:--</div><div class="s">CET</div></div>
       <div><div class="k">Next event</div><div class="v word" id="next-name">—</div><div class="s" id="next-in">&nbsp;</div></div>
-      <div><div class="k">Server status</div><div class="v word"><span class="status-dot" id="status-dot"></span><span id="status-text">Online</span></div><div class="s">&nbsp;</div></div>
+      <div><div class="k">Server status</div><div class="v word"><span class="status-dot wait" id="status-dot"></span><span id="status-text">Checking…</span></div><div class="s">&nbsp;</div></div>
     </div>
     <div class="actions">
       <a class="btn primary" href="#news">Latest news</a>
@@ -664,15 +665,13 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
 <script id="ranking-data" type="application/json">{"updated":null,"level":[],"class":[],"guild":[]}</script>
 <script>
 (function () {
-  /* Fill these in to activate the buttons. STATUS: "online" or "offline" */
+  /* Fill these in to activate the buttons. Server status is checked live below. */
   var LINKS = { discord: "https://discord.gg/99t6dQr2E", download: "https://mega.nz/file/jtZTWBhA#jZmLR3mfUXriq1u98reghgB0cWikovEGCehX8RMMaVA", mirror: "" };
-  var STATUS = "online";
 
   function setLink(id, url) { var a = document.getElementById(id); if (!a) return; if (url) { a.href = url; a.target = "_blank"; a.rel = "noopener"; a.removeAttribute("aria-disabled"); } }
   setLink("discord-float", LINKS.discord); setLink("nav-discord", LINKS.discord); setLink("reg-discord-btn", LINKS.discord);
   if (!LINKS.mirror) { var mr = document.getElementById("mirror-row"); if (mr) mr.hidden = true; } setLink("download-link", LINKS.download); setLink("download-mirror", LINKS.mirror);
   document.querySelectorAll('[aria-disabled="true"]').forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); }); a.title = "Link coming soon"; });
-  if (STATUS !== "online") { document.getElementById("status-dot").classList.add("off"); document.getElementById("status-text").textContent = "Offline"; }
 
   /* Server clock (CET) and event countdowns */
   function serverNow() {
@@ -942,6 +941,9 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
               function () { throw { msg: "Can't reach the account service. Please try again in a few minutes." }; });
     });
   }
+  function setStatus(on) { var d = document.getElementById("status-dot"); d.classList.remove("wait"); d.classList.toggle("off", !on); document.getElementById("status-text").textContent = on ? "Online" : "Offline"; }
+  function checkStatus() { apiCall("/status", {}).then(function (j) { setStatus(!!(j && j.ok && j.online)); }, function () { setStatus(false); }); }
+  checkStatus(); setInterval(checkStatus, 60000);
   function stat(id, t, err) { var e = document.getElementById(id); e.textContent = t; e.classList.toggle("err", !!err); }
   function showLogin() { document.getElementById("acc-panel").classList.remove("wide"); document.getElementById("acc-login").hidden = false; document.getElementById("acc-recover").hidden = true; document.getElementById("acc-snrec").hidden = true; document.getElementById("acc-view").hidden = true; }
   function needRelogin(j) { if (j && j.relogin) { setTok(null); showLogin(); stat("acc-login-status", j.error, true); return true; } return false; }
