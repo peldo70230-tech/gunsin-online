@@ -139,6 +139,64 @@ a { color: inherit; }
 .acc-card .status { text-align: left; min-height: 0; }
 @media (max-width: 760px) { .acc-grid { grid-template-columns: 1fr; } .acc-head { flex-wrap: wrap; } }
 
+
+/* Dashboard */
+#acc-panel.wide { max-width: 1220px; }
+.dash { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 16px; margin-top: 18px; }
+.dcard { border: 1px solid var(--line); background: rgba(0,0,0,.28); padding: 18px; min-width: 0; }
+.dcard .acc-h { margin: 0 0 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.d-act { grid-column: span 2; }
+.char-top { display: grid; grid-template-columns: 110px 1fr; gap: 18px; align-items: start; }
+.avatar { width: 110px; height: 110px; display: grid; place-items: center; border: 1px solid var(--brass); background: radial-gradient(circle at 50% 35%, var(--oxblood-hi), #1a0909); font: 46px/1 var(--f-display); color: var(--ivory); box-shadow: inset 0 0 24px rgba(0,0,0,.6); }
+.char-sel { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+.char-sel select { flex: 1; min-width: 0; min-height: 40px; background: rgba(0,0,0,.45); color: var(--ivory); border: 1px solid var(--line); padding: 6px 10px; font: 16px var(--f-body); }
+.lv { flex: none; font: 20px/1 var(--f-display); color: var(--brass); padding: 8px 10px; border: 1px solid var(--line); background: rgba(209,171,99,.08); }
+.kv { display: grid; grid-template-columns: auto 1fr; margin: 12px 0 0; }
+.kv dt, .kv dd { margin: 0; padding: 7px 0; border-bottom: 1px solid var(--line); }
+.kv dt { color: var(--ash); font-size: 15px; } .kv dd { text-align: right; font-weight: 700; }
+.expbar { height: 10px; margin-top: 14px; background: rgba(0,0,0,.5); border: 1px solid var(--line); overflow: hidden; }
+.expbar span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--oxblood-hi), var(--brass)); transition: width .6s ease; }
+.exp-t { font: 500 12px/1 var(--f-mono); color: var(--ash); margin-top: 6px; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stat { display: flex; align-items: center; gap: 10px; padding: 12px 10px; border: 1px solid var(--line); background: rgba(0,0,0,.3); min-width: 0; }
+.stat svg { width: 26px; height: 26px; flex: none; }
+.stat span { display: block; font-size: 12px; color: var(--ash); line-height: 1.2; }
+.stat b { display: block; font: 500 17px/1.3 var(--f-mono); }
+.shop-note { font-size: 14px; color: var(--ash); background: rgba(0,0,0,.3); border: 1px solid var(--line); padding: 10px 12px; margin: 0 0 14px; }
+.shop-note b { color: var(--brass); }
+.shop-row { display: flex; align-items: center; gap: 8px; }
+.shop-row input { flex: 1; min-width: 0; min-height: 42px; background: rgba(0,0,0,.45); border: 1px solid var(--line); color: var(--brass); font: 500 18px var(--f-mono); padding: 6px 12px; }
+.shop-row span { font: 20px var(--f-display); color: var(--brass); }
+.shop-gold { text-align: center; color: #f2c94c; font: 18px/1.3 var(--f-display); margin: 12px 0; }
+.d-shop .btn { width: 100%; }
+.d-quick { display: grid; gap: 10px; align-content: start; }
+.d-quick .acc-h { margin-bottom: 4px; }
+.d-quick .acc-sub { margin: 0 0 4px; }
+.d-quick .status { text-align: left; min-height: 0; margin: 0; }
+.acts { max-height: 260px; margin: 0; }
+.acts .rank tbody tr td.ok { color: var(--good); } .acts .rank tbody tr td.pend { color: #f2c94c; } .acts .rank tbody tr td.bad { color: var(--bad); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.settings-h { margin-top: 26px; }
+.acc-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.center { text-align: center; }
+@media (max-width: 1100px) { .dash { grid-template-columns: 1fr 1fr; } .d-char { grid-column: span 2; } .d-act { grid-column: span 2; } .acc-grid3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 700px) { .dash, .acc-grid3 { grid-template-columns: 1fr; } .d-char, .d-act { grid-column: auto; } .char-top { grid-template-columns: 1fr; } .avatar { width: 80px; height: 80px; font-size: 34px; } }
+
+
+.packs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.pack { background: rgba(0,0,0,.4); border: 1px solid var(--line); color: var(--ivory); padding: 10px 4px; cursor: pointer; font: inherit; }
+.pack b { display: block; font: 500 20px/1.1 var(--f-mono); color: #f2c94c; }
+.pack span { font-size: 14px; color: var(--ash); }
+.pack[aria-pressed="true"] { border-color: var(--brass); background: rgba(209,171,99,.14); box-shadow: inset 0 0 0 1px var(--brass); }
+.pp-buttons { margin-bottom: 8px; min-height: 0; }
+.pp-buttons:not(:empty) + .btn { margin-top: 2px; }
+.payinfo { margin-top: 14px; border: 1px solid var(--brass); background: rgba(209,171,99,.07); padding: 12px; }
+.payinfo .pay-t { margin: 0 0 8px; font-size: 15px; }
+.payinfo dl { margin: 0; display: grid; gap: 6px; }
+.payinfo dt { font: 11px/1 var(--f-display); letter-spacing: .14em; color: var(--ash); margin-top: 4px; }
+.payinfo dd { margin: 0; display: flex; justify-content: space-between; gap: 8px; align-items: center; font: 500 14px/1.3 var(--f-mono); word-break: break-all; }
+.cp { flex: none; background: none; border: 1px solid var(--line); color: var(--brass); font: 12px var(--f-body); padding: 3px 8px; cursor: pointer; }
+
 /* Home */
 .home { text-align: center; max-width: 980px; width: 100%; }
 .home .han { font: 800 clamp(64px, 13vw, 150px)/1 var(--f-han); margin: 0; text-shadow: 0 6px 40px rgba(0,0,0,.6); letter-spacing: .04em; }
@@ -390,9 +448,58 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
           <div><div class="acc-k">Logged in as</div><div class="acc-name" id="acc-name"></div><div class="acc-sub" id="acc-sub"></div></div>
           <button class="btn small" id="acc-logout" type="button">Log out</button>
         </div>
-        <h3 class="acc-h">Characters</h3>
-        <div class="rank-wrap acc-chars" id="acc-chars"></div>
-        <div class="acc-grid">
+        <div class="dash">
+          <section class="dcard d-char">
+            <h3 class="acc-h">Character info</h3>
+            <div class="char-top">
+              <div class="avatar" id="ch-avatar" aria-hidden="true">?</div>
+              <div class="char-main">
+                <div class="char-sel"><select id="ch-select" aria-label="Select a character"></select><span class="lv" id="ch-lv">Lv. –</span></div>
+                <dl class="kv"><dt>Name</dt><dd id="ch-name">–</dd><dt>Class</dt><dd id="ch-class">–</dd><dt>Guild</dt><dd id="ch-guild">–</dd></dl>
+                <div class="expbar"><span id="ch-expfill"></span></div><div class="exp-t" id="ch-exp">EXP: –</div>
+              </div>
+            </div>
+          </section>
+          <section class="dcard d-stats">
+            <h3 class="acc-h">Combat stats</h3>
+            <div class="stats">
+              <div class="stat"><svg viewBox="0 0 24 24"><path fill="#e0564a" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.3 3 4.5 6.6 4.5c2.1 0 3.6 1.2 5.4 3.2 1.8-2 3.3-3.2 5.4-3.2 3.6 0 5.7 3.8 4.2 7.3C19.5 16.4 12 21 12 21z"/></svg><div><span>HP</span><b id="st-hp">–</b></div></div>
+              <div class="stat"><svg viewBox="0 0 24 24"><path fill="#5aa7e6" d="M12 2s7 7.6 7 12.5A7 7 0 0 1 5 14.5C5 9.6 12 2 12 2z"/></svg><div><span>MP</span><b id="st-mp">–</b></div></div>
+              <div class="stat"><svg viewBox="0 0 24 24"><path fill="none" stroke="#d1ab63" stroke-width="2" stroke-linecap="round" d="M4 4l11 11M20 4L9 15M6 18l3-3M18 18l-3-3M5 19l2 2M19 19l-2 2"/></svg><div><span>Honor kill</span><b id="st-kill">–</b></div></div>
+              <div class="stat"><svg viewBox="0 0 24 24"><path fill="#7d9bd8" d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z"/></svg><div><span>Honor death</span><b id="st-death">–</b></div></div>
+              <div class="stat"><svg viewBox="0 0 24 24"><path fill="#e88a4a" d="M12 2c3 2 5 5.5 5 9.5l2.5 3-3 .5-1 3h-7l-1-3-3-.5L7 11.5C7 7.5 9 4 12 2zm0 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM10 19h4l-2 3z"/></svg><div><span>Contribute</span><b id="st-contr">–</b></div></div>
+              <div class="stat"><svg viewBox="0 0 24 24"><path fill="#f2c94c" d="M12 2l2.6 6.6L21 9.3l-5 4.4 1.6 6.8L12 17l-5.6 3.5L8 13.7 3 9.3l6.4-.7z"/></svg><div><span>Honor point</span><b id="st-honor">–</b></div></div>
+            </div>
+          </section>
+          <section class="dcard d-shop">
+            <h3 class="acc-h">Coin shop</h3>
+            <p class="shop-note">Buy <b>Unique Coins</b> with PayPal or bank transfer. They are delivered to the selected character automatically.</p>
+            <div class="packs" id="shop-packs" role="radiogroup" aria-label="Package">
+              <button type="button" class="pack" data-euro="10" aria-pressed="true"><b>50</b><span>10 €</span></button>
+              <button type="button" class="pack" data-euro="20" aria-pressed="false"><b>100</b><span>20 €</span></button>
+              <button type="button" class="pack" data-euro="50" aria-pressed="false"><b>250</b><span>50 €</span></button>
+            </div>
+            <div class="shop-gold" id="shop-gold">50 Unique Coins</div>
+            <div id="pp-buttons" class="pp-buttons"></div>
+            <button class="btn" id="shop-buy" type="button" disabled>Order by bank transfer</button>
+            <p class="acc-sub center" id="shop-status">Online payments are not enabled yet.</p>
+            <div class="payinfo" id="payinfo" hidden></div>
+          </section>
+          <section class="dcard d-act">
+            <h3 class="acc-h">Recent activity</h3>
+            <div class="rank-wrap acts" id="acc-acts"></div>
+          </section>
+          <section class="dcard d-quick">
+            <h3 class="acc-h">Quick actions</h3>
+            <p class="acc-sub">For the selected character. Log out of the game first.</p>
+            <button class="btn" type="button" data-act="unstuck">Unstuck (move to town)</button>
+            <button class="btn" type="button" data-act="rage">Rage reset</button>
+            <button class="btn" type="button" disabled title="Coming soon">Guild time reset</button>
+            <p class="status" id="qa-status" role="status"></p>
+          </section>
+        </div>
+        <h3 class="acc-h settings-h">Account settings</h3>
+        <div class="acc-grid3">
           <form class="form acc-card" id="acc-pw" novalidate>
             <h3 class="acc-h">Change password</h3>
             <div class="field"><label for="pw-old">Current password</label><input id="pw-old" type="password" autocomplete="current-password" maxlength="16"></div>
@@ -401,21 +508,19 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
             <button class="btn" type="submit">Save password</button>
             <p class="status" id="pw-status" role="status"></p>
           </form>
-          <div class="acc-col">
-            <form class="form acc-card" id="acc-mail" novalidate>
-              <h3 class="acc-h">Email</h3>
-              <div class="field"><label for="mail-new">Email for password recovery</label><input id="mail-new" type="email" maxlength="80"></div>
-              <button class="btn" type="submit">Save email</button>
-              <p class="status" id="mail-status" role="status"></p>
-            </form>
-            <form class="form acc-card" id="acc-2nd" novalidate>
-              <h3 class="acc-h">Secondary password</h3>
-              <p class="acc-sub" id="pw2-info">Forgot the 8-digit in-game password? Remove it and set a new one at your next login.</p>
-              <div class="field"><label for="pw2-pass">Confirm with your password</label><input id="pw2-pass" type="password" autocomplete="current-password" maxlength="16"></div>
-              <button class="btn" type="submit">Remove secondary password</button>
-              <p class="status" id="pw2-status" role="status"></p>
-            </form>
-          </div>
+          <form class="form acc-card" id="acc-mail" novalidate>
+            <h3 class="acc-h">Email</h3>
+            <div class="field"><label for="mail-new">Email for password recovery</label><input id="mail-new" type="email" maxlength="80"></div>
+            <button class="btn" type="submit">Save email</button>
+            <p class="status" id="mail-status" role="status"></p>
+          </form>
+          <form class="form acc-card" id="acc-2nd" novalidate>
+            <h3 class="acc-h">Secondary password</h3>
+            <p class="acc-sub" id="pw2-info">Forgot the 8-digit in-game password? Remove it and set a new one at your next login.</p>
+            <div class="field"><label for="pw2-pass">Confirm with your password</label><input id="pw2-pass" type="password" autocomplete="current-password" maxlength="16"></div>
+            <button class="btn" type="submit">Remove secondary password</button>
+            <p class="status" id="pw2-status" role="status"></p>
+          </form>
         </div>
       </div>
     </div>
@@ -716,20 +821,130 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     });
   }
   function stat(id, t, err) { var e = document.getElementById(id); e.textContent = t; e.classList.toggle("err", !!err); }
-  function showLogin() { document.getElementById("acc-login").hidden = false; document.getElementById("acc-view").hidden = true; }
+  function showLogin() { document.getElementById("acc-panel").classList.remove("wide"); document.getElementById("acc-login").hidden = false; document.getElementById("acc-view").hidden = true; }
   function needRelogin(j) { if (j && j.relogin) { setTok(null); showLogin(); stat("acc-login-status", j.error, true); return true; } return false; }
+  var ME = null;
+  function fmt(n) { return (n == null || n === "") ? "–" : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+  function showChar(c) {
+    document.getElementById("ch-avatar").textContent = c ? c.cls.charAt(0) : "?";
+    document.getElementById("ch-lv").textContent = "Lv. " + (c ? c.level : "–");
+    document.getElementById("ch-name").textContent = c ? c.name : "–";
+    document.getElementById("ch-class").textContent = c ? c.cls : "–";
+    document.getElementById("ch-guild").textContent = c && c.guild ? c.guild : "–";
+    var pct = c && c.exp != null ? Math.max(0, Math.min(100, c.exp)) : null;
+    document.getElementById("ch-expfill").style.width = (pct || 0) + "%";
+    document.getElementById("ch-exp").textContent = "EXP: " + (pct == null ? "–" : pct + "%");
+    [["st-hp", "hp"], ["st-mp", "mp"], ["st-kill", "kills"], ["st-death", "deaths"], ["st-contr", "contribute"], ["st-honor", "honor"]].forEach(function (x) { document.getElementById(x[0]).textContent = c ? fmt(c[x[1]]) : "–"; });
+    document.querySelectorAll(".d-quick [data-act]").forEach(function (b) { b.disabled = !c; });
+  }
   function renderMe(j) {
+    if (!ME) loadShop();
+    ME = j;
+    document.getElementById("acc-panel").classList.add("wide");
     document.getElementById("acc-login").hidden = true; document.getElementById("acc-view").hidden = false;
     document.getElementById("acc-name").textContent = j.user;
     document.getElementById("acc-sub").textContent = (j.email ? j.email : "No email set") + (j.created ? " · registered " + j.created : "");
     document.getElementById("mail-new").value = j.email || "";
     document.getElementById("pw2-info").textContent = j.has2nd ? "Forgot the 8-digit in-game password? Remove it and set a new one at your next login." : "You have no secondary password set right now.";
-    var el = document.getElementById("acc-chars");
-    if (!j.chars || !j.chars.length) { el.innerHTML = '<div class="empty"><b>No characters yet</b>Create one in the game.</div>'; return; }
-    var h = '<table class="rank"><thead><tr><th>Character</th><th>Class</th><th>Level</th><th>Guild</th><th>Honor</th><th>Kills</th></tr></thead><tbody>';
-    j.chars.forEach(function (c) { h += "<tr><td>" + esc(c.name) + "</td><td>" + esc(c.cls) + "</td><td>" + esc(c.level) + "</td><td>" + esc(c.guild || "–") + "</td><td>" + esc(c.honor) + "</td><td>" + esc(c.kills) + "</td></tr>"; });
-    el.innerHTML = h + "</tbody></table>";
+    var sel = document.getElementById("ch-select"), prev = sel.value; sel.innerHTML = "";
+    (j.chars || []).forEach(function (c) { var o = document.createElement("option"); o.value = c.pid; o.textContent = c.name + " (" + c.cls + " " + c.level + ")"; sel.appendChild(o); });
+    if (!j.chars || !j.chars.length) { var o = document.createElement("option"); o.textContent = "No characters yet"; sel.appendChild(o); sel.disabled = true; showChar(null); }
+    else { sel.disabled = false; if (prev && j.chars.some(function (c) { return String(c.pid) === prev; })) sel.value = prev; showChar(curChar()); }
+    var a = document.getElementById("acc-acts");
+    if (!j.activity || !j.activity.length) a.innerHTML = '<div class="empty"><b>No activity yet</b>Purchases and account changes appear here.</div>';
+    else {
+      var h = '<table class="rank"><thead><tr><th>Action</th><th>Price</th><th>Date</th><th>Status</th></tr></thead><tbody>';
+      j.activity.forEach(function (x) { var st = (x.status || "").toLowerCase(), cl = /done|paid|delivered/.test(st) ? "ok" : /pend/.test(st) ? "pend" : "bad";
+        h += "<tr><td>" + esc(x.action) + (x.detail ? " · " + esc(x.detail) : "") + "</td><td>" + esc(x.price || "–") + "</td><td>" + esc(x.date) + '</td><td class="' + cl + '">' + esc(x.status) + "</td></tr>"; });
+      a.innerHTML = h + "</tbody></table>";
+    }
   }
+  function curChar() { if (!ME || !ME.chars) return null; var v = document.getElementById("ch-select").value; return ME.chars.filter(function (c) { return String(c.pid) === v; })[0] || null; }
+  document.getElementById("ch-select").addEventListener("change", function () { showChar(curChar()); });
+  document.querySelectorAll(".d-quick [data-act]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var c = curChar(); if (!c) return;
+      var act = b.getAttribute("data-act");
+      if (!b._armed) { b._armed = true; b._txt = b.textContent; b.textContent = "Click again to confirm"; b.classList.add("primary");
+        stat("qa-status", "Make sure " + c.name + " is logged out of the game.");
+        b._t = setTimeout(function () { b._armed = false; b.textContent = b._txt; b.classList.remove("primary"); }, 4000); return; }
+      clearTimeout(b._t); b._armed = false; b.textContent = b._txt; b.classList.remove("primary");
+      b.disabled = true; stat("qa-status", "Working…");
+      apiCall("/" + act, { token: TOKEN, pid: c.pid }).then(function (j) { if (needRelogin(j)) return; if (j.ok) { stat("qa-status", act === "unstuck" ? c.name + " will be in town at the next login." : "Rage of " + c.name + " was reset."); loadMe(); } else stat("qa-status", j.error || "Error.", true); })
+        .catch(function (x) { stat("qa-status", x.msg || "Error.", true); }).then(function () { b.disabled = false; });
+    });
+  });
+  /* Coin shop (bank transfer) */
+  var shopEuro = "10", PACKS = { "10": 50, "20": 100, "50": 250 }, shopOn = false;
+  function shopSel(e) { shopEuro = e; document.querySelectorAll(".pack").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-euro") === e ? "true" : "false"); });
+    document.getElementById("shop-gold").textContent = fmt(PACKS[e]) + " Unique Coins"; }
+  document.querySelectorAll(".pack").forEach(function (b) { b.addEventListener("click", function () { shopSel(b.getAttribute("data-euro")); }); });
+  function loadShop() {
+    apiCall("/shop", {}).then(function (j) {
+      if (!j || !j.ok) return;
+      shopOn = !!j.enabled;
+      if (j.paypal) loadPayPal(j.paypal);
+      if (j.packages) j.packages.forEach(function (p) { PACKS[String(p.euro)] = p.amount; var b = document.querySelector('.pack[data-euro="' + p.euro + '"] b'); if (b) b.textContent = fmt(p.amount); });
+      shopSel(shopEuro);
+      document.getElementById("shop-buy").disabled = !shopOn;
+      document.getElementById("shop-status").textContent = (shopOn || j.paypal) ? "" : "Online payments are not enabled yet.";
+      document.getElementById("shop-buy").hidden = !shopOn;
+    }).catch(function () {});
+  }
+  var ppLoaded = false;
+  function loadPayPal(cid) {
+    if (ppLoaded || !/^[A-Za-z0-9_-]{20,100}$/.test(cid)) return; ppLoaded = true;
+    var sc = document.createElement("script");
+    sc.src = "https://www.paypal.com/sdk/js?client-id=" + encodeURIComponent(cid) + "&currency=EUR&intent=capture&disable-funding=paylater,venmo";
+    sc.onload = function () {
+      if (!window.paypal) return;
+      window.paypal.Buttons({
+        style: { layout: "vertical", color: "gold", shape: "rect", label: "pay", height: 42 },
+        onClick: function (data, actions) { if (!curChar()) { stat("shop-status", "Choose a character first.", true); return actions.reject(); } stat("shop-status", ""); return actions.resolve(); },
+        createOrder: function () {
+          var c = curChar();
+          return apiCall("/pp/create", { token: TOKEN, pid: c.pid, euro: shopEuro }).then(function (j) {
+            if (needRelogin(j)) throw new Error("relogin"); if (!j.ok) { stat("shop-status", j.error || "Error.", true); throw new Error(j.error); } return j.id; });
+        },
+        onApprove: function (data) {
+          stat("shop-status", "Completing payment…");
+          return apiCall("/pp/capture", { token: TOKEN, orderID: data.orderID }).then(function (j) {
+            if (j.ok) stat("shop-status", "Payment complete! " + j.amount + " Unique Coins will arrive to " + j.character + " (log in to receive them).");
+            else stat("shop-status", j.error || "Payment failed.", true);
+            loadMe();
+          }).catch(function (x) { stat("shop-status", (x && x.msg) || "Payment failed.", true); });
+        },
+        onCancel: function () { stat("shop-status", "Payment cancelled."); },
+        onError: function () { stat("shop-status", "PayPal error. Please try again.", true); }
+      }).render("#pp-buttons");
+    };
+    sc.onerror = function () { ppLoaded = false; };
+    document.head.appendChild(sc);
+  }
+  function copyBtn(v) { return '<button type="button" class="cp" data-cp="' + esc(v) + '">Copy</button>'; }
+  document.getElementById("shop-buy").addEventListener("click", function () {
+    var c = curChar(); if (!c) return stat("shop-status", "Choose a character first.", true);
+    var b = this; b.disabled = true; stat("shop-status", "Creating your order…");
+    apiCall("/order", { token: TOKEN, pid: c.pid, euro: shopEuro }).then(function (j) {
+      if (needRelogin(j)) return;
+      if (!j.ok) return stat("shop-status", j.error || "Error.", true);
+      stat("shop-status", "");
+      var k = j.bank, rows = [["Amount", j.euro + ".00 EUR"], ["Recipient", k.name], ["IBAN", k.iban]];
+      if (k.bank) rows.push(["Bank", k.bank]); if (k.swift) rows.push(["SWIFT/BIC", k.swift]); if (k.address) rows.push(["Address", k.address]);
+      rows.push(["Payment reference", j.ref]);
+      var h = '<p class="pay-t">Order <b>' + esc(j.ref) + "</b>: " + esc(j.amount) + " " + esc(j.item) + "s for " + esc(j.character) + "</p><dl>";
+      rows.forEach(function (r) { h += "<dt>" + esc(r[0]) + "</dt><dd><span>" + esc(r[1]) + "</span>" + copyBtn(r[1]) + "</dd>"; });
+      h += '</dl><p class="acc-sub">Write <b>' + esc(j.ref) + "</b> in the payment description. The coins arrive after the payment is confirmed (usually within 1–2 working days). You can see the status under Recent activity.</p>";
+      var pi = document.getElementById("payinfo"); pi.innerHTML = h; pi.hidden = false;
+      loadMe();
+    }).catch(function (x) { stat("shop-status", x.msg || "Error.", true); }).then(function () { b.disabled = !shopOn; });
+  });
+  document.getElementById("payinfo").addEventListener("click", function (e) {
+    var t = e.target.closest ? e.target.closest(".cp") : null; if (!t) return;
+    var v = t.getAttribute("data-cp");
+    function done() { t.textContent = "Copied"; setTimeout(function () { t.textContent = "Copy"; }, 1500); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(done, function () {}); 
+  });
   function loadMe() {
     if (!TOKEN) return showLogin();
     apiCall("/me", { token: TOKEN }).then(function (j) { if (needRelogin(j)) return; if (j.ok) renderMe(j); else { showLogin(); stat("acc-login-status", j.error || "Error.", true); } })
