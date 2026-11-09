@@ -182,6 +182,10 @@ td.r, th.r { text-align: right; }
 .status { min-height: 1.4em; margin: 0; font-size: 15px; color: var(--good); text-align: center; }
 .status.err { color: var(--bad); }
 .form .btn { width: 100%; }
+.form .btn:disabled { opacity: .6; cursor: wait; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.reg-note { margin: 0; text-align: center; font-size: 14px; color: var(--ash); }
+.reg-note a { color: var(--brass); }
 .home .tag { min-height: 1em; }
 
 /* Ranking */
@@ -335,14 +339,15 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   <div class="panel narrow">
     <h2>CREATE ACCOUNT</h2>
     <div class="body">
-      <form class="form" id="reg-form" novalidate>
+      <form class="form" id="reg-form" novalidate autocomplete="off">
         <div class="field"><label for="reg-user">Username</label><input id="reg-user" name="user" autocomplete="username" maxlength="16" placeholder="4–16 letters or numbers"></div>
-        <div class="field"><label for="reg-discord">Discord</label><input id="reg-discord" name="discord" maxlength="40" placeholder="your Discord username"></div>
-        <div class="field"><label for="reg-email">Email</label><input id="reg-email" name="email" type="email" maxlength="80" placeholder="for password recovery"></div>
-        <div class="preview" id="reg-preview" aria-live="polite"></div>
-        <button class="btn primary" type="submit">Create account</button>
+        <div class="field"><label for="reg-pass">Password</label><input id="reg-pass" name="pass" type="password" autocomplete="new-password" maxlength="16" placeholder="4–16 letters or numbers"></div>
+        <div class="field"><label for="reg-pass2">Repeat password</label><input id="reg-pass2" name="pass2" type="password" autocomplete="new-password" maxlength="16"></div>
+        <div class="field"><label for="reg-email">Email <span style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="reg-email" name="email" type="email" maxlength="80" placeholder="for password recovery"></div>
+        <div class="hp" aria-hidden="true"><label for="reg-web">Website</label><input id="reg-web" name="website" tabindex="-1" autocomplete="off"></div>
+        <button class="btn primary" type="submit" id="reg-submit">Create account</button>
         <p class="status" id="reg-status" role="status"></p>
-        <a class="btn" id="reg-discord-btn" href="#register">Open Discord</a>
+        <p class="reg-note" id="reg-note">Problems? Ask on <a id="reg-discord-btn" href="#register">Discord</a>.</p>
       </form>
     </div>
   </div>
@@ -599,24 +604,34 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   }
   loadRanking(); setInterval(loadRanking, 120000);
 
-  /* Account request builder (no password collected) */
-  var f = document.getElementById("reg-form"), pv = document.getElementById("reg-preview"), st = document.getElementById("reg-status");
+  /* Registration: sent to the game server's registration service (address in api.json) */
+  var f = document.getElementById("reg-form"), st = document.getElementById("reg-status"), sb = document.getElementById("reg-submit"), API = null;
   function val(id) { return document.getElementById(id).value.trim(); }
-  function build() { return "Account request – Gunsin Online\nUsername: " + (val("reg-user") || "…") + "\nDiscord: " + (val("reg-discord") || "…") + (val("reg-email") ? "\nEmail: " + val("reg-email") : ""); }
-  function update() { pv.textContent = build(); }
-  ["reg-user", "reg-discord", "reg-email"].forEach(function (id) { document.getElementById(id).addEventListener("input", update); });
-  update();
-  function selectPreview() { try { var r = document.createRange(); r.selectNodeContents(pv); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); } catch (x) {} }
+  function say(t, err) { st.textContent = t; st.classList.toggle("err", !!err); }
+  function loadApi() {
+    if (!window.fetch || location.protocol === "file:") return Promise.resolve(null);
+    return fetch("api.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { API = j && j.register ? String(j.register).replace(/\/+$/, "") : null; return API; }).catch(function () { return null; });
+  }
+  loadApi();
   f.addEventListener("submit", function (e) {
     e.preventDefault();
-    var u = val("reg-user"), d = val("reg-discord");
-    st.classList.remove("err");
-    if (!/^[A-Za-z0-9]{4,16}$/.test(u)) { st.textContent = "Username must be 4–16 letters or numbers."; st.classList.add("err"); return; }
-    if (!d) { st.textContent = "Add your Discord name."; st.classList.add("err"); return; }
-    var text = build(), ok = "Copied. Paste it in the registration channel on Discord.";
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function () { st.textContent = ok; }, function () { selectPreview(); st.textContent = "Press Ctrl+C to copy, then paste it on Discord."; });
-    } else { selectPreview(); st.textContent = "Press Ctrl+C to copy, then paste it on Discord."; }
+    var u = val("reg-user"), p = document.getElementById("reg-pass").value, p2 = document.getElementById("reg-pass2").value, m = val("reg-email");
+    if (!/^[A-Za-z0-9]{4,16}$/.test(u)) return say("Username must be 4–16 letters or numbers.", true);
+    if (!/^[A-Za-z0-9]{4,16}$/.test(p)) return say("Password must be 4–16 letters or numbers (no spaces or symbols).", true);
+    if (p !== p2) return say("Passwords do not match.", true);
+    if (m && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) return say("That email address doesn't look right.", true);
+    sb.disabled = true; say("Creating your account…");
+    loadApi().then(function (api) {
+      if (!api) throw { msg: "Registration is offline right now. Please try again later or ask on Discord." };
+      return fetch(api + "/register", { method: "POST", headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify({ user: u, pass: p, email: m, website: val("reg-web") }) })
+        .then(function (r) { return r.json().catch(function () { return { ok: false, error: "Server error (" + r.status + ")." }; }); }, function () { throw { msg: "Can't reach the registration server. Please try again in a few minutes." }; });
+    }).then(function (j) {
+      if (j && j.ok) { f.reset(); say("Account “" + u + "” created! Download the client and log in."); }
+      else say((j && j.error) || "Registration failed.", true);
+    }).catch(function (x) { say((x && x.msg) || "Registration failed.", true); })
+      .then(function () { sb.disabled = false; });
   });
 })();
 </script>
