@@ -896,6 +896,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   function say(t, err) { st.textContent = t; st.classList.toggle("err", !!err); }
   function loadApi() {
     if (!window.fetch || location.protocol === "file:") return Promise.resolve(null);
+    if (/(^|\.)gunsinonline\.com$/.test(location.hostname)) { API = "https://api.gunsinonline.com"; return Promise.resolve(API); }
     return fetch("api.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { API = j && j.register ? String(j.register).replace(/\/+$/, "") : null; return API; }).catch(function () { return null; });
   }
