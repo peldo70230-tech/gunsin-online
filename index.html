@@ -3,8 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Gunsin Online - KalOnline private server">
 <title>Gunsin Online</title>
+<meta name="description" content="Gunsin Online - KalOnline private server. PvP, Battlefield, Duel Tournament and daily events.">
+<meta name="theme-color" content="#120808">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gunsin Online">
+<meta property="og:title" content="Gunsin Online - KalOnline private server">
+<meta property="og:description" content="PvP, Battlefield, Duel Tournament and daily events. Create your account and join the war.">
+<meta property="og:url" content="https://peldo70230-tech.github.io/gunsin-online/">
+<meta property="og:image" content="https://peldo70230-tech.github.io/gunsin-online/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://peldo70230-tech.github.io/gunsin-online/assets/og.jpg">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -145,7 +159,7 @@ a { color: inherit; }
 .dash { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 16px; margin-top: 18px; }
 .dcard { border: 1px solid var(--line); background: rgba(0,0,0,.28); padding: 18px; min-width: 0; }
 .dcard .acc-h { margin: 0 0 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
-.d-act { grid-column: span 2; }
+.d-act { grid-column: span 1; }
 .char-top { display: grid; grid-template-columns: 110px 1fr; gap: 18px; align-items: start; }
 .avatar { width: 110px; height: 110px; display: grid; place-items: center; border: 1px solid var(--brass); background: radial-gradient(circle at 50% 35%, var(--oxblood-hi), #1a0909); font: 46px/1 var(--f-display); color: var(--ivory); box-shadow: inset 0 0 24px rgba(0,0,0,.6); }
 .char-sel { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
@@ -179,7 +193,7 @@ a { color: inherit; }
 .settings-h { margin-top: 26px; }
 .acc-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .center { text-align: center; }
-@media (max-width: 1100px) { .dash { grid-template-columns: 1fr 1fr; } .d-char { grid-column: span 2; } .d-act { grid-column: span 2; } .acc-grid3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 1100px) { .dash { grid-template-columns: 1fr 1fr; } .d-char { grid-column: span 2; } .d-act { grid-column: span 1; } .acc-grid3 { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 700px) { .dash, .acc-grid3 { grid-template-columns: 1fr; } .d-char, .d-act { grid-column: auto; } .char-top { grid-template-columns: 1fr; } .avatar { width: 80px; height: 80px; font-size: 34px; } }
 
 
@@ -196,6 +210,25 @@ a { color: inherit; }
 .payinfo dt { font: 11px/1 var(--f-display); letter-spacing: .14em; color: var(--ash); margin-top: 4px; }
 .payinfo dd { margin: 0; display: flex; justify-content: space-between; gap: 8px; align-items: center; font: 500 14px/1.3 var(--f-mono); word-break: break-all; }
 .cp { flex: none; background: none; border: 1px solid var(--line); color: var(--brass); font: 12px var(--f-body); padding: 3px 8px; cursor: pointer; }
+
+
+.d-vote .votes { display: grid; gap: 10px; margin-top: 6px; }
+.vrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px; border: 1px solid var(--line); background: rgba(0,0,0,.3); }
+.vrow b { font: 16px/1.2 var(--f-display); letter-spacing: .04em; }
+.vrow small { display: block; color: var(--ash); font-size: 12px; margin-top: 2px; }
+.vrow .btn { min-height: 36px; padding: 8px 14px; font-size: 13px; flex: none; }
+.d-vote .status { text-align: left; min-height: 0; margin: 8px 0 0; }
+
+
+.vote-float { position: fixed; z-index: 45; right: max(18px, env(safe-area-inset-right, 0px)); top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 16px); display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 16px; text-decoration: none; color: var(--ink); background: linear-gradient(180deg, #f2d27a, var(--brass)); border: 1px solid #f6e3a8; font: 13px/1 var(--f-display); letter-spacing: .12em;
+  box-shadow: 0 8px 26px rgba(0,0,0,.45), 0 0 18px rgba(242,201,76,.35); animation: votePulse 3s ease-in-out infinite; }
+.vote-float svg { width: 16px; height: 16px; }
+.vote-float:hover { filter: brightness(1.08); }
+@keyframes votePulse { 50% { box-shadow: 0 8px 26px rgba(0,0,0,.45), 0 0 30px rgba(242,201,76,.65); } }
+footer { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+footer .toplist img { display: block; height: 40px; width: auto; border: 1px solid var(--line); }
+@media (max-width: 640px) { .vote-float span { display: none; } .vote-float { padding: 10px; } }
 
 /* Home */
 .home { text-align: center; max-width: 980px; width: 100%; }
@@ -348,6 +381,10 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   <li><a href="#rules"><span>Rules</span><i></i></a></li>
 </ul>
 
+<a class="vote-float" href="#account" title="Vote for Gunsin Online and get a reward">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2l2.6 6.6L21 9.3l-5 4.4 1.6 6.8L12 17l-5.6 3.5L8 13.7 3 9.3l6.4-.7z"/></svg>
+  <span>Vote &amp; get reward</span>
+</a>
 <a class="float" id="discord-float" href="#register" aria-label="Join our community">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.3 3 4.5 6.6 4.5c2.1 0 3.6 1.2 5.4 3.2 1.8-2 3.3-3.2 5.4-3.2 3.6 0 5.7 3.8 4.2 7.3C19.5 16.4 12 21 12 21z"/></svg>
   <span>Join our community</span>
@@ -378,7 +415,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   <div class="panel">
     <h2>LATEST NEWS</h2>
     <div class="body">
-      <ul class="news">
+      <ul class="news" id="news-list">
         <li><time datetime="2026-11-01">01 Nov 2026</time><div><span class="tag">Update</span><h3>Gunsin Online 1.0</h3><p>Battlefield arena, Duel Tournament, 3rd job and the first season are live.</p></div></li>
         <li><time datetime="2026-10-28">28 Oct 2026</time><div><span class="tag">Event</span><h3>Daily events</h3><p>Duel Tournament every day at 16:00, Battlefield at 20:00.</p></div></li>
       </ul>
@@ -494,8 +531,14 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
             <p class="acc-sub">For the selected character. Log out of the game first.</p>
             <button class="btn" type="button" data-act="unstuck">Unstuck (move to town)</button>
             <button class="btn" type="button" data-act="rage">Rage reset</button>
-            <button class="btn" type="button" disabled title="Coming soon">Guild time reset</button>
+            <button class="btn" type="button" data-act="guildreset">Guild time reset</button>
             <p class="status" id="qa-status" role="status"></p>
+          </section>
+          <section class="dcard d-vote">
+            <h3 class="acc-h">Vote for reward</h3>
+            <p class="acc-sub" id="vote-info">Vote for Gunsin Online on the top lists and get a reward for the selected character.</p>
+            <div class="votes" id="vote-list"><p class="acc-sub">Voting is not open yet.</p></div>
+            <p class="status" id="vote-status" role="status"></p>
           </section>
         </div>
         <h3 class="acc-h settings-h">Account settings</h3>
@@ -560,7 +603,10 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
       </ol>
     </div>
   </div>
-  <footer>© 2026 Gunsin Online · Private server, not affiliated with the publisher of KalOnline.</footer>
+  <footer>
+    <a class="toplist" href="https://top-kal.com/server/778/gunsin-online#/vote" target="_blank" rel="noopener"><img src="https://top-kal.com/assets/images/tok/vote_image.jpg" alt="Vote for Gunsin Online on TOP-KAL.COM" loading="lazy"></a>
+    <span>© 2026 Gunsin Online · Private server, not affiliated with the publisher of KalOnline.</span>
+  </footer>
 </section>
 </main>
 
@@ -779,6 +825,28 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   }
   loadRanking(); setInterval(loadRanking, 120000);
 
+
+  /* News from news.txt (one item per line: date | tag | title | text) */
+  (function () {
+    if (!window.fetch || location.protocol === "file:") return;
+    var M = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    fetch("news.txt?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) {
+      var items = [];
+      t.split(/\r?\n/).forEach(function (line) {
+        line = line.trim(); if (!line || line.charAt(0) === "#") return;
+        var p = line.split("|").map(function (x) { return x.trim(); });
+        if (p.length < 3) return;
+        items.push({ date: p[0], tag: p[1], title: p[2], text: p.slice(3).join(" | ") });
+      });
+      if (!items.length) return;
+      var h = "";
+      items.slice(0, 6).forEach(function (n) {
+        var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(n.date), shown = m ? (m[3] + " " + M[+m[2] - 1] + " " + m[1]) : n.date;
+        h += '<li><time' + (m ? ' datetime="' + esc(n.date) + '"' : "") + ">" + esc(shown) + "</time><div>" + (n.tag ? '<span class="tag">' + esc(n.tag) + "</span>" : "") + "<h3>" + esc(n.title) + "</h3>" + (n.text ? "<p>" + esc(n.text) + "</p>" : "") + "</div></li>";
+      });
+      document.getElementById("news-list").innerHTML = h;
+    }).catch(function () {});
+  })();
   /* Registration: sent to the game server's registration service (address in api.json) */
   var f = document.getElementById("reg-form"), st = document.getElementById("reg-status"), sb = document.getElementById("reg-submit"), API = null;
   function val(id) { return document.getElementById(id).value.trim(); }
@@ -838,7 +906,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     document.querySelectorAll(".d-quick [data-act]").forEach(function (b) { b.disabled = !c; });
   }
   function renderMe(j) {
-    if (!ME) loadShop();
+    if (!ME) { loadShop(); loadVotes(); }
     ME = j;
     document.getElementById("acc-panel").classList.add("wide");
     document.getElementById("acc-login").hidden = true; document.getElementById("acc-view").hidden = false;
@@ -866,11 +934,11 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
       var c = curChar(); if (!c) return;
       var act = b.getAttribute("data-act");
       if (!b._armed) { b._armed = true; b._txt = b.textContent; b.textContent = "Click again to confirm"; b.classList.add("primary");
-        stat("qa-status", "Make sure " + c.name + " is logged out of the game.");
+        stat("qa-status", act === "guildreset" ? "Click again to reset the guild join time of " + c.name + "." : "Make sure " + c.name + " is logged out of the game.");
         b._t = setTimeout(function () { b._armed = false; b.textContent = b._txt; b.classList.remove("primary"); }, 4000); return; }
       clearTimeout(b._t); b._armed = false; b.textContent = b._txt; b.classList.remove("primary");
       b.disabled = true; stat("qa-status", "Working…");
-      apiCall("/" + act, { token: TOKEN, pid: c.pid }).then(function (j) { if (needRelogin(j)) return; if (j.ok) { stat("qa-status", act === "unstuck" ? c.name + " will be in town at the next login." : "Rage of " + c.name + " was reset."); loadMe(); } else stat("qa-status", j.error || "Error.", true); })
+      apiCall("/" + act, { token: TOKEN, pid: c.pid }).then(function (j) { if (needRelogin(j)) return; if (j.ok) { stat("qa-status", act === "unstuck" ? c.name + " will be in town at the next login." : act === "guildreset" ? "Guild time of " + c.name + " will be reset within 10 seconds." : "Rage of " + c.name + " was reset."); loadMe(); } else stat("qa-status", j.error || "Error.", true); })
         .catch(function (x) { stat("qa-status", x.msg || "Error.", true); }).then(function () { b.disabled = false; });
     });
   });
@@ -891,6 +959,48 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
       document.getElementById("shop-buy").hidden = !shopOn;
     }).catch(function () {});
   }
+
+  /* Vote for reward */
+  var voteState = {};
+  function voteRender(j) {
+    var el = document.getElementById("vote-list");
+    if (!j || !j.ok || !j.enabled) { el.innerHTML = '<p class="acc-sub">Voting is not open yet.</p>'; return; }
+    document.getElementById("vote-info").textContent = "Reward per vote: " + j.reward + ". Vote, then come back and claim it for the selected character.";
+    var h = "";
+    j.sites.forEach(function (v) {
+      var w = v.wait > 0 ? "Again in " + Math.floor(v.wait / 3600) + " h " + Math.floor((v.wait % 3600) / 60) + " min" : "Every " + v.hours + " h";
+      var st = voteState[v.id];
+      var btn = v.wait > 0 ? '<button class="btn" type="button" disabled>Voted</button>'
+        : st ? '<button class="btn primary" type="button" data-claim="' + v.id + '">Claim reward</button>'
+        : '<button class="btn" type="button" data-vote="' + v.id + '">Vote</button>';
+      h += '<div class="vrow"><div><b>' + esc(v.name) + "</b><small>" + esc(w) + "</small></div>" + btn + "</div>";
+    });
+    el.innerHTML = h;
+  }
+  function loadVotes() { if (!TOKEN) return; apiCall("/vote/list", { token: TOKEN }).then(function (j) { if (!needRelogin(j)) voteRender(j); }).catch(function () {}); }
+  document.getElementById("vote-list").addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("button") : null; if (!b) return;
+    var vs = b.getAttribute("data-vote"), cs = b.getAttribute("data-claim");
+    if (vs) {
+      var win = null; try { win = window.open("about:blank", "_blank"); } catch (x) {}
+      b.disabled = true; stat("vote-status", "Opening the vote page…");
+      apiCall("/vote/start", { token: TOKEN, site: +vs }).then(function (j) {
+        if (needRelogin(j)) { if (win) win.close(); return; }
+        if (!j.ok) { if (win) win.close(); stat("vote-status", j.error || "Error.", true); b.disabled = false; return; }
+        if (win) { try { win.opener = null; } catch (x) {} win.location = j.url; } else window.open(j.url, "_blank", "noopener");
+        voteState[vs] = Date.now(); stat("vote-status", "Vote on the opened page, then come back and click Claim reward.");
+        loadVotes();
+      }).catch(function (x) { if (win) win.close(); stat("vote-status", x.msg || "Error.", true); b.disabled = false; });
+    } else if (cs) {
+      var c = curChar(); if (!c) return stat("vote-status", "Choose a character first.", true);
+      b.disabled = true; stat("vote-status", "Claiming…");
+      apiCall("/vote/claim", { token: TOKEN, site: +cs, pid: c.pid }).then(function (j) {
+        if (needRelogin(j)) return;
+        if (j.ok) { delete voteState[cs]; stat("vote-status", "Thank you! " + j.reward + " will arrive to " + j.character + " (log in to receive it)."); loadVotes(); loadMe(); }
+        else { stat("vote-status", j.error || "Error.", true); b.disabled = false; }
+      }).catch(function (x) { stat("vote-status", x.msg || "Error.", true); b.disabled = false; });
+    }
+  });
   var ppLoaded = false;
   function loadPayPal(cid) {
     if (ppLoaded || !/^[A-Za-z0-9_-]{20,100}$/.test(cid)) return; ppLoaded = true;
@@ -960,7 +1070,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
       setTok(j.token); document.getElementById("acc-pass").value = ""; stat("acc-login-status", ""); loadMe();
     }).catch(function (x) { stat("acc-login-status", x.msg || "Login failed.", true); });
   });
-  document.getElementById("acc-logout").addEventListener("click", function () { if (TOKEN) apiCall("/logout", { token: TOKEN }).catch(function () {}); setTok(null); showLogin(); });
+  document.getElementById("acc-logout").addEventListener("click", function () { if (TOKEN) apiCall("/logout", { token: TOKEN }).catch(function () {}); setTok(null); ME = null; showLogin(); });
   function formCall(formId, statusId, path, build, done) {
     document.getElementById(formId).addEventListener("submit", function (e) {
       e.preventDefault(); var b = build(); if (!b) return;
