@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Gunsin Online</title>
 <meta name="description" content="Gunsin Online - KalOnline private server. PvP, Battlefield, Duel Tournament and daily events.">
 <meta name="theme-color" content="#120808">
@@ -191,7 +191,7 @@ a { color: inherit; }
 .acts .rank tbody tr td.ok { color: var(--good); } .acts .rank tbody tr td.pend { color: #f2c94c; } .acts .rank tbody tr td.bad { color: var(--bad); }
 .btn:disabled { opacity: .45; cursor: not-allowed; }
 .settings-h { margin-top: 26px; }
-.acc-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.acc-grid3 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .center { text-align: center; }
 @media (max-width: 1100px) { .dash { grid-template-columns: 1fr 1fr; } .d-char { grid-column: span 2; } .d-act { grid-column: span 1; } .acc-grid3 { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 700px) { .dash, .acc-grid3 { grid-template-columns: 1fr; } .d-char, .d-act { grid-column: auto; } .char-top { grid-template-columns: 1fr; } .avatar { width: 80px; height: 80px; font-size: 34px; } }
@@ -295,6 +295,8 @@ td.r, th.r { text-align: right; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .reg-note { margin: 0; text-align: center; font-size: 14px; color: var(--ash); }
 .reg-note a { color: var(--brass); }
+.field-help { margin: -4px 0 0; font-size: 13px; line-height: 1.45; color: var(--ash); }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; color: var(--brass); text-decoration: underline; cursor: pointer; }
 .home .tag { min-height: 1em; }
 
 /* Ranking */
@@ -458,7 +460,10 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
         <div class="field"><label for="reg-user">Username</label><input id="reg-user" name="user" autocomplete="username" maxlength="16" placeholder="4–16 letters or numbers"></div>
         <div class="field"><label for="reg-pass">Password</label><input id="reg-pass" name="pass" type="password" autocomplete="new-password" maxlength="16" placeholder="4–16 letters or numbers"></div>
         <div class="field"><label for="reg-pass2">Repeat password</label><input id="reg-pass2" name="pass2" type="password" autocomplete="new-password" maxlength="16"></div>
-        <div class="field"><label for="reg-email">Email <span style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="reg-email" name="email" type="email" maxlength="80" placeholder="for password recovery"></div>
+        <div class="field"><label for="reg-sn">Secret number</label><input id="reg-sn" name="sn" type="password" inputmode="numeric" autocomplete="off" maxlength="8" placeholder="6–8 digits"></div>
+        <div class="field"><label for="reg-sn2">Repeat secret number</label><input id="reg-sn2" name="sn2" type="password" inputmode="numeric" autocomplete="off" maxlength="8"></div>
+        <p class="field-help">You need the secret number to change your password, remove the secondary password or recover your account. Write it down and never share it. Nobody can look it up for you.</p>
+        <div class="field"><label for="reg-email">Email <span style="text-transform:none;letter-spacing:0">(recommended)</span></label><input id="reg-email" name="email" type="email" maxlength="80" placeholder="to recover a forgotten secret number"></div>
         <div class="hp" aria-hidden="true"><label for="reg-web">Website</label><input id="reg-web" name="website" tabindex="-1" autocomplete="off"></div>
         <button class="btn primary" type="submit" id="reg-submit">Create account</button>
         <p class="status" id="reg-status" role="status"></p>
@@ -478,7 +483,31 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
         <div class="field"><label for="acc-pass">Password</label><input id="acc-pass" type="password" autocomplete="current-password" maxlength="16"></div>
         <button class="btn primary" type="submit">Log in</button>
         <p class="status" id="acc-login-status" role="status"></p>
-        <p class="reg-note">No account yet? <a href="#register">Create one</a>.</p>
+        <p class="reg-note"><button class="linkbtn" type="button" id="acc-forgot">Forgot password?</button> · No account yet? <a href="#register">Create one</a>.</p>
+      </form>
+      <form class="form acc-login" id="acc-recover" novalidate hidden>
+        <h3 class="acc-h">Reset password</h3>
+        <p class="field-help">Enter your username and the secret number you chose at registration, then pick a new password.</p>
+        <div class="field"><label for="rc-user">Username</label><input id="rc-user" autocomplete="username" maxlength="16"></div>
+        <div class="field"><label for="rc-sn">Secret number</label><input id="rc-sn" type="password" inputmode="numeric" autocomplete="off" maxlength="8"></div>
+        <div class="field"><label for="rc-new">New password</label><input id="rc-new" type="password" autocomplete="new-password" maxlength="16" placeholder="4–16 letters or numbers"></div>
+        <div class="field"><label for="rc-new2">Repeat new password</label><input id="rc-new2" type="password" autocomplete="new-password" maxlength="16"></div>
+        <button class="btn primary" type="submit">Set new password</button>
+        <p class="status" id="rc-status" role="status"></p>
+        <p class="reg-note"><button class="linkbtn" type="button" id="rc-snforgot">Forgot your secret number?</button> · <button class="linkbtn" type="button" id="rc-back">Back to log in</button></p>
+      </form>
+      <form class="form acc-login" id="acc-snrec" novalidate hidden>
+        <h3 class="acc-h">New secret number</h3>
+        <p class="field-help" id="sr-help">Enter your username and the email saved on your account. We'll email you a code.</p>
+        <div class="field"><label for="sr-user">Username</label><input id="sr-user" autocomplete="username" maxlength="16"></div>
+        <div class="field" data-step="1"><label for="sr-mail">Email</label><input id="sr-mail" type="email" autocomplete="email" maxlength="80"></div>
+        <div class="field" data-step="2" hidden><label for="sr-code">Code from the email</label><input id="sr-code" autocomplete="one-time-code" maxlength="9" style="text-transform:uppercase;letter-spacing:.15em"></div>
+        <div class="field" data-step="2" hidden><label for="sr-sn">New secret number</label><input id="sr-sn" type="password" inputmode="numeric" autocomplete="off" maxlength="8" placeholder="6–8 digits"></div>
+        <div class="field" data-step="2" hidden><label for="sr-sn2">Repeat new secret number</label><input id="sr-sn2" type="password" inputmode="numeric" autocomplete="off" maxlength="8"></div>
+        <button class="btn primary" type="submit" id="sr-btn">Send code</button>
+        <p class="status" id="sr-status" role="status"></p>
+        <p class="reg-note"><button class="linkbtn" type="button" id="sr-have" data-step="1">I already have a code</button> <button class="linkbtn" type="button" id="sr-resend" data-step="2" hidden>Send a new code</button> · <button class="linkbtn" type="button" id="sr-back">Back to log in</button></p>
+        <p class="field-help">No email on your account? Ask on Discord.</p>
       </form>
       <div class="acc-view" id="acc-view" hidden>
         <div class="acc-head">
@@ -545,7 +574,8 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
         <div class="acc-grid3">
           <form class="form acc-card" id="acc-pw" novalidate>
             <h3 class="acc-h">Change password</h3>
-            <div class="field"><label for="pw-old">Current password</label><input id="pw-old" type="password" autocomplete="current-password" maxlength="16"></div>
+            <div class="field" data-sn="yes"><label for="pw-sn">Secret number</label><input id="pw-sn" type="password" inputmode="numeric" autocomplete="off" maxlength="8"></div>
+            <div class="field" data-sn="no"><label for="pw-old">Current password</label><input id="pw-old" type="password" autocomplete="current-password" maxlength="16"></div>
             <div class="field"><label for="pw-new">New password</label><input id="pw-new" type="password" autocomplete="new-password" maxlength="16" placeholder="4–16 letters or numbers"></div>
             <div class="field"><label for="pw-new2">Repeat new password</label><input id="pw-new2" type="password" autocomplete="new-password" maxlength="16"></div>
             <button class="btn" type="submit">Save password</button>
@@ -553,16 +583,29 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
           </form>
           <form class="form acc-card" id="acc-mail" novalidate>
             <h3 class="acc-h">Email</h3>
-            <div class="field"><label for="mail-new">Email for password recovery</label><input id="mail-new" type="email" maxlength="80"></div>
+            <div class="field"><label for="mail-new">Email for recovering your secret number</label><input id="mail-new" type="email" maxlength="80"></div>
+            <div class="field" data-sn="yes"><label for="mail-sn">Confirm with your secret number</label><input id="mail-sn" type="password" inputmode="numeric" autocomplete="off" maxlength="8"></div>
+            <div class="field" data-sn="no"><label for="mail-pass">Confirm with your password</label><input id="mail-pass" type="password" autocomplete="current-password" maxlength="16"></div>
             <button class="btn" type="submit">Save email</button>
             <p class="status" id="mail-status" role="status"></p>
           </form>
           <form class="form acc-card" id="acc-2nd" novalidate>
             <h3 class="acc-h">Secondary password</h3>
             <p class="acc-sub" id="pw2-info">Forgot the 8-digit in-game password? Remove it and set a new one at your next login.</p>
-            <div class="field"><label for="pw2-pass">Confirm with your password</label><input id="pw2-pass" type="password" autocomplete="current-password" maxlength="16"></div>
+            <div class="field" data-sn="yes"><label for="pw2-sn">Confirm with your secret number</label><input id="pw2-sn" type="password" inputmode="numeric" autocomplete="off" maxlength="8"></div>
+            <div class="field" data-sn="no"><label for="pw2-pass">Confirm with your password</label><input id="pw2-pass" type="password" autocomplete="current-password" maxlength="16"></div>
             <button class="btn" type="submit">Remove secondary password</button>
             <p class="status" id="pw2-status" role="status"></p>
+          </form>
+          <form class="form acc-card" id="acc-sn" novalidate>
+            <h3 class="acc-h">Secret number</h3>
+            <p class="acc-sub" id="sn-info">Protects your password and secondary password.</p>
+            <div class="field"><label for="sn-pass">Your password</label><input id="sn-pass" type="password" autocomplete="current-password" maxlength="16"></div>
+            <div class="field" data-sn="yes"><label for="sn-old">Current secret number</label><input id="sn-old" type="password" inputmode="numeric" autocomplete="off" maxlength="8"></div>
+            <div class="field"><label for="sn-new">New secret number</label><input id="sn-new" type="password" inputmode="numeric" autocomplete="off" maxlength="8" placeholder="6–8 digits"></div>
+            <div class="field"><label for="sn-new2">Repeat new secret number</label><input id="sn-new2" type="password" inputmode="numeric" autocomplete="off" maxlength="8"></div>
+            <button class="btn" type="submit" id="sn-btn">Save secret number</button>
+            <p class="status" id="sn-status" role="status"></p>
           </form>
         </div>
       </div>
@@ -859,16 +902,18 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   loadApi();
   f.addEventListener("submit", function (e) {
     e.preventDefault();
-    var u = val("reg-user"), p = document.getElementById("reg-pass").value, p2 = document.getElementById("reg-pass2").value, m = val("reg-email");
+    var u = val("reg-user"), p = document.getElementById("reg-pass").value, p2 = document.getElementById("reg-pass2").value, m = val("reg-email"), sn = val("reg-sn"), sn2 = val("reg-sn2");
     if (!/^[A-Za-z0-9]{4,16}$/.test(u)) return say("Username must be 4–16 letters or numbers.", true);
     if (!/^[A-Za-z0-9]{4,16}$/.test(p)) return say("Password must be 4–16 letters or numbers (no spaces or symbols).", true);
     if (p !== p2) return say("Passwords do not match.", true);
+    if (!/^\d{6,8}$/.test(sn)) return say("Secret number must be 6–8 digits.", true);
+    if (sn !== sn2) return say("Secret numbers do not match.", true);
     if (m && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) return say("That email address doesn't look right.", true);
     sb.disabled = true; say("Creating your account…");
     loadApi().then(function (api) {
       if (!api) throw { msg: "Registration is offline right now. Please try again later or ask on Discord." };
       return fetch(api + "/register", { method: "POST", headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify({ user: u, pass: p, email: m, website: val("reg-web") }) })
+        body: JSON.stringify({ user: u, pass: p, sn: sn, email: m, website: val("reg-web") }) })
         .then(function (r) { return r.json().catch(function () { return { ok: false, error: "Server error (" + r.status + ")." }; }); }, function () { throw { msg: "Can't reach the registration server. Please try again in a few minutes." }; });
     }).then(function (j) {
       if (j && j.ok) { f.reset(); say("Account “" + u + "” created! Download the client and log in."); }
@@ -889,7 +934,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     });
   }
   function stat(id, t, err) { var e = document.getElementById(id); e.textContent = t; e.classList.toggle("err", !!err); }
-  function showLogin() { document.getElementById("acc-panel").classList.remove("wide"); document.getElementById("acc-login").hidden = false; document.getElementById("acc-view").hidden = true; }
+  function showLogin() { document.getElementById("acc-panel").classList.remove("wide"); document.getElementById("acc-login").hidden = false; document.getElementById("acc-recover").hidden = true; document.getElementById("acc-snrec").hidden = true; document.getElementById("acc-view").hidden = true; }
   function needRelogin(j) { if (j && j.relogin) { setTok(null); showLogin(); stat("acc-login-status", j.error, true); return true; } return false; }
   var ME = null;
   function fmtNum(n) { return (n == null || n === "") ? "–" : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
@@ -913,6 +958,9 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     document.getElementById("acc-name").textContent = j.user;
     document.getElementById("acc-sub").textContent = (j.email ? j.email : "No email set") + (j.created ? " · registered " + j.created : "");
     document.getElementById("mail-new").value = j.email || "";
+    document.querySelectorAll("#acc-view [data-sn]").forEach(function (el) { el.hidden = (el.getAttribute("data-sn") === "yes") !== !!j.hasSn; });
+    document.getElementById("sn-info").textContent = j.hasSn ? "Your secret number is set. You can change it here." : "Your account has no secret number yet. Set one now: it protects your password and secondary password.";
+    document.getElementById("sn-btn").textContent = j.hasSn ? "Change secret number" : "Set secret number";
     document.getElementById("pw2-info").textContent = j.has2nd ? "Forgot the 8-digit in-game password? Remove it and set a new one at your next login." : "You have no secondary password set right now.";
     var sel = document.getElementById("ch-select"), prev = sel.value; sel.innerHTML = "";
     (j.chars || []).forEach(function (c) { var o = document.createElement("option"); o.value = c.pid; o.textContent = c.name + " (" + c.cls + " " + c.level + ")"; sel.appendChild(o); });
@@ -1080,18 +1128,87 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     });
   }
   formCall("acc-pw", "pw-status", "/password", function () {
-    var o = document.getElementById("pw-old").value, n = document.getElementById("pw-new").value, n2 = document.getElementById("pw-new2").value;
+    var o = document.getElementById("pw-old").value, sn = document.getElementById("pw-sn").value.trim(), n = document.getElementById("pw-new").value, n2 = document.getElementById("pw-new2").value;
     if (!/^[A-Za-z0-9]{4,16}$/.test(n)) { stat("pw-status", "New password must be 4–16 letters or numbers.", true); return null; }
     if (n !== n2) { stat("pw-status", "New passwords do not match.", true); return null; }
-    return { old: o, "new": n };
+    if (ME && ME.hasSn && !/^\d{6,8}$/.test(sn)) { stat("pw-status", "Enter your secret number (6–8 digits).", true); return null; }
+    return ME && ME.hasSn ? { sn: sn, "new": n } : { old: o, "new": n };
   }, function () { document.getElementById("acc-pw").reset(); stat("pw-status", "Password changed. Use the new one in the game."); });
   formCall("acc-mail", "mail-status", "/email", function () {
     var m = document.getElementById("mail-new").value.trim();
     if (m && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) { stat("mail-status", "That email address doesn't look right.", true); return null; }
-    return { email: m };
-  }, loadMe);
-  formCall("acc-2nd", "pw2-status", "/reset2nd", function () { return { pass: document.getElementById("pw2-pass").value }; },
+    if (ME && ME.hasSn) { var sn = document.getElementById("mail-sn").value.trim(); if (!/^\d{6,8}$/.test(sn)) { stat("mail-status", "Enter your secret number (6–8 digits).", true); return null; } return { email: m, sn: sn }; }
+    var pw = document.getElementById("mail-pass").value; if (!pw) { stat("mail-status", "Enter your password.", true); return null; }
+    return { email: m, pass: pw };
+  }, function () { document.getElementById("mail-sn").value = ""; document.getElementById("mail-pass").value = ""; stat("mail-status", "Email saved."); loadMe(); });
+  formCall("acc-2nd", "pw2-status", "/reset2nd", function () {
+    if (ME && ME.hasSn) { var sn = document.getElementById("pw2-sn").value.trim(); if (!/^\d{6,8}$/.test(sn)) { stat("pw2-status", "Enter your secret number (6–8 digits).", true); return null; } return { sn: sn }; }
+    return { pass: document.getElementById("pw2-pass").value }; },
     function () { document.getElementById("acc-2nd").reset(); stat("pw2-status", "Removed. Set a new 8-digit password at your next login."); loadMe(); });
+  formCall("acc-sn", "sn-status", "/setsn", function () {
+    var p = document.getElementById("sn-pass").value, o = document.getElementById("sn-old").value.trim(), n = document.getElementById("sn-new").value.trim(), n2 = document.getElementById("sn-new2").value.trim();
+    if (!p) { stat("sn-status", "Enter your password.", true); return null; }
+    if (!/^\d{6,8}$/.test(n)) { stat("sn-status", "Secret number must be 6–8 digits.", true); return null; }
+    if (n !== n2) { stat("sn-status", "Secret numbers do not match.", true); return null; }
+    return { pass: p, oldsn: o, sn: n };
+  }, function () { document.getElementById("acc-sn").reset(); stat("sn-status", "Secret number saved. Write it down somewhere safe."); loadMe(); });
+  function showRecover(on) { document.getElementById("acc-login").hidden = on; document.getElementById("acc-recover").hidden = !on; if (on) { document.getElementById("rc-user").value = document.getElementById("acc-user").value.trim(); stat("rc-status", ""); } }
+  document.getElementById("acc-forgot").addEventListener("click", function () { showRecover(true); });
+  document.getElementById("rc-back").addEventListener("click", function () { showRecover(false); });
+  var srStep = 1;
+  function srShow(step) {
+    srStep = step;
+    document.querySelectorAll("#acc-snrec [data-step]").forEach(function (el) { el.hidden = el.getAttribute("data-step") !== String(step); });
+    document.getElementById("sr-btn").textContent = step === 1 ? "Send code" : "Save new secret number";
+    document.getElementById("sr-help").textContent = step === 1 ? "Enter your username and the email saved on your account. We'll email you a code." : "Enter the 8-character code from the email (valid 30 minutes) and choose a new secret number.";
+  }
+  function showSnRec(on) {
+    document.getElementById("acc-login").hidden = true; document.getElementById("acc-recover").hidden = on; document.getElementById("acc-snrec").hidden = !on;
+    if (on) { document.getElementById("sr-user").value = document.getElementById("rc-user").value.trim() || document.getElementById("acc-user").value.trim(); stat("sr-status", ""); srShow(1); }
+  }
+  document.getElementById("rc-snforgot").addEventListener("click", function () { showSnRec(true); });
+  document.getElementById("sr-back").addEventListener("click", function () { document.getElementById("acc-snrec").hidden = true; showRecover(false); });
+  document.getElementById("sr-have").addEventListener("click", function () { stat("sr-status", ""); srShow(2); });
+  document.getElementById("sr-resend").addEventListener("click", function () { stat("sr-status", ""); srShow(1); });
+  document.getElementById("acc-snrec").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var u = document.getElementById("sr-user").value.trim(), b = document.getElementById("sr-btn");
+    if (!u) return stat("sr-status", "Enter your username.", true);
+    if (srStep === 1) {
+      var m = document.getElementById("sr-mail").value.trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) return stat("sr-status", "Enter the email of your account.", true);
+      b.disabled = true; stat("sr-status", "Sending…");
+      apiCall("/snforgot", { user: u, email: m }).then(function (j) {
+        if (!j.ok) return stat("sr-status", j.error || "Error.", true);
+        srShow(2); stat("sr-status", j.message || "Check your inbox.");
+      }).catch(function (x) { stat("sr-status", x.msg || "Error.", true); }).then(function () { b.disabled = false; });
+      return;
+    }
+    var code = document.getElementById("sr-code").value.replace(/[\s-]/g, "").toUpperCase(), sn = document.getElementById("sr-sn").value.trim(), sn2 = document.getElementById("sr-sn2").value.trim();
+    if (!/^[A-Z0-9]{8}$/.test(code)) return stat("sr-status", "The code has 8 letters and numbers.", true);
+    if (!/^\d{6,8}$/.test(sn)) return stat("sr-status", "Secret number must be 6–8 digits.", true);
+    if (sn !== sn2) return stat("sr-status", "Secret numbers do not match.", true);
+    b.disabled = true; stat("sr-status", "Saving…");
+    apiCall("/snreset", { user: u, code: code, sn: sn }).then(function (j) {
+      if (!j.ok) return stat("sr-status", j.error || "Error.", true);
+      document.getElementById("acc-snrec").reset(); document.getElementById("acc-snrec").hidden = true; showRecover(true);
+      document.getElementById("rc-user").value = u; stat("rc-status", "New secret number saved. Now you can set a new password here.");
+    }).catch(function (x) { stat("sr-status", x.msg || "Error.", true); }).then(function () { b.disabled = false; });
+  });
+  document.getElementById("acc-recover").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var u = document.getElementById("rc-user").value.trim(), sn = document.getElementById("rc-sn").value.trim(), n = document.getElementById("rc-new").value, n2 = document.getElementById("rc-new2").value;
+    if (!u) return stat("rc-status", "Enter your username.", true);
+    if (!/^\d{6,8}$/.test(sn)) return stat("rc-status", "Secret number must be 6–8 digits.", true);
+    if (!/^[A-Za-z0-9]{4,16}$/.test(n)) return stat("rc-status", "New password must be 4–16 letters or numbers.", true);
+    if (n !== n2) return stat("rc-status", "New passwords do not match.", true);
+    stat("rc-status", "Saving…");
+    apiCall("/recover", { user: u, sn: sn, "new": n }).then(function (j) {
+      if (!j.ok) return stat("rc-status", j.error || "Error.", true);
+      document.getElementById("acc-recover").reset(); showRecover(false); document.getElementById("acc-user").value = u;
+      stat("acc-login-status", "Password changed. You can log in now.");
+    }).catch(function (x) { stat("rc-status", x.msg || "Error.", true); });
+  });
   loadMe();
 })();
 </script>
