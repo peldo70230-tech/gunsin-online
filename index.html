@@ -201,6 +201,12 @@ a { color: inherit; }
 .pack { background: rgba(0,0,0,.4); border: 1px solid var(--line); color: var(--ivory); padding: 10px 4px; cursor: pointer; font: inherit; }
 .pack b { display: block; font: 500 20px/1.1 var(--f-mono); color: #f2c94c; }
 .pack span { font-size: 14px; color: var(--ash); }
+.coin-in { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+.coin-in label { color: var(--ash); font-size: 14px; flex: 0 0 auto; }
+.coin-in input { flex: 1 1 auto; min-width: 0; background: rgba(0,0,0,.45); border: 1px solid var(--line); color: #f2c94c; font: 500 20px/1.2 var(--f-mono); padding: 8px 10px; text-align: right; }
+.coin-in input:focus { outline: none; border-color: var(--brass); }
+.coin-in input[aria-invalid="true"] { border-color: #d0614f; }
+.coin-hint { color: var(--ash); font-size: 13px; text-align: center; margin-top: 6px; }
 .pack[aria-pressed="true"] { border-color: var(--brass); background: rgba(209,171,99,.14); box-shadow: inset 0 0 0 1px var(--brass); }
 .pp-buttons { margin-bottom: 8px; min-height: 0; }
 .pp-buttons:not(:empty) + .btn { margin-top: 2px; }
@@ -540,12 +546,14 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
           <section class="dcard d-shop">
             <h3 class="acc-h">Coin shop</h3>
             <p class="shop-note">Buy <b>Donation Coins</b> with PayPal or bank transfer. They are delivered to the selected character automatically.</p>
-            <div class="packs" id="shop-packs" role="radiogroup" aria-label="Package">
-              <button type="button" class="pack" data-euro="10" aria-pressed="true"><b>50</b><span>10 €</span></button>
-              <button type="button" class="pack" data-euro="20" aria-pressed="false"><b>100</b><span>20 €</span></button>
-              <button type="button" class="pack" data-euro="50" aria-pressed="false"><b>250</b><span>50 €</span></button>
+            <div class="packs" id="shop-packs" aria-label="Quick amounts">
+              <button type="button" class="pack" data-coins="50" aria-pressed="true"><b>50</b><span>10 €</span></button>
+              <button type="button" class="pack" data-coins="250" aria-pressed="false"><b>250</b><span>50 €</span></button>
+              <button type="button" class="pack" data-coins="500" aria-pressed="false"><b>500</b><span>100 €</span></button>
             </div>
-            <div class="shop-gold" id="shop-gold">50 Donation Coins</div>
+            <div class="coin-in"><label for="shop-coins">Donation Coins</label><input id="shop-coins" type="number" inputmode="numeric" min="5" max="5000" step="1" value="50"></div>
+            <div class="shop-gold" id="shop-gold">50 Donation Coins = 10.00 €</div>
+            <p class="coin-hint" id="coin-hint">5 Donation Coins = 1 € · from 5 to 5,000</p>
             <div id="pp-buttons" class="pp-buttons"></div>
             <button class="btn" id="shop-buy" type="button" disabled>Order by bank transfer</button>
             <p class="acc-sub center" id="shop-status">Online payments are not enabled yet.</p>
@@ -992,17 +1000,28 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     });
   });
   /* Coin shop (bank transfer) */
-  var shopEuro = "10", PACKS = { "10": 50, "20": 100, "50": 250 }, shopOn = false;
-  function shopSel(e) { shopEuro = e; document.querySelectorAll(".pack").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-euro") === e ? "true" : "false"); });
-    document.getElementById("shop-gold").textContent = fmtNum(PACKS[e]) + " Donation Coins"; }
-  document.querySelectorAll(".pack").forEach(function (b) { b.addEventListener("click", function () { shopSel(b.getAttribute("data-euro")); }); });
+  var shopCoins = 50, CPE = 5, CMIN = 5, CMAX = 5000, shopOn = false;
+  function eur(n) { return (Math.round(n * 100 / CPE) / 100).toFixed(2); }
+  function coinsOk() { return shopCoins >= CMIN && shopCoins <= CMAX; }
+  function shopUpd() {
+    var inp = document.getElementById("shop-coins"), v = inp.value.trim(), n = /^\d+$/.test(v) ? parseInt(v, 10) : 0;
+    shopCoins = n; var ok = coinsOk(); inp.setAttribute("aria-invalid", ok ? "false" : "true");
+    document.querySelectorAll(".pack").forEach(function (b) { b.setAttribute("aria-pressed", parseInt(b.getAttribute("data-coins"), 10) === n ? "true" : "false"); });
+    document.getElementById("shop-gold").textContent = ok ? fmtNum(n) + " Donation Coins = " + eur(n) + " €" : "Enter " + fmtNum(CMIN) + " – " + fmtNum(CMAX) + " Donation Coins";
+  }
+  function shopSet(n) { document.getElementById("shop-coins").value = n; shopUpd(); }
+  document.getElementById("shop-coins").addEventListener("input", shopUpd);
+  document.querySelectorAll(".pack").forEach(function (b) { b.addEventListener("click", function () { shopSet(b.getAttribute("data-coins")); }); });
+  function packLabels() { document.querySelectorAll(".pack").forEach(function (b) { b.querySelector("span").textContent = (parseInt(b.getAttribute("data-coins"), 10) / CPE) + " €"; }); }
   function loadShop() {
     apiCall("/shop", {}).then(function (j) {
       if (!j || !j.ok) return;
       shopOn = !!j.enabled;
       if (j.paypal) loadPayPal(j.paypal);
-      if (j.packages) j.packages.forEach(function (p) { PACKS[String(p.euro)] = p.amount; var b = document.querySelector('.pack[data-euro="' + p.euro + '"] b'); if (b) b.textContent = fmtNum(p.amount); });
-      shopSel(shopEuro);
+      if (j.coinsPerEuro) { CPE = j.coinsPerEuro; CMIN = j.minCoins || CMIN; CMAX = j.maxCoins || CMAX;
+        var inp = document.getElementById("shop-coins"); inp.min = CMIN; inp.max = CMAX;
+        document.getElementById("coin-hint").textContent = CPE + " Donation Coins = 1 € · from " + fmtNum(CMIN) + " to " + fmtNum(CMAX); packLabels(); }
+      shopUpd();
       document.getElementById("shop-buy").disabled = !shopOn;
       document.getElementById("shop-status").textContent = (shopOn || j.paypal) ? "" : "Online payments are not enabled yet.";
       document.getElementById("shop-buy").hidden = !shopOn;
@@ -1059,10 +1078,10 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
       if (!window.paypal) return;
       window.paypal.Buttons({
         style: { layout: "vertical", color: "gold", shape: "rect", label: "pay", height: 42 },
-        onClick: function (data, actions) { if (!curChar()) { stat("shop-status", "Choose a character first.", true); return actions.reject(); } stat("shop-status", ""); return actions.resolve(); },
+        onClick: function (data, actions) { if (!curChar()) { stat("shop-status", "Choose a character first.", true); return actions.reject(); } if (!coinsOk()) { stat("shop-status", "Enter between " + CMIN + " and " + CMAX + " Donation Coins.", true); return actions.reject(); } stat("shop-status", ""); return actions.resolve(); },
         createOrder: function () {
           var c = curChar();
-          return apiCall("/pp/create", { token: TOKEN, pid: c.pid, euro: shopEuro }).then(function (j) {
+          return apiCall("/pp/create", { token: TOKEN, pid: c.pid, coins: shopCoins }).then(function (j) {
             if (needRelogin(j)) throw new Error("relogin"); if (!j.ok) { stat("shop-status", j.error || "Error.", true); throw new Error(j.error); } return j.id; });
         },
         onApprove: function (data) {
@@ -1083,12 +1102,13 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   function copyBtn(v) { return '<button type="button" class="cp" data-cp="' + esc(v) + '">Copy</button>'; }
   document.getElementById("shop-buy").addEventListener("click", function () {
     var c = curChar(); if (!c) return stat("shop-status", "Choose a character first.", true);
+    if (!coinsOk()) return stat("shop-status", "Enter between " + CMIN + " and " + CMAX + " Donation Coins.", true);
     var b = this; b.disabled = true; stat("shop-status", "Creating your order…");
-    apiCall("/order", { token: TOKEN, pid: c.pid, euro: shopEuro }).then(function (j) {
+    apiCall("/order", { token: TOKEN, pid: c.pid, coins: shopCoins }).then(function (j) {
       if (needRelogin(j)) return;
       if (!j.ok) return stat("shop-status", j.error || "Error.", true);
       stat("shop-status", "");
-      var k = j.bank, rows = [["Amount", j.euro + ".00 EUR"], ["Recipient", k.name], ["IBAN", k.iban]];
+      var k = j.bank, rows = [["Amount", j.euro + " EUR"], ["Recipient", k.name], ["IBAN", k.iban]];
       if (k.bank) rows.push(["Bank", k.bank]); if (k.swift) rows.push(["SWIFT/BIC", k.swift]); if (k.address) rows.push(["Address", k.address]);
       rows.push(["Payment reference", j.ref]);
       var h = '<p class="pay-t">Order <b>' + esc(j.ref) + "</b>: " + esc(j.amount) + " " + esc(j.item) + "s for " + esc(j.character) + "</p><dl>";
