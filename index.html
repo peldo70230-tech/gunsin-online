@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Gunsin Online</title>
+<meta name="copyright" content="© 2026 Gunsin Online">
+<meta name="author" content="Gunsin Online">
 <meta name="description" content="Gunsin Online - KalOnline private server. PvP, Battlefield, Duel Tournament and daily events.">
 <meta name="theme-color" content="#120808">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -113,6 +115,21 @@ a { color: inherit; }
 
 .stage .bgimg { object-fit: cover; filter: brightness(.5) saturate(1.15); }
 .stage .bgimg.sharp { filter: brightness(.62) saturate(1.05); }
+.stage .bgimg.hero { filter: brightness(.88) saturate(1.05); object-position: 100% 40%; }
+#home .stage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,6,6,.78) 0%, rgba(10,6,6,.55) 32%, rgba(10,6,6,0) 58%); }
+.stage .bgimg.newsimg { filter: brightness(.88) saturate(1.05); object-position: 0% 100%; }
+#news .stage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(270deg, rgba(10,6,6,.7) 0%, rgba(10,6,6,.45) 40%, rgba(10,6,6,0) 66%); }
+@media (max-width: 760px) { .stage .bgimg.newsimg { object-position: 21% 100%; filter: brightness(.6) saturate(1.05); } #news .stage::after { background: rgba(10,6,6,.25); } }
+.stage .bgimg.dlimg { filter: brightness(.88) saturate(1.05); object-position: 100% 40%; }
+#download .stage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,6,6,.78) 0%, rgba(10,6,6,.55) 32%, rgba(10,6,6,0) 58%); }
+@media (max-width: 760px) { .stage .bgimg.dlimg { object-position: 83% 40%; filter: brightness(.6) saturate(1.05); } #download .stage::after { background: rgba(10,6,6,.25); } }
+.stage .bgimg.regimg { filter: brightness(.88) saturate(1.05); object-position: 0% 15%; }
+#register .stage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(270deg, rgba(10,6,6,.7) 0%, rgba(10,6,6,.45) 40%, rgba(10,6,6,0) 62%); }
+@media (max-width: 760px) { .stage .bgimg.regimg { object-position: 22% 40%; filter: brightness(.6) saturate(1.05); } #register .stage::after { background: rgba(10,6,6,.25); } }
+.stage .bgimg.accimg { filter: brightness(.6) saturate(1.05); object-position: 50% 45%; }
+.stage .bgimg.rankimg { filter: brightness(.72) saturate(1.05); object-position: 50% 20%; }
+.stage .bgimg.rulesimg { filter: brightness(.68) saturate(1.05); object-position: 50% 35%; }
+@media (max-width: 760px) { .stage .bgimg.hero { object-position: 80% 40%; filter: brightness(.6) saturate(1.05); } #home .stage::after { background: rgba(10,6,6,.25); } }
 .stage .art { inset: auto; top: 6%; height: 88%; width: auto; aspect-ratio: var(--ar); }
 .stage .art-r { right: 7%; } .stage .art-l { left: 7%; }
 .stage .art img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.08) contrast(1.04);
@@ -234,6 +251,7 @@ a { color: inherit; }
 @keyframes votePulse { 50% { box-shadow: 0 8px 26px rgba(0,0,0,.45), 0 0 30px rgba(242,201,76,.65); } }
 footer { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
 footer .toplist img { display: block; height: 40px; width: auto; border: 1px solid var(--line); }
+footer .disc { flex-basis: 100%; font-size: 11px; opacity: .7; margin-top: -8px; }
 @media (max-width: 640px) { .vote-float span { display: none; } .vote-float { padding: 10px; } }
 
 /* Home */
@@ -401,7 +419,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
 
 <main>
 <section class="scene side-r" id="home">
-  <div class="stage intro" data-scene="duel" style="--fog:rgba(255,120,80,.35)" aria-hidden="true"><img class="bgimg" data-d="0.15" src="assets/lone_bg.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><div class="art art-r" data-d="0.55" style="--ar:0.722"><img src="assets/warrior.webp" alt="" decoding="async"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
+  <div class="stage intro" data-scene="duel" style="--fog:rgba(255,120,80,.35)" aria-hidden="true"><img class="bgimg hero" data-d="0.15" src="assets/hero_archer.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
   <div class="home">
     <p class="han">군신</p>
     <h1>GUNSIN ONLINE</h1>
@@ -420,7 +438,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
 </section>
 
 <section class="scene side-l" id="news">
-  <div class="stage" data-scene="fortress" style="--fog:rgba(140,170,220,.4)" aria-hidden="true"><img class="bgimg" data-d="0.15" src="assets/night_bg.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><div class="art art-l" data-d="0.55" style="--ar:0.75"><img src="assets/night.webp" alt="" decoding="async"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
+  <div class="stage" data-scene="fortress" style="--fog:rgba(140,170,220,.4)" aria-hidden="true"><img class="bgimg newsimg" data-d="0.15" src="assets/news_knight.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
   <div class="panel">
     <h2>LATEST NEWS</h2>
     <div class="body">
@@ -437,7 +455,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
 </section>
 
 <section class="scene side-r" id="download">
-  <div class="stage" data-scene="dragon" style="--fog:rgba(255,215,150,.45)" aria-hidden="true"><img class="bgimg" data-d="0.15" src="assets/dragon_bg.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><div class="art art-r" data-d="0.55" style="--ar:0.56"><img src="assets/dragon.webp" alt="" decoding="async"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
+  <div class="stage" data-scene="dragon" style="--fog:rgba(255,215,150,.45)" aria-hidden="true"><img class="bgimg dlimg" data-d="0.15" src="assets/dl_thief.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
   <div class="panel">
     <h2>DOWNLOAD GAME CLIENT</h2>
     <div class="body">
@@ -459,7 +477,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
 </section>
 
 <section class="scene side-l" id="register">
-  <div class="stage" data-scene="temple" style="--fog:rgba(200,235,215,.4)" aria-hidden="true"><img class="bgimg" data-d="0.15" src="assets/falls_bg.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><div class="art art-l" data-d="0.55" style="--ar:0.565"><img src="assets/falls.webp" alt="" decoding="async"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
+  <div class="stage" data-scene="temple" style="--fog:rgba(200,235,215,.4)" aria-hidden="true"><img class="bgimg regimg" data-d="0.15" src="assets/reg_mage.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
   <div class="panel narrow">
     <h2>CREATE ACCOUNT</h2>
     <div class="body">
@@ -481,7 +499,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
 </section>
 
 <section class="scene" id="account">
-  <div class="stage" data-scene="duel" style="--fog:rgba(255,120,80,.35)" aria-hidden="true"><img class="bgimg" data-d="0.15" src="assets/warrior_bg.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
+  <div class="stage" data-scene="duel" style="--fog:rgba(255,120,80,.35)" aria-hidden="true"><img class="bgimg accimg" data-d="0.15" src="assets/acc_town.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
   <div class="panel" id="acc-panel">
     <h2>MY ACCOUNT</h2>
     <div class="body">
@@ -623,7 +641,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
 </section>
 
 <section class="scene side-r" id="ranking">
-  <div class="stage" data-scene="dragon" style="--fog:rgba(255,200,140,.4)" aria-hidden="true"><img class="bgimg" data-d="0.15" src="assets/sunset_bg.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><div class="art art-r" data-d="0.55" style="--ar:0.667"><img src="assets/sunset.webp" alt="" decoding="async"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
+  <div class="stage" data-scene="dragon" style="--fog:rgba(255,200,140,.4)" aria-hidden="true"><img class="bgimg rankimg" data-d="0.15" src="assets/rank_village.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
   <div class="panel">
     <h2>RANKING</h2>
     <div class="body">
@@ -639,7 +657,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
 </section>
 
 <section class="scene" id="rules">
-  <div class="stage" data-scene="battle" style="--fog:rgba(220,200,170,.35)" aria-hidden="true"><img class="bgimg sharp" data-d="0.15" src="assets/lone.webp" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
+  <div class="stage" data-scene="battle" style="--fog:rgba(220,200,170,.35)" aria-hidden="true"><img class="bgimg rulesimg" data-d="0.15" src="assets/rules_gate.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
   <div class="panel">
     <h2>RULES</h2>
     <div class="body">
@@ -657,7 +675,8 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   </div>
   <footer>
     <a class="toplist" href="https://top-kal.com/server/778/gunsin-online#/vote" target="_blank" rel="noopener"><img src="https://top-kal.com/assets/images/tok/vote_image.jpg" alt="Vote for Gunsin Online on TOP-KAL.COM" loading="lazy"></a>
-    <span>© 2026 Gunsin Online · Private server, not affiliated with the publisher of KalOnline.</span>
+    <span>© 2026 Gunsin Online. All rights reserved.</span>
+    <span class="disc">Private server, not affiliated with the publisher of KalOnline.</span>
   </footer>
 </section>
 </main>
