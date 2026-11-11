@@ -214,10 +214,12 @@ a { color: inherit; }
 @media (max-width: 700px) { .dash, .acc-grid3 { grid-template-columns: 1fr; } .d-char, .d-act { grid-column: auto; } .char-top { grid-template-columns: 1fr; } .avatar { width: 80px; height: 80px; font-size: 34px; } }
 
 
-.packs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.packs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 .pack { background: rgba(0,0,0,.4); border: 1px solid var(--line); color: var(--ivory); padding: 10px 4px; cursor: pointer; font: inherit; }
 .pack b { display: block; font: 500 20px/1.1 var(--f-mono); color: #f2c94c; }
 .pack span { font-size: 14px; color: var(--ash); }
+.pack em { display: block; font-style: normal; font-size: 13px; color: #7bd88f; min-height: 1.2em; margin-top: 2px; }
+.shop-bonus { text-align: center; color: #7bd88f; font-size: 14px; margin: 4px 0 0; }
 .coin-in { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
 .coin-in label { color: var(--ash); font-size: 14px; flex: 0 0 auto; }
 .coin-in input { flex: 1 1 auto; min-width: 0; background: rgba(0,0,0,.45); border: 1px solid var(--line); color: #f2c94c; font: 500 20px/1.2 var(--f-mono); padding: 8px 10px; text-align: right; }
@@ -566,13 +568,15 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
             <h3 class="acc-h">Coin shop</h3>
             <p class="shop-note">Buy <b>Donation Coins</b> with PayPal or bank transfer. They are delivered to the selected character automatically.</p>
             <div class="packs" id="shop-packs" aria-label="Quick amounts">
-              <button type="button" class="pack" data-coins="100" aria-pressed="true"><b>100</b><span>10 €</span></button>
-              <button type="button" class="pack" data-coins="500" aria-pressed="false"><b>500</b><span>50 €</span></button>
-              <button type="button" class="pack" data-coins="1000" aria-pressed="false"><b>1000</b><span>100 €</span></button>
+              <button type="button" class="pack" data-coins="100" aria-pressed="true"><b>100</b><span>10 €</span><em></em></button>
+              <button type="button" class="pack" data-coins="250" aria-pressed="false"><b>250</b><span>25 €</span><em>+25 bonus</em></button>
+              <button type="button" class="pack" data-coins="500" aria-pressed="false"><b>500</b><span>50 €</span><em>+75 bonus</em></button>
+              <button type="button" class="pack" data-coins="1000" aria-pressed="false"><b>1000</b><span>100 €</span><em>+250 bonus</em></button>
             </div>
             <div class="coin-in"><label for="shop-coins">Donation Coins</label><input id="shop-coins" type="number" inputmode="numeric" min="100" max="10000" step="1" value="100"></div>
             <div class="shop-gold" id="shop-gold">100 Donation Coins = 10.00 €</div>
             <p class="coin-hint" id="coin-hint">10 Donation Coins = 1 € · from 100 to 10,000 (minimum 10 €)</p>
+            <p class="shop-bonus" id="shop-bonus-tiers">Bonus coins: 25 € +10% · 50 € +15% · 100 € +25%</p>
             <div id="pp-buttons" class="pp-buttons"></div>
             <button class="btn" id="shop-buy" type="button" disabled>Order by bank transfer</button>
             <p class="acc-sub center" id="shop-status">Online payments are not enabled yet.</p>
@@ -1021,24 +1025,28 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     });
   });
   /* Coin shop (bank transfer) */
-  var shopCoins = 100, CPE = 10, CMIN = 100, CMAX = 10000, shopOn = false;
+  var shopCoins = 100, CPE = 10, CMIN = 100, CMAX = 10000, shopOn = false, BONUS = [[100, 25], [50, 15], [25, 10]];
+  function bonusOf(n) { var e = n / CPE; for (var i = 0; i < BONUS.length; i++) { if (e >= BONUS[i][0]) return Math.floor(n * BONUS[i][1] / 100); } return 0; }
   function eur(n) { return (Math.round(n * 100 / CPE) / 100).toFixed(2); }
   function coinsOk() { return shopCoins >= CMIN && shopCoins <= CMAX; }
   function shopUpd() {
     var inp = document.getElementById("shop-coins"), v = inp.value.trim(), n = /^\d+$/.test(v) ? parseInt(v, 10) : 0;
     shopCoins = n; var ok = coinsOk(); inp.setAttribute("aria-invalid", ok ? "false" : "true");
     document.querySelectorAll(".pack").forEach(function (b) { b.setAttribute("aria-pressed", parseInt(b.getAttribute("data-coins"), 10) === n ? "true" : "false"); });
-    document.getElementById("shop-gold").textContent = ok ? fmtNum(n) + " Donation Coins = " + eur(n) + " €" : "Enter " + fmtNum(CMIN) + " – " + fmtNum(CMAX) + " Donation Coins";
+    var bn = ok ? bonusOf(n) : 0;
+    document.getElementById("shop-gold").textContent = ok ? fmtNum(n) + (bn ? " + " + fmtNum(bn) + " bonus" : "") + " Donation Coins = " + eur(n) + " €" : "Enter " + fmtNum(CMIN) + " – " + fmtNum(CMAX) + " Donation Coins";
   }
   function shopSet(n) { document.getElementById("shop-coins").value = n; shopUpd(); }
   document.getElementById("shop-coins").addEventListener("input", shopUpd);
   document.querySelectorAll(".pack").forEach(function (b) { b.addEventListener("click", function () { shopSet(b.getAttribute("data-coins")); }); });
-  function packLabels() { document.querySelectorAll(".pack").forEach(function (b) { b.querySelector("span").textContent = (parseInt(b.getAttribute("data-coins"), 10) / CPE) + " €"; }); }
+  function packLabels() { document.querySelectorAll(".pack").forEach(function (b) { var c = parseInt(b.getAttribute("data-coins"), 10), bn = bonusOf(c); b.querySelector("span").textContent = (c / CPE) + " €"; b.querySelector("em").textContent = bn ? "+" + fmtNum(bn) + " bonus" : ""; }); }
   function loadShop() {
     apiCall("/shop", {}).then(function (j) {
       if (!j || !j.ok) return;
       shopOn = !!j.enabled;
       if (j.paypal) loadPayPal(j.paypal);
+      if (j.bonus && j.bonus.length) { BONUS = j.bonus.map(function (x) { return [x.euro, x.percent]; }).sort(function (a, b) { return b[0] - a[0]; });
+        document.getElementById("shop-bonus-tiers").textContent = "Bonus coins: " + BONUS.slice().reverse().map(function (x) { return x[0] + " € +" + x[1] + "%"; }).join(" · "); }
       if (j.coinsPerEuro) { CPE = j.coinsPerEuro; CMIN = j.minCoins || CMIN; CMAX = j.maxCoins || CMAX;
         var inp = document.getElementById("shop-coins"); inp.min = CMIN; inp.max = CMAX;
         document.getElementById("coin-hint").textContent = CPE + " Donation Coins = 1 € · from " + fmtNum(CMIN) + " to " + fmtNum(CMAX) + " (minimum " + (CMIN / CPE) + " €)"; packLabels(); }
