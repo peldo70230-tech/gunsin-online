@@ -566,13 +566,13 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
             <h3 class="acc-h">Coin shop</h3>
             <p class="shop-note">Buy <b>Donation Coins</b> with PayPal or bank transfer. They are delivered to the selected character automatically.</p>
             <div class="packs" id="shop-packs" aria-label="Quick amounts">
-              <button type="button" class="pack" data-coins="50" aria-pressed="true"><b>50</b><span>10 €</span></button>
-              <button type="button" class="pack" data-coins="250" aria-pressed="false"><b>250</b><span>50 €</span></button>
-              <button type="button" class="pack" data-coins="500" aria-pressed="false"><b>500</b><span>100 €</span></button>
+              <button type="button" class="pack" data-coins="100" aria-pressed="true"><b>100</b><span>10 €</span></button>
+              <button type="button" class="pack" data-coins="500" aria-pressed="false"><b>500</b><span>50 €</span></button>
+              <button type="button" class="pack" data-coins="1000" aria-pressed="false"><b>1000</b><span>100 €</span></button>
             </div>
-            <div class="coin-in"><label for="shop-coins">Donation Coins</label><input id="shop-coins" type="number" inputmode="numeric" min="5" max="5000" step="1" value="50"></div>
-            <div class="shop-gold" id="shop-gold">50 Donation Coins = 10.00 €</div>
-            <p class="coin-hint" id="coin-hint">5 Donation Coins = 1 € · from 5 to 5,000</p>
+            <div class="coin-in"><label for="shop-coins">Donation Coins</label><input id="shop-coins" type="number" inputmode="numeric" min="100" max="10000" step="1" value="100"></div>
+            <div class="shop-gold" id="shop-gold">100 Donation Coins = 10.00 €</div>
+            <p class="coin-hint" id="coin-hint">10 Donation Coins = 1 € · from 100 to 10,000 (minimum 10 €)</p>
             <div id="pp-buttons" class="pp-buttons"></div>
             <button class="btn" id="shop-buy" type="button" disabled>Order by bank transfer</button>
             <p class="acc-sub center" id="shop-status">Online payments are not enabled yet.</p>
@@ -1021,7 +1021,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     });
   });
   /* Coin shop (bank transfer) */
-  var shopCoins = 50, CPE = 5, CMIN = 5, CMAX = 5000, shopOn = false;
+  var shopCoins = 100, CPE = 10, CMIN = 100, CMAX = 10000, shopOn = false;
   function eur(n) { return (Math.round(n * 100 / CPE) / 100).toFixed(2); }
   function coinsOk() { return shopCoins >= CMIN && shopCoins <= CMAX; }
   function shopUpd() {
@@ -1041,7 +1041,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
       if (j.paypal) loadPayPal(j.paypal);
       if (j.coinsPerEuro) { CPE = j.coinsPerEuro; CMIN = j.minCoins || CMIN; CMAX = j.maxCoins || CMAX;
         var inp = document.getElementById("shop-coins"); inp.min = CMIN; inp.max = CMAX;
-        document.getElementById("coin-hint").textContent = CPE + " Donation Coins = 1 € · from " + fmtNum(CMIN) + " to " + fmtNum(CMAX); packLabels(); }
+        document.getElementById("coin-hint").textContent = CPE + " Donation Coins = 1 € · from " + fmtNum(CMIN) + " to " + fmtNum(CMAX) + " (minimum " + (CMIN / CPE) + " €)"; packLabels(); }
       shopUpd();
       document.getElementById("shop-buy").disabled = !shopOn;
       document.getElementById("shop-status").textContent = (shopOn || j.paypal) ? "" : "Online payments are not enabled yet.";
