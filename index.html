@@ -337,6 +337,39 @@ td.r, th.r { text-align: right; }
 .empty b { display: block; color: var(--ivory); font: 18px/1.3 var(--f-display); letter-spacing: .06em; margin-bottom: 6px; }
 .updated { text-align: center; font-size: 13px; color: var(--ash); margin: 12px 0 0; }
 .updated .status-dot { width: 7px; height: 7px; margin-right: 6px; }
+/* Level ranking (v2) */
+#ranking .panel { max-width: min(1100px, 92vw); }
+.lr-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 20px; }
+.lr-title { margin: 0; font: clamp(20px, 2.4vw, 28px)/1.1 var(--f-display); letter-spacing: .04em; color: var(--ivory); }
+.lr-search { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ash); }
+.lr-search input { width: 200px; max-width: 46vw; min-height: 34px; padding: 6px 10px; background: rgba(0,0,0,.6); color: var(--ivory); border: 1px solid var(--line); font: 15px var(--f-body); }
+.lr-search input:focus { outline: none; border-color: var(--brass); }
+.lr th { white-space: nowrap; }
+.lr th.sort { cursor: pointer; user-select: none; }
+.lr th.sort::after { content: " \2195"; opacity: .45; font-size: 11px; }
+.lr th.sort.asc::after { content: " \2191"; opacity: 1; color: var(--brass); }
+.lr th.sort.desc::after { content: " \2193"; opacity: 1; color: var(--brass); }
+.lr td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; font-weight: 400; color: var(--ivory); }
+.lr tbody tr:nth-child(-n+3) td, .lr tbody tr:nth-child(-n+3) .nm { font-weight: 700; }
+.lr tbody tr { transition: background .2s; }
+.lr tbody tr:hover { background: rgba(209,171,99,.07); }
+.lr td.rk { width: 58px; text-align: center; font: 700 16px/1 var(--f-body); color: var(--ivory); }
+.lr td.rk svg { width: 20px; height: 26px; display: block; margin: 0 auto; }
+.lr .cico { width: 34px; height: 34px; display: block; }
+.lr .nm { display: inline-flex; align-items: center; gap: 10px; color: var(--ivory); font-weight: 500; }
+.lr .dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid #3fae5a; box-sizing: border-box; display: inline-grid; place-items: center; }
+.lr .dot::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #3fae5a; }
+.lr td.spec { color: #4f9fd6; }
+.lr td.lvl { font-family: var(--f-mono); }
+.lr td.gld { color: var(--ivory); }
+.pbar { position: relative; width: 100%; min-width: 150px; height: 20px; background: rgba(255,255,255,.08); border-radius: 10px; overflow: hidden; }
+.pbar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 10px; min-width: 14px; }
+.pbar i.g { background: linear-gradient(90deg, #2bb36a, #3fd07f); }
+.pbar i.o { background: linear-gradient(90deg, #e98b17, #f6a531); }
+.pbar i.b { background: linear-gradient(90deg, #3b7fd1, #4f97e3); }
+.pbar b { position: absolute; right: 10px; top: 0; line-height: 20px; font: 700 11px/20px var(--f-mono); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.8); }
+@media (max-width: 760px) { .lr .hide-s { display: none; } .pbar { min-width: 96px; } .pbar b { font-size: 9px; right: 6px; } .lr td, .lr th { padding-left: 5px; padding-right: 5px; } .lr td.rk { width: 34px; } }
+
 
 /* Rules */
 .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 34px; margin: 0; padding: 0; list-style: none; counter-reset: r; }
@@ -876,11 +909,57 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   };
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   var curKind = "level", live = false;
+  var TITLES = {
+    "Knight": ["Wandering Knight", "Apprentice Knight", "Commander", "Vagabond Swordman", "God of Sword", "General"],
+    "Mage": ["Scholar", "Literary Man", "Hermit", "Chairperson of Joong-Bang", "Ascetic", "Military Adviser"],
+    "Archer": ["Wandering Archer", "Apprentice Archer", "Imperial Commander", "Expert Archer", "God of Bow", "Imperial General"],
+    "Thief": ["Wandering Thief", "Thief Guild member", "Hitman", "I. Swordman", "Dark Shadow", "Unearthly Ghost"]
+  };
+  function specName(r) { var t = TITLES[r.cls]; if (!t) return r.cls || ""; var s = parseInt(r.spec, 10); if (!(s >= 1)) s = 1; return t[Math.min(s, t.length) - 1]; }
+  var CLS = {
+    "Knight": ["#7a1d14", "#e2553a", '<path d="M17 7l2 2-8 8-2 1 1-2z" fill="#fff"/><path d="M8 15l3 3M7 19l2-2" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>'],
+    "Mage": ["#4a1238", "#c0398a", '<circle cx="13" cy="10" r="3.2" fill="#fff"/><path d="M12 13.5l-3.5 8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>'],
+    "Archer": ["#1d4a2e", "#56b06e", '<path d="M8 6c6 2 8 8 6 14" stroke="#fff" stroke-width="1.6" fill="none"/><path d="M8 6l6 14M6 13h13M16 11l3 2-3 2" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round"/>'],
+    "Thief": ["#2a2340", "#7d6ad1", '<path d="M16 6l2 2-7 9-2 .5.5-2z" fill="#fff"/><path d="M8 15.5l2.5 2.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>']
+  };
+  function classIcon(c) { var d = CLS[c] || ["#3a2c1c", "#b08a4a", '<circle cx="13" cy="13" r="4" fill="#fff"/>'];
+    return '<svg class="cico" viewBox="0 0 26 26" role="img" aria-label="' + esc(c) + '"><defs><radialGradient id="cg' + esc(c).replace(/\W/g, "") + '" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="' + d[1] + '"/><stop offset="1" stop-color="' + d[0] + '"/></radialGradient></defs><circle cx="13" cy="13" r="12" fill="url(#cg' + esc(c).replace(/\W/g, "") + ')" stroke="#c9a35a" stroke-width="1.4"/><circle cx="13" cy="13" r="9.6" fill="none" stroke="rgba(255,255,255,.25)" stroke-width=".8"/>' + d[2] + "</svg>"; }
+  function medal(n) { var c = n === 1 ? ["#f5c542", "#b8860b"] : n === 2 ? ["#e3edf5", "#7f9bb3"] : ["#e8955a", "#9a4f1e"];
+    return '<svg viewBox="0 0 20 26" aria-label="' + n + '"><path d="M5 0h4l2 8H7zM11 0h4l-2 8H9z" fill="#3b6fb3"/><circle cx="10" cy="16" r="7.5" fill="' + c[0] + '" stroke="' + c[1] + '" stroke-width="1.5"/><text x="10" y="19.5" text-anchor="middle" font-size="9" font-weight="700" fill="' + c[1] + '" font-family="Arial">' + n + "</text></svg>"; }
+  function pbar(p) { p = Math.max(0, Math.min(1000, Number(p) || 0)); var k = p >= 500 ? "g" : p >= 250 ? "o" : "b";
+    return '<div class="pbar"><i class="' + k + '" style="width:' + (p / 10).toFixed(1) + '%"></i><b>' + p.toFixed(2) + "/1000</b></div>"; }
+  var lrSort = { key: "rank", dir: 1 }, lrQuery = "";
+  function renderLevel(panel) {
+    var rows = (data.level || []).map(function (r, i) { return { r: r, rank: i + 1 }; });
+    var q = lrQuery.trim().toLowerCase();
+    if (q) rows = rows.filter(function (x) { return (x.r.name + " " + (x.r.guild || "") + " " + (x.r.cls || "") + " " + specName(x.r)).toLowerCase().indexOf(q) >= 0; });
+    var key = lrSort.key, dir = lrSort.dir;
+    rows.sort(function (a, b) {
+      var va, vb;
+      if (key === "rank") { va = a.rank; vb = b.rank; }
+      else if (key === "level") { va = a.r.level * 10000 + (a.r.prog || 0); vb = b.r.level * 10000 + (b.r.prog || 0); }
+      else if (key === "prog") { va = a.r.prog || 0; vb = b.r.prog || 0; }
+      else { va = String(key === "spec" ? specName(a.r) : (a.r[key] || "")).toLowerCase(); vb = String(key === "spec" ? specName(b.r) : (b.r[key] || "")).toLowerCase(); }
+      return (va < vb ? -1 : va > vb ? 1 : a.rank - b.rank) * dir;
+    });
+    var hd = [["rank", "Rank"], ["cls", "Class", "hide-s"], ["name", "Name"], ["spec", "Specialty", "hide-s"], ["level", "Level"], ["guild", "Guild", "hide-s"], ["prog", "Progress"]];
+    var h = '<div class="lr-head"><h3 class="lr-title">Level Ranking</h3><label class="lr-search">Search: <input type="search" id="lr-q" value="' + esc(lrQuery) + '" aria-label="Search ranking"></label></div>';
+    h += '<div class="rank-wrap"><table class="rank lr"><thead><tr>' + hd.map(function (x) { var s = lrSort.key === x[0] ? (lrSort.dir > 0 ? " asc" : " desc") : ""; return '<th class="sort' + s + (x[2] ? " " + x[2] : "") + '" data-k="' + x[0] + '">' + x[1] + "</th>"; }).join("") + "</tr></thead><tbody>";
+    if (!rows.length) h += '<tr><td colspan="7" style="text-align:center;color:var(--ash)">No characters found.</td></tr>';
+    rows.forEach(function (x) { var r = x.r;
+      h += '<tr><td class="rk">' + (x.rank <= 3 ? medal(x.rank) : x.rank) + "</td><td class=\"hide-s\">" + classIcon(r.cls) + '</td><td><span class="nm">' + esc(r.name) + '</span></td><td class="spec hide-s">' + esc(specName(r)) + '</td><td class="lvl">' + esc(r.level) + '</td><td class="gld hide-s">' + esc(r.guild || "-") + "</td><td>" + pbar(r.prog) + "</td></tr>"; });
+    panel.innerHTML = h + "</tbody></table></div>";
+    var inp = document.getElementById("lr-q");
+    inp.addEventListener("input", function () { lrQuery = inp.value; var pos = inp.selectionStart; renderLevel(panel); var n = document.getElementById("lr-q"); n.focus(); try { n.setSelectionRange(pos, pos); } catch (e) {} });
+    panel.querySelectorAll("th.sort").forEach(function (th) { th.addEventListener("click", function () { var k = th.getAttribute("data-k"); lrSort = { key: k, dir: lrSort.key === k ? -lrSort.dir : (k === "level" || k === "prog" ? -1 : 1) }; renderLevel(panel); }); });
+  }
   function render(kind) {
     curKind = kind;
     document.querySelectorAll(".tab").forEach(function (b) { b.setAttribute("aria-selected", b.getAttribute("data-rank") === kind ? "true" : "false"); });
     var rows = data[kind] || [], panel = document.getElementById("rank-panel");
-    if (!rows.length) { panel.innerHTML = '<div class="empty"><b>No ranking yet</b>Check back after the next update.</div>'; }
+    panel.classList.toggle("rank-wrap", kind !== "level");
+    if (kind === "level" && rows.length) { renderLevel(panel); }
+    else if (!rows.length) { panel.innerHTML = '<div class="empty"><b>No ranking yet</b>Check back after the next update.</div>'; }
     else {
       var c = cols[kind], h = '<table class="rank"><thead><tr>' + c.map(function (x) { return "<th>" + x[0] + "</th>"; }).join("") + "</tr></thead><tbody>";
       rows.forEach(function (r, i) { h += "<tr>" + c.map(function (x) { var v = x[1] === "pos" ? (i + 1) : r[x[1]]; return "<td" + (x[1] === "pos" ? ' class="pos"' : "") + ">" + esc(v) + "</td>"; }).join("") + "</tr>"; });
