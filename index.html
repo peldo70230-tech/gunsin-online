@@ -157,6 +157,31 @@ a { color: inherit; }
 [hidden] { display: none !important; }
 #acc-panel { max-width: 980px; }
 #acc-panel .acc-login { max-width: 420px; margin: 0 auto; }
+/* Login (not logged in): light, see-through form on the left so the scene shows */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+#acc-panel .t-user { display: none; } #acc-panel.wide .t-user { display: inline; } #acc-panel.wide .t-guest { display: none; }
+#account:has(#acc-panel:not(.wide)) { justify-content: flex-start; padding-left: max(8vw, 16px); }
+#acc-panel:not(.wide) { position: relative; max-width: 400px; background: none; border: 0; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 26px 22px 24px; }
+#acc-panel:not(.wide)::before { content: ""; position: absolute; inset: -40px -70px; z-index: -1; pointer-events: none; background: radial-gradient(closest-side, rgba(8,4,3,.62), rgba(8,4,3,.35) 60%, transparent); }
+#acc-panel:not(.wide) h2 { font-size: clamp(30px, 4vw, 42px); letter-spacing: .1em; color: #eef2f2; text-shadow: 0 2px 0 rgba(0,0,0,.6), 0 0 22px rgba(0,0,0,.7); }
+#acc-panel:not(.wide) h2::after { display: none; }
+#acc-panel:not(.wide) .body { margin-top: 22px; }
+#acc-panel:not(.wide) .acc-login .field { margin-bottom: 10px; }
+#acc-panel:not(.wide) .acc-login input { background: rgba(6,4,4,.78); border: 1px solid var(--line); border-radius: 4px; height: 46px; padding: 0 14px; font-size: 16px; color: #f1ece4; box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 2px 10px rgba(0,0,0,.45); }
+#acc-panel:not(.wide) .acc-login input::placeholder { color: rgba(214,208,198,.75); }
+#acc-panel:not(.wide) .acc-login input:focus { border-color: var(--brass); outline: none; }
+.pw-wrap { position: relative; }
+.pw-wrap input { padding-right: 46px !important; }
+.pw-eye { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: none; border: 0; color: rgba(230,226,218,.8); cursor: pointer; padding: 6px; line-height: 0; }
+.pw-eye[aria-pressed="true"] { color: var(--brass); }
+#acc-panel:not(.wide) .login-btn { display: block; width: 200px; margin: 14px auto 0; height: 50px; border-radius: 5px; font-size: 17px; letter-spacing: .12em; color: var(--ivory); background: linear-gradient(180deg, #8e2a24, #5e1714); border: 1px solid var(--brass); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 4px 14px rgba(0,0,0,.5); }
+#acc-panel:not(.wide) .login-btn:hover { background: linear-gradient(180deg, #a3332b, #6e1c18); }
+#acc-panel:not(.wide) #acc-login-status:empty { display: none; }
+#acc-panel:not(.wide) .acc-login { gap: 12px; }
+.acc-welcome { margin: 4px 0 0; text-align: center; font-size: 14px; color: #ece6dc; text-shadow: 0 1px 3px rgba(0,0,0,.9); }
+#acc-panel:not(.wide) .reg-note { margin-top: 10px; text-shadow: 0 1px 3px rgba(0,0,0,.9); color: #ddd5c8; }
+#acc-panel:not(.wide) .reg-note a, #acc-panel:not(.wide) .reg-note .linkbtn { color: #f1ece4; }
+@media (max-width: 900px) { #account:has(#acc-panel:not(.wide)) { justify-content: center; padding-left: 16px; } }
 .acc-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
 .acc-k { font: 12px/1 var(--f-display); letter-spacing: .18em; color: var(--ash); }
 .acc-name { font: 26px/1.2 var(--f-display); letter-spacing: .06em; margin-top: 6px; }
@@ -450,7 +475,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     <li><a href="#ranking">Ranking</a></li>
     <li><a href="#rules">Rules</a></li>
   </ul>
-  <span class="cta"><a class="btn small" id="nav-discord" href="#register">Discord</a><a class="btn small primary" href="#register">Create account</a></span>
+  <span class="cta"><a class="btn small" id="nav-discord" href="#register">Discord</a><a class="btn small primary" href="#account">Login</a></span>
 </nav>
 
 <ul class="dots" aria-label="Sections">
@@ -539,11 +564,8 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
       <form class="form" id="reg-form" novalidate autocomplete="off">
         <div class="field"><label for="reg-user">Username</label><input id="reg-user" name="user" autocomplete="username" maxlength="16" placeholder="4–16 letters or numbers"></div>
         <div class="field"><label for="reg-pass">Password</label><input id="reg-pass" name="pass" type="password" autocomplete="new-password" maxlength="16" placeholder="4–16 letters or numbers"></div>
-        <div class="field"><label for="reg-pass2">Repeat password</label><input id="reg-pass2" name="pass2" type="password" autocomplete="new-password" maxlength="16"></div>
-        <div class="field"><label for="reg-sn">Secret number</label><input id="reg-sn" name="sn" type="password" inputmode="numeric" autocomplete="off" maxlength="8" placeholder="6–8 digits"></div>
-        <div class="field"><label for="reg-sn2">Repeat secret number</label><input id="reg-sn2" name="sn2" type="password" inputmode="numeric" autocomplete="off" maxlength="8"></div>
-        <p class="field-help">You need the secret number to change your password, remove the secondary password or recover your account. Write it down and never share it. Nobody can look it up for you.</p>
-        <div class="field"><label for="reg-email">Email <span style="text-transform:none;letter-spacing:0">(recommended)</span></label><input id="reg-email" name="email" type="email" maxlength="80" placeholder="to recover a forgotten secret number"></div>
+        <div class="field"><label for="reg-email">Email</label><input id="reg-email" name="email" type="email" maxlength="80" placeholder="your@gmail.com"></div>
+        <p class="field-help">We'll email you your secret number (S/N). You need it to change your password, remove the secondary password or recover your account. Keep that email safe and never share the number.</p>
         <div class="hp" aria-hidden="true"><label for="reg-web">Website</label><input id="reg-web" name="website" tabindex="-1" autocomplete="off"></div>
         <button class="btn primary" type="submit" id="reg-submit">Create account</button>
         <p class="status" id="reg-status" role="status"></p>
@@ -556,14 +578,15 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
 <section class="scene" id="account">
   <div class="stage" data-scene="duel" style="--fog:rgba(255,120,80,.35)" aria-hidden="true"><img class="bgimg accimg" data-d="0.15" src="assets/acc_town.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
   <div class="panel" id="acc-panel">
-    <h2>MY ACCOUNT</h2>
+    <h2><span class="t-guest">LOGIN</span><span class="t-user">MY ACCOUNT</span></h2>
     <div class="body">
       <form class="form acc-login" id="acc-login" novalidate>
-        <div class="field"><label for="acc-user">Username</label><input id="acc-user" autocomplete="username" maxlength="16"></div>
-        <div class="field"><label for="acc-pass">Password</label><input id="acc-pass" type="password" autocomplete="current-password" maxlength="16"></div>
-        <button class="btn primary" type="submit">Log in</button>
+        <div class="field"><label class="sr" for="acc-user">Username</label><input id="acc-user" autocomplete="username" maxlength="16" placeholder="Username"></div>
+        <div class="field pw-wrap"><label class="sr" for="acc-pass">Password</label><input id="acc-pass" type="password" autocomplete="current-password" maxlength="16" placeholder="Password"><button type="button" class="pw-eye" id="acc-eye" aria-label="Show password" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
+        <button class="btn primary login-btn" type="submit">Login</button>
         <p class="status" id="acc-login-status" role="status"></p>
-        <p class="reg-note"><button class="linkbtn" type="button" id="acc-forgot">Forgot password?</button> · No account yet? <a href="#register">Create one</a>.</p>
+        <p class="acc-welcome">Welcome back, traveler! Please log in to continue.</p>
+        <p class="reg-note"><button class="linkbtn" type="button" id="acc-forgot">Forgot password?</button> · <a href="#register">Create new account</a></p>
       </form>
       <form class="form acc-login" id="acc-recover" novalidate hidden>
         <h3 class="acc-h">Reset password</h3>
@@ -1043,21 +1066,18 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   loadApi();
   f.addEventListener("submit", function (e) {
     e.preventDefault();
-    var u = val("reg-user"), p = document.getElementById("reg-pass").value, p2 = document.getElementById("reg-pass2").value, m = val("reg-email"), sn = val("reg-sn"), sn2 = val("reg-sn2");
+    var u = val("reg-user"), p = document.getElementById("reg-pass").value, m = val("reg-email");
     if (!/^[A-Za-z0-9]{4,16}$/.test(u)) return say("Username must be 4–16 letters or numbers.", true);
     if (!/^[A-Za-z0-9]{4,16}$/.test(p)) return say("Password must be 4–16 letters or numbers (no spaces or symbols).", true);
-    if (p !== p2) return say("Passwords do not match.", true);
-    if (!/^\d{6,8}$/.test(sn)) return say("Secret number must be 6–8 digits.", true);
-    if (sn !== sn2) return say("Secret numbers do not match.", true);
-    if (m && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) return say("That email address doesn't look right.", true);
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) return say("Enter a valid email address. Your secret number will be sent there.", true);
     sb.disabled = true; say("Creating your account…");
     loadApi().then(function (api) {
       if (!api) throw { msg: "Registration is offline right now. Please try again later or ask on Discord." };
       return fetch(api + "/register", { method: "POST", headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify({ user: u, pass: p, sn: sn, email: m, website: val("reg-web") }) })
+        body: JSON.stringify({ user: u, pass: p, email: m, website: val("reg-web") }) })
         .then(function (r) { return r.json().catch(function () { return { ok: false, error: "Server error (" + r.status + ")." }; }); }, function () { throw { msg: "Can't reach the registration server. Please try again in a few minutes." }; });
     }).then(function (j) {
-      if (j && j.ok) { f.reset(); say("Account “" + u + "” created! Download the client and log in."); }
+      if (j && j.ok) { f.reset(); say(j.message || ("Account “" + u + "” created! Your secret number was sent to " + m + ".")); }
       else say((j && j.error) || "Registration failed.", true);
     }).catch(function (x) { say((x && x.msg) || "Registration failed.", true); })
       .then(function () { sb.disabled = false; });
@@ -1268,6 +1288,8 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     apiCall("/me", { token: TOKEN }).then(function (j) { if (needRelogin(j)) return; if (j.ok) renderMe(j); else { showLogin(); stat("acc-login-status", j.error || "Error.", true); } })
       .catch(function (x) { showLogin(); stat("acc-login-status", x.msg || "Error.", true); });
   }
+  (function () { var eye = document.getElementById("acc-eye"), pw = document.getElementById("acc-pass");
+    eye.addEventListener("click", function () { var show = pw.type === "password"; pw.type = show ? "text" : "password"; eye.setAttribute("aria-pressed", show ? "true" : "false"); eye.setAttribute("aria-label", show ? "Hide password" : "Show password"); }); })();
   document.getElementById("acc-login").addEventListener("submit", function (e) {
     e.preventDefault();
     var u = document.getElementById("acc-user").value.trim(), p = document.getElementById("acc-pass").value;
