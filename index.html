@@ -108,12 +108,9 @@ a { color: inherit; }
 .home .han { background: linear-gradient(100deg, var(--ivory) 40%, #fff6dc 50%, var(--ivory) 60%); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
   animation: rise 1.4s cubic-bezier(.2,.7,.2,1) both .3s, shine 7s ease-in-out infinite 2s; text-shadow: none; filter: drop-shadow(0 6px 30px rgba(0,0,0,.7)) drop-shadow(0 0 24px rgba(255,140,80,.35)); }
 @keyframes shine { 0%, 60% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
-.panel { opacity: 0; transform: translateX(calc(var(--dir, 1) * 130px)); transition: opacity .8s ease, transform 1s cubic-bezier(.16,.84,.26,1); }
+.panel { opacity: 0; transform: translateY(40px) rotateX(8deg); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
 .panel.in { opacity: 1; transform: none; }
-/* Slide-in: each part of a section glides in one after another */
-.panel .sl { opacity: 0; transform: translateX(calc(var(--dir, 1) * 100px)); transition: opacity .7s ease, transform .9s cubic-bezier(.16,.84,.26,1); transition-delay: calc(var(--i, 0) * 85ms + 120ms); }
-.panel.in .sl { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .panel .sl { opacity: 1; transform: none; transition: none; } .panel { opacity: 1; transform: none; } .intro img { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .panel { opacity: 1; transform: none; } .intro img { opacity: 1; } }
 
 
 .stage .bgimg { object-fit: cover; filter: brightness(.5) saturate(1.15); }
@@ -596,7 +593,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
 </section>
 
 <section class="scene side-r" id="download">
-  <div class="stage" data-scene="forge" style="--fog:rgba(255,215,150,.45)" aria-hidden="true"><img class="bgimg dlimg" data-d="0.15" src="assets/dl_thief.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
+  <div class="stage" data-scene="dragon" style="--fog:rgba(255,215,150,.45)" aria-hidden="true"><img class="bgimg dlimg" data-d="0.15" src="assets/dl_thief.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
   <div class="panel">
     <h2>DOWNLOAD<br>GAME CLIENT</h2>
     <div class="body">
@@ -626,7 +623,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
 </section>
 
 <section class="scene side-l" id="register">
-  <div class="stage" data-scene="spirit" style="--fog:rgba(200,235,215,.4)" aria-hidden="true"><img class="bgimg regimg" data-d="0.15" src="assets/reg_mage.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
+  <div class="stage" data-scene="temple" style="--fog:rgba(200,235,215,.4)" aria-hidden="true"><img class="bgimg regimg" data-d="0.15" src="assets/reg_mage.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
   <div class="panel narrow">
     <h2>CREATE ACCOUNT</h2>
     <div class="body">
@@ -645,7 +642,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
 </section>
 
 <section class="scene" id="account">
-  <div class="stage" data-scene="lantern" style="--fog:rgba(255,120,80,.35)" aria-hidden="true"><img class="bgimg accimg" data-d="0.15" src="assets/acc_town.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
+  <div class="stage" data-scene="duel" style="--fog:rgba(255,120,80,.35)" aria-hidden="true"><img class="bgimg accimg" data-d="0.15" src="assets/acc_town.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
   <div class="panel" id="acc-panel">
     <h2><span class="t-guest">LOGIN</span><span class="t-user">MY ACCOUNT</span></h2>
     <div class="body">
@@ -798,7 +795,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
 </section>
 
 <section class="scene side-r" id="ranking">
-  <div class="stage" data-scene="glory" style="--fog:rgba(255,200,140,.4)" aria-hidden="true"><img class="bgimg rankimg" data-d="0.15" src="assets/rank_village.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
+  <div class="stage" data-scene="dragon" style="--fog:rgba(255,200,140,.4)" aria-hidden="true"><img class="bgimg rankimg" data-d="0.15" src="assets/rank_village.jpg" alt="" decoding="async"><div class="fog" data-d="0.4"></div><canvas class="fx" data-d="0.85"></canvas><div class="fog f2" data-d="0.9"></div></div><div class="vign"></div>
   <div class="panel">
     <h2>RANKING</h2>
     <div class="body">
@@ -896,13 +893,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   if ("IntersectionObserver" in window) {
     var vo = new IntersectionObserver(function (es) { es.forEach(function (en) { var st = en.target.querySelector(".stage"); if (en.isIntersecting) visible.add(st); else visible.delete(st); }); }, { rootMargin: "100px" });
     document.querySelectorAll(".scene").forEach(function (s) { vo.observe(s); });
-    document.querySelectorAll(".panel").forEach(function (p) { var k = 0;
-      [].forEach.call(p.querySelectorAll(":scope > h2, :scope > .body > *:not(form):not(.acc-view):not(.rank-wrap):not(.rules), :scope > .body > form:not([hidden]) > *:not(.hp), .rules > li, .champs, .tabs"), function (el) {
-        if (el.closest(".acc-view") || el.classList.contains("sl")) return; el.classList.add("sl"); el.style.setProperty("--i", Math.min(k++, 12)); }); });
-    var secList = [].slice.call(document.querySelectorAll(".scene")), lastIdx = 0;
-    var po = new IntersectionObserver(function (es) { es.forEach(function (en) { var pn = en.target, idx = secList.indexOf(pn.closest(".scene"));
-      if (en.isIntersecting) { if (!pn.classList.contains("in")) { pn.style.setProperty("--dir", idx >= lastIdx ? 1 : -1); void pn.offsetWidth; pn.classList.add("in"); } lastIdx = idx; }
-      else if (en.intersectionRatio === 0) pn.classList.remove("in"); }); }, { threshold: [0, .15] });
+    var po = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) en.target.classList.add("in"); }); }, { threshold: .15 });
     document.querySelectorAll(".panel").forEach(function (p) { po.observe(p); });
   } else { stages.forEach(function (s) { visible.add(s); }); document.querySelectorAll(".panel").forEach(function (p) { p.classList.add("in"); }); }
   setTimeout(function () { var i = document.querySelector(".intro"); if (i) { [].forEach.call(i.querySelectorAll("img"), function (im, k) { im.style.transitionDelay = (k * .18) + "s"; }); i.classList.remove("intro"); } }, 60);
@@ -913,11 +904,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     dragon: [{ n: 70, kind: "dust", c: "255,220,170", vy: [-.15, .15], vx: [.2, .7] }],
     temple: [{ n: 45, kind: "petal", c: "235,250,240", vy: [.4, 1], vx: [.3, 1] }, { n: 22, kind: "fly", c: "255,210,130", vy: [-.2, .2], vx: [-.2, .2] }],
     battle: [{ n: 120, kind: "ember", c: "255,160,70", vy: [-2.2, -.6], vx: [.2, 1.2] }],
-    night: [{ n: 110, kind: "snow", c: "230,238,255", vy: [.5, 1.4], vx: [-.2, .4] }],
-    forge: [{ n: 110, kind: "ember", c: "255,150,60", vy: [-2, -.7], vx: [-.3, .5] }],
-    spirit: [{ n: 50, kind: "fly", c: "150,240,220", vy: [-.5, -.1], vx: [-.2, .2] }, { n: 30, kind: "fly", c: "255,215,130", vy: [-.4, .1], vx: [-.2, .2] }],
-    lantern: [{ n: 45, kind: "fly", c: "255,200,100", vy: [-.25, .25], vx: [-.3, .3] }],
-    glory: [{ n: 80, kind: "dust", c: "255,215,120", vy: [.2, .6], vx: [-.15, .15] }]
+    night: [{ n: 110, kind: "snow", c: "230,238,255", vy: [.5, 1.4], vx: [-.2, .4] }]
   };
   var small = innerWidth < 700;
   stages.forEach(function (st) {
@@ -946,7 +933,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     if (!gl) return;
     function sh(type, src) { var o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(o); return o; }
     function prog(vs, fs) { var p = gl.createProgram(); gl.attachShader(p, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(p); return p; }
-    var fogP, ptP, xP;
+    var fogP, ptP;
     try {
       fogP = prog("attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}",
         "precision mediump float;uniform vec2 res;uniform float t;uniform vec2 L;uniform vec3 col;uniform float dens;uniform vec2 m;" +
@@ -969,24 +956,6 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
         "precision mediump float;uniform vec3 pc;varying float vA;varying float vZ;void main(){float d=length(gl_PointCoord-.5);" +
         "float blur=mix(.08,.42,smoothstep(.55,1.,vZ));float g=1.-smoothstep(.5-blur,.5,d);g*=g;float core=1.-smoothstep(0.,.18,d);" +
         "float a=g*vA*(.85-vZ*.5);vec3 c=min(pc*a+vec3(1.,.95,.85)*core*vA*.35*(1.-vZ),vec3(1.));gl_FragColor=vec4(c,max(max(c.r,c.g),c.b));}");
-      xP = prog("attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}",
-        "precision mediump float;uniform vec2 res;uniform float t;uniform float mode;uniform vec3 xc;uniform vec2 m;" +
-        "float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}" +
-        "float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),f.x),f.y);}" +
-        "float fbm(vec2 p){float s=0.,a=.5;for(int i=0;i<4;i++){s+=a*n(p);p*=2.07;a*=.5;}return s;}" +
-        "void main(){vec2 uv=gl_FragCoord.xy/res;float asp=res.x/res.y;vec2 p=uv*vec2(asp,1.);float v=0.;" +
-        // 1 forge: heat glow + flickering flame tongues from the ground
-        "if(mode<1.5){float f=fbm(vec2(p.x*3.,p.y*2.-t*.9));v=smoothstep(.55,0.,uv.y)*(.35+.65*f)*.55;v+=pow(f,4.)*smoothstep(.35,0.,uv.y)*.9;}" +
-        // 2 spirit: drifting aurora ribbons
-        "else if(mode<2.5){for(int i=0;i<3;i++){float fi=float(i);float y0=.62+fi*.09+.07*sin(p.x*1.7+t*.35+fi*2.1)+.05*(fbm(vec2(p.x*1.3+t*.08,fi))-.5);" +
-        "float b=exp(-pow((uv.y-y0)*(16.+fi*6.),2.));v+=b*(.45+.55*sin(p.x*5.-t*.9+fi*1.7))*(.55-fi*.12);}v*=.75+.25*sin(t*.7);}" +
-        // 3 lantern: soft floating light orbs
-        "else if(mode<3.5){for(int i=0;i<6;i++){float fi=float(i);vec2 c=vec2(fract(.17+fi*.29+.03*t*(1.+fi*.13))*asp,.15+.7*fract(.61+fi*.37+.5*sin(t*.11+fi)));" +
-        "float d=length(p-c);v+=exp(-d*d*55.)*(.55+.45*sin(t*1.3+fi*2.))*.55;}}" +
-        // 4 glory: golden god rays from above
-        "else{vec2 d=uv-vec2(.5+m.x*.04,1.15);float dist=length(d*vec2(asp,1.));float ang=atan(d.x,-d.y);" +
-        "float r=pow(n(vec2(ang*11.,t*.12)),3.)+.6*pow(n(vec2(ang*27.,-t*.09)),4.);v=r*smoothstep(1.5,.1,dist)*.6+exp(-dist*2.2)*.25;}" +
-        "vec3 c=xc*v;c=min(c,vec3(1.));gl_FragColor=vec4(c,max(max(c.r,c.g),c.b));}");
     } catch (e) { return; }
     var quad = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, quad); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
     var N = innerWidth < 700 ? 350 : 800, arr = new Float32Array(N * 4);
@@ -998,11 +967,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
       fortress: { L: [.3, .86],  col: [.45, .55, .8],  dens: .75, pc: [1, .78, .35], wind: [.006, .012], n: .45, size: 10 },
       dragon:   { L: [.82, .8],  col: [.95, .72, .38], dens: .45, pc: [1, .85, .55], wind: [.03, .008],  n: .8, size: 7 },
       temple:   { L: [.28, .82], col: [.5, .72, .62],  dens: .7,  pc: [.85, 1, .92], wind: [.02, -.045], n: .7, size: 8 },
-      battle:   { L: [.5, .72],  col: [.85, .66, .45], dens: .6,  pc: [1, .55, .25], wind: [.07, .03],   n: 1, size: 8 },
-      forge:    { L: [.8, .78],  col: [.95, .55, .25], dens: .35, pc: [1, .5, .15],  wind: [.012, .11],  n: 1, size: 8, mode: 1, xc: [1, .42, .1] },
-      spirit:   { L: [.12, .82], col: [.45, .75, .7],  dens: .4,  pc: [.6, 1, .9],   wind: [.006, .05],  n: .7, size: 9, mode: 2, xc: [.35, .95, .85] },
-      lantern:  { L: [.62, .8],  col: [.8, .45, .2],   dens: .4,  pc: [1, .78, .35], wind: [.008, .012], n: .35, size: 13, mode: 3, xc: [1, .7, .3] },
-      glory:    { L: [.5, 1.05], col: [.95, .75, .35], dens: .3,  pc: [1, .85, .45], wind: [.004, -.03], n: .75, size: 7, mode: 4, xc: [1, .8, .4] }
+      battle:   { L: [.5, .72],  col: [.85, .66, .45], dens: .6,  pc: [1, .55, .25], wind: [.07, .03],   n: 1, size: 8 }
     };
     var host = null, cur = SC.duel;
     function place(sec) { if (host === sec) return; host = sec; cur = SC[sec.querySelector(".stage").getAttribute("data-scene")] || SC.duel; sec.appendChild(cv); resize(); }
@@ -1017,9 +982,6 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
       gl.uniform2f(U(fogP, "res"), cv.width, cv.height); gl.uniform1f(U(fogP, "t"), T); gl.uniform2f(U(fogP, "L"), cur.L[0] + mx * .05, cur.L[1] - my * .04);
       gl.uniform3fv(U(fogP, "col"), cur.col); gl.uniform1f(U(fogP, "dens"), cur.dens); gl.uniform2f(U(fogP, "m"), mx, my);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); gl.disableVertexAttribArray(lp);
-      if (cur.mode) { gl.useProgram(xP); var lx = gl.getAttribLocation(xP, "p"); gl.enableVertexAttribArray(lx); gl.vertexAttribPointer(lx, 2, gl.FLOAT, false, 0, 0);
-        gl.uniform2f(U(xP, "res"), cv.width, cv.height); gl.uniform1f(U(xP, "t"), T); gl.uniform1f(U(xP, "mode"), cur.mode); gl.uniform3fv(U(xP, "xc"), cur.xc); gl.uniform2f(U(xP, "m"), mx, my);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); gl.disableVertexAttribArray(lx); }
       gl.useProgram(ptP); gl.bindBuffer(gl.ARRAY_BUFFER, pts); var la = gl.getAttribLocation(ptP, "a"); gl.enableVertexAttribArray(la); gl.vertexAttribPointer(la, 4, gl.FLOAT, false, 0, 0);
       gl.uniform1f(U(ptP, "t"), T); gl.uniform2f(U(ptP, "m"), mx, my); gl.uniform2fv(U(ptP, "wind"), cur.wind); gl.uniform1f(U(ptP, "asp"), cv.width / cv.height);
       gl.uniform1f(U(ptP, "size"), cur.size * .62 * (cv.height / 500)); gl.uniform3fv(U(ptP, "pc"), cur.pc);
