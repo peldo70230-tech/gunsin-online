@@ -64,7 +64,15 @@ a { color: inherit; }
 .logo .lat { font: 15px/1 var(--f-display); letter-spacing: .14em; color: var(--brass); }
 .menu { display: flex; gap: 4px; list-style: none; margin: 0 auto; padding: 0; }
 .menu a { display: block; padding: 8px 12px; text-decoration: none; font: 14px/1 var(--f-display); letter-spacing: .14em; color: var(--ash); border-bottom: 2px solid transparent; }
-.menu a:hover, .menu a.active { color: var(--ivory); border-bottom-color: var(--brass); }
+.menu a:hover, .menu a.active { color: var(--ivory); }
+@media (min-width: 901px) {
+  .menu a { position: relative; border-bottom: 0; padding: 10px 12px 14px; transition: color .25s; }
+  .menu a::after { content: ""; position: absolute; left: 50%; right: 50%; bottom: 2px; height: 1px; background: linear-gradient(90deg, transparent, var(--brass), transparent); transition: left .3s, right .3s; }
+  .menu a::before { content: ""; position: absolute; left: 50%; bottom: -1px; width: 7px; height: 7px; background: #f2c94c; transform: translateX(-50%) rotate(45deg) scale(0); box-shadow: 0 0 8px rgba(242,201,76,.6); transition: transform .3s; }
+  .menu a:hover::after, .menu a.active::after { left: -4px; right: -4px; }
+  .menu a.active::before { transform: translateX(-50%) rotate(45deg) scale(1); }
+  .menu a:hover { color: #f2c94c; }
+}
 .nav .cta { flex: none; display: flex; gap: 8px; }
 .menu-toggle { display: none; margin-left: auto; background: none; border: 1px solid var(--line); color: var(--ivory); font: 13px/1 var(--f-display); letter-spacing: .14em; padding: 10px 14px; cursor: pointer; }
 
@@ -209,6 +217,20 @@ a, button, select, summary, [role="tab"], .tab, .set-tab, .dl-tab, .linkbtn, .pa
 .dl-btn, #reg-submit, a.btn[href="#register"], a.btn[href="#download"] { cursor: url("assets/cur_dagger.png") 0 0, pointer !important; }
 .dl-btn.soon, [aria-disabled="true"], button:disabled { cursor: url("assets/cur_arrow.png") 1 1, default !important; }
 input, textarea { cursor: text; }
+/* Home: minimal buttons (text + gold line with diamond) */
+.home .actions { gap: 34px; }
+.home .actions .btn { position: relative; background: none !important; border: 0; box-shadow: none; padding: 12px 10px 14px; letter-spacing: .16em; text-shadow: 0 1px 4px rgba(0,0,0,.9); transition: color .25s; }
+.home .actions .btn::after { content: ""; position: absolute; left: 6%; right: 6%; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--brass), transparent); transition: left .3s, right .3s; }
+.home .actions .btn::before { content: ""; position: absolute; left: 50%; bottom: -4px; width: 8px; height: 8px; background: #f2c94c; transform: translateX(-50%) rotate(45deg); box-shadow: 0 0 8px rgba(242,201,76,.6); }
+.home .actions .btn:hover { color: #f2c94c; }
+.home .actions .btn:hover::after { left: -8%; right: -8%; }
+/* Header Discord / Login: cut corners */
+.nav .cta .btn { --n: 7px; position: relative; z-index: 0; border: 0; background: var(--brass); clip-path: polygon(var(--n) 0, calc(100% - var(--n)) 0, 100% var(--n), 100% calc(100% - var(--n)), calc(100% - var(--n)) 100%, var(--n) 100%, 0 calc(100% - var(--n)), 0 var(--n)); }
+.nav .cta .btn::before { content: ""; position: absolute; inset: 1px; z-index: -1; background: #1a0f0b; clip-path: polygon(6.6px 0, calc(100% - 6.6px) 0, 100% 6.6px, 100% calc(100% - 6.6px), calc(100% - 6.6px) 100%, 6.6px 100%, 0 calc(100% - 6.6px), 0 6.6px); transition: background .2s; }
+.nav .cta .btn.primary::before { background: linear-gradient(180deg, #8e2a24, #5e1714); }
+.nav .cta .btn:hover { background: #f2c94c; }
+.nav .cta .btn:hover::before { background: #2a1913; }
+.nav .cta .btn.primary:hover::before { background: linear-gradient(180deg, #a3332b, #6e1c18); }
 /* Latest news: no frame, text straight on the picture */
 #news .panel { background: none; border: 0; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
 #news .panel h2, #news .news, #news .events { text-shadow: 0 1px 4px rgba(0,0,0,.9); }
