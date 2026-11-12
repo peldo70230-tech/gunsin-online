@@ -338,7 +338,8 @@ td.r, th.r { text-align: right; }
 .updated { text-align: center; font-size: 13px; color: var(--ash); margin: 12px 0 0; }
 .updated .status-dot { width: 7px; height: 7px; margin-right: 6px; }
 /* Level ranking (v2) */
-#ranking .panel { max-width: min(1100px, 92vw); }
+#ranking.scene { justify-content: center; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+#ranking .panel { max-width: min(1100px, 92vw); margin-left: auto; margin-right: auto; }
 .lr-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 20px; }
 .lr-title { margin: 0; font: clamp(20px, 2.4vw, 28px)/1.1 var(--f-display); letter-spacing: .04em; color: var(--ivory); }
 .lr-search { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ash); }
@@ -355,7 +356,7 @@ td.r, th.r { text-align: right; }
 .lr tbody tr:hover { background: rgba(209,171,99,.07); }
 .lr td.rk { width: 58px; text-align: center; font: 700 16px/1 var(--f-body); color: var(--ivory); }
 .lr td.rk svg { width: 20px; height: 26px; display: block; margin: 0 auto; }
-.lr .cico { width: 34px; height: 34px; display: block; }
+.lr .cico { width: 36px; height: 36px; display: block; filter: drop-shadow(0 1px 3px rgba(0,0,0,.6)); }
 .lr .nm { display: inline-flex; align-items: center; gap: 10px; color: var(--ivory); font-weight: 500; }
 .lr .dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid #3fae5a; box-sizing: border-box; display: inline-grid; place-items: center; }
 .lr .dot::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #3fae5a; }
@@ -916,14 +917,8 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     "Thief": ["Wandering Thief", "Thief Guild member", "Hitman", "I. Swordman", "Dark Shadow", "Unearthly Ghost"]
   };
   function specName(r) { var t = TITLES[r.cls]; if (!t) return r.cls || ""; var s = parseInt(r.spec, 10); if (!(s >= 1)) s = 1; return t[Math.min(s, t.length) - 1]; }
-  var CLS = {
-    "Knight": ["#7a1d14", "#e2553a", '<path d="M17 7l2 2-8 8-2 1 1-2z" fill="#fff"/><path d="M8 15l3 3M7 19l2-2" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>'],
-    "Mage": ["#4a1238", "#c0398a", '<circle cx="13" cy="10" r="3.2" fill="#fff"/><path d="M12 13.5l-3.5 8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>'],
-    "Archer": ["#1d4a2e", "#56b06e", '<path d="M8 6c6 2 8 8 6 14" stroke="#fff" stroke-width="1.6" fill="none"/><path d="M8 6l6 14M6 13h13M16 11l3 2-3 2" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round"/>'],
-    "Thief": ["#2a2340", "#7d6ad1", '<path d="M16 6l2 2-7 9-2 .5.5-2z" fill="#fff"/><path d="M8 15.5l2.5 2.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>']
-  };
-  function classIcon(c) { var d = CLS[c] || ["#3a2c1c", "#b08a4a", '<circle cx="13" cy="13" r="4" fill="#fff"/>'];
-    return '<svg class="cico" viewBox="0 0 26 26" role="img" aria-label="' + esc(c) + '"><defs><radialGradient id="cg' + esc(c).replace(/\W/g, "") + '" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="' + d[1] + '"/><stop offset="1" stop-color="' + d[0] + '"/></radialGradient></defs><circle cx="13" cy="13" r="12" fill="url(#cg' + esc(c).replace(/\W/g, "") + ')" stroke="#c9a35a" stroke-width="1.4"/><circle cx="13" cy="13" r="9.6" fill="none" stroke="rgba(255,255,255,.25)" stroke-width=".8"/>' + d[2] + "</svg>"; }
+  var CLSIMG = { "Knight": "knight", "Mage": "mage", "Archer": "archer", "Thief": "thief", "Shaman": "shaman", "Sword Trickster": "trickster" };
+  function classIcon(c) { var f = CLSIMG[c]; return f ? '<img class="cico" src="assets/cls_' + f + '.png" width="36" height="36" alt="' + esc(c) + '" title="' + esc(c) + '" loading="lazy">' : esc(c); }
   function medal(n) { var c = n === 1 ? ["#f5c542", "#b8860b"] : n === 2 ? ["#e3edf5", "#7f9bb3"] : ["#e8955a", "#9a4f1e"];
     return '<svg viewBox="0 0 20 26" aria-label="' + n + '"><path d="M5 0h4l2 8H7zM11 0h4l-2 8H9z" fill="#3b6fb3"/><circle cx="10" cy="16" r="7.5" fill="' + c[0] + '" stroke="' + c[1] + '" stroke-width="1.5"/><text x="10" y="19.5" text-anchor="middle" font-size="9" font-weight="700" fill="' + c[1] + '" font-family="Arial">' + n + "</text></svg>"; }
   function pbar(p) { p = Math.max(0, Math.min(1000, Number(p) || 0)); var k = p >= 500 ? "g" : p >= 250 ? "o" : "b";
