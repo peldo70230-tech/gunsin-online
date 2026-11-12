@@ -160,7 +160,6 @@ a { color: inherit; }
 /* Login (not logged in): light, see-through form on the left so the scene shows */
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 #acc-panel .t-user { display: none; } #acc-panel.wide .t-user { display: inline; } #acc-panel.wide .t-guest { display: none; }
-#account:has(#acc-panel:not(.wide)) { justify-content: flex-start; padding-left: max(8vw, 16px); }
 #acc-panel:not(.wide) { position: relative; max-width: 400px; background: none; border: 0; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 26px 22px 24px; }
 #acc-panel:not(.wide)::before { content: ""; position: absolute; inset: -40px -70px; z-index: -1; pointer-events: none; background: radial-gradient(closest-side, rgba(8,4,3,.62), rgba(8,4,3,.35) 60%, transparent); }
 #acc-panel:not(.wide) h2 { font-size: clamp(30px, 4vw, 42px); letter-spacing: .1em; color: #eef2f2; text-shadow: 0 2px 0 rgba(0,0,0,.6), 0 0 22px rgba(0,0,0,.7); }
@@ -178,16 +177,49 @@ a { color: inherit; }
 #acc-panel:not(.wide) .login-btn:hover { background: linear-gradient(180deg, #a3332b, #6e1c18); }
 #acc-panel:not(.wide) #acc-login-status:empty { display: none; }
 #acc-panel:not(.wide) .acc-login { gap: 12px; }
+/* Create account: same see-through look as Login */
+#register .panel, .scene.side-l#register .panel { position: relative; max-width: 460px; background: none; border: 0; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 26px 22px 24px; }
+#register .panel::before { content: ""; position: absolute; inset: -40px -70px; z-index: -1; pointer-events: none; background: radial-gradient(closest-side, rgba(8,4,3,.62), rgba(8,4,3,.35) 60%, transparent); }
+#register .panel h2 { white-space: nowrap; font-size: clamp(26px, 3.2vw, 38px); letter-spacing: .1em; color: #eef2f2; text-shadow: 0 2px 0 rgba(0,0,0,.6), 0 0 22px rgba(0,0,0,.7); }
+#register .panel h2::after { display: none; }
+#register .panel .body { margin-top: 22px; }
+#reg-form { gap: 12px; }
+#reg-form input { background: rgba(6,4,4,.78); border: 1px solid var(--line); border-radius: 4px; height: 46px; padding: 0 14px; font-size: 16px; color: #f1ece4; box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 2px 10px rgba(0,0,0,.45); }
+#reg-form input::placeholder { color: rgba(214,208,198,.75); }
+#reg-form input:focus { border-color: var(--brass); outline: none; }
+#reg-form .field-help { margin: 0; text-align: center; font-size: 13px; color: #e6dfd3; text-shadow: 0 1px 3px rgba(0,0,0,.9); }
+#reg-form .login-btn { display: block; width: 220px; margin: 6px auto 0; height: 50px; border-radius: 5px; font-size: 16px; letter-spacing: .12em; color: var(--ivory); background: linear-gradient(180deg, #8e2a24, #5e1714); border: 1px solid var(--brass); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 4px 14px rgba(0,0,0,.5); }
+#reg-form .login-btn:hover { background: linear-gradient(180deg, #a3332b, #6e1c18); }
+#reg-status:empty { display: none; }
+#reg-form .reg-note { text-shadow: 0 1px 3px rgba(0,0,0,.9); color: #ddd5c8; }
+#reg-form .reg-note a { color: #f1ece4; }
 .acc-welcome { margin: 4px 0 0; text-align: center; font-size: 14px; color: #ece6dc; text-shadow: 0 1px 3px rgba(0,0,0,.9); }
 #acc-panel:not(.wide) .reg-note { margin-top: 10px; text-shadow: 0 1px 3px rgba(0,0,0,.9); color: #ddd5c8; }
 #acc-panel:not(.wide) .reg-note a, #acc-panel:not(.wide) .reg-note .linkbtn { color: #f1ece4; }
-@media (max-width: 900px) { #account:has(#acc-panel:not(.wide)) { justify-content: center; padding-left: 16px; } }
+
 .acc-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
 .acc-k { font: 12px/1 var(--f-display); letter-spacing: .18em; color: var(--ash); }
 .acc-name { font: 26px/1.2 var(--f-display); letter-spacing: .06em; margin-top: 6px; }
 .acc-sub { font-size: 14px; color: var(--ash); margin: 4px 0 0; }
 .acc-h { font: 15px/1.2 var(--f-display); letter-spacing: .16em; color: var(--brass); margin: 22px 0 10px; font-weight: normal; }
 .acc-card .acc-h { margin-top: 0; }
+/* Account settings as its own sub-page */
+.acc-btns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.acc-btns .btn svg { vertical-align: -2px; margin-right: 7px; }
+#acc-setbtn[aria-pressed="true"] { border-color: var(--brass); color: var(--brass); }
+.acc-settings { display: none; }
+#acc-view.show-set .acc-settings { display: block; }
+#acc-view.show-set .dash { display: none; }
+.set-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 22px 0 14px; flex-wrap: wrap; }
+.set-title { margin: 0; font: 20px/1.2 var(--f-display); letter-spacing: .14em; color: var(--ivory); font-weight: normal; }
+.set-back { font-size: 14px; }
+.set-tabs { display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin-bottom: 20px; }
+.set-tab { background: none; border: 1px solid transparent; border-bottom: 0; color: var(--ash); font: 13px/1 var(--f-display); letter-spacing: .12em; padding: 12px 16px; cursor: pointer; margin-bottom: -1px; }
+.set-tab[aria-selected="true"] { color: var(--brass); border-color: var(--line); background: rgba(18,8,8,.6); border-bottom: 1px solid rgba(18,8,8,1); }
+.set-pane.acc-grid3 { display: block; max-width: 520px; margin: 0 auto; }
+.set-pane .acc-card { display: none; }
+.set-pane .acc-card.on { display: grid; }
+@media (max-width: 560px) { .set-tab { flex: 1 1 45%; padding: 11px 8px; text-align: center; } .acc-head { flex-wrap: wrap; } }
 .acc-chars { max-height: 30vh; margin-top: 0; }
 .acc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px; }
 .acc-col { display: grid; gap: 18px; align-content: start; }
@@ -562,14 +594,14 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     <h2>CREATE ACCOUNT</h2>
     <div class="body">
       <form class="form" id="reg-form" novalidate autocomplete="off">
-        <div class="field"><label for="reg-user">Username</label><input id="reg-user" name="user" autocomplete="username" maxlength="16" placeholder="4–16 letters or numbers"></div>
-        <div class="field"><label for="reg-pass">Password</label><input id="reg-pass" name="pass" type="password" autocomplete="new-password" maxlength="16" placeholder="4–16 letters or numbers"></div>
-        <div class="field"><label for="reg-email">Email</label><input id="reg-email" name="email" type="email" maxlength="80" placeholder="your@gmail.com"></div>
-        <p class="field-help">We'll email you your secret number (S/N). You need it to change your password, remove the secondary password or recover your account. Keep that email safe and never share the number.</p>
+        <div class="field"><label class="sr" for="reg-user">Username</label><input id="reg-user" name="user" autocomplete="username" maxlength="16" placeholder="Username"></div>
+        <div class="field pw-wrap"><label class="sr" for="reg-pass">Password</label><input id="reg-pass" name="pass" type="password" autocomplete="new-password" maxlength="16" placeholder="Password"><button type="button" class="pw-eye" id="reg-eye" aria-label="Show password" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
+        <div class="field"><label class="sr" for="reg-email">Email</label><input id="reg-email" name="email" type="email" maxlength="80" placeholder="Email"></div>
+        <p class="field-help">Username and password: 4–16 letters or numbers. Your secret number (S/N) will be sent to your email. Never share it.</p>
         <div class="hp" aria-hidden="true"><label for="reg-web">Website</label><input id="reg-web" name="website" tabindex="-1" autocomplete="off"></div>
-        <button class="btn primary" type="submit" id="reg-submit">Create account</button>
+        <button class="btn primary login-btn" type="submit" id="reg-submit">Create account</button>
         <p class="status" id="reg-status" role="status"></p>
-        <p class="reg-note" id="reg-note">Problems? Ask on <a id="reg-discord-btn" href="#register">Discord</a>.</p>
+        <p class="reg-note" id="reg-note">Already have an account? <a href="#account">Login</a> · Problems? Ask on <a id="reg-discord-btn" href="#register">Discord</a>.</p>
       </form>
     </div>
   </div>
@@ -585,7 +617,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
         <div class="field pw-wrap"><label class="sr" for="acc-pass">Password</label><input id="acc-pass" type="password" autocomplete="current-password" maxlength="16" placeholder="Password"><button type="button" class="pw-eye" id="acc-eye" aria-label="Show password" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
         <button class="btn primary login-btn" type="submit">Login</button>
         <p class="status" id="acc-login-status" role="status"></p>
-        <p class="acc-welcome">Welcome back, traveler! Please log in to continue.</p>
+        <p class="acc-welcome">The realm of Gunsin awaits your return.</p>
         <p class="reg-note"><button class="linkbtn" type="button" id="acc-forgot">Forgot password?</button> · <a href="#register">Create new account</a></p>
       </form>
       <form class="form acc-login" id="acc-recover" novalidate hidden>
@@ -615,7 +647,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
       <div class="acc-view" id="acc-view" hidden>
         <div class="acc-head">
           <div><div class="acc-k">Logged in as</div><div class="acc-name" id="acc-name"></div><div class="acc-sub" id="acc-sub"></div></div>
-          <button class="btn small" id="acc-logout" type="button">Log out</button>
+          <div class="acc-btns"><button class="btn small" id="acc-setbtn" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.7 7.7 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.7 7.7 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.7 7.7 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.7 7.7 0 0 0 1.7-1l2.5 1 2-3.5zM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg><span id="acc-setlbl">Account settings</span></button><button class="btn small" id="acc-logout" type="button">Log out</button></div>
         </div>
         <div class="dash">
           <section class="dcard d-char">
@@ -677,8 +709,15 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
             <p class="status" id="vote-status" role="status"></p>
           </section>
         </div>
-        <h3 class="acc-h settings-h">Account settings</h3>
-        <div class="acc-grid3">
+        <div class="acc-settings" id="acc-settings">
+        <div class="set-top"><button class="linkbtn set-back" type="button" id="acc-setback">&larr; Back to dashboard</button><h3 class="set-title">Account settings</h3></div>
+        <div class="set-tabs" role="tablist" aria-label="Account settings">
+          <button type="button" role="tab" class="set-tab" data-set="acc-pw" aria-selected="true">Password</button>
+          <button type="button" role="tab" class="set-tab" data-set="acc-mail" aria-selected="false">Email</button>
+          <button type="button" role="tab" class="set-tab" data-set="acc-2nd" aria-selected="false">Secondary password</button>
+          <button type="button" role="tab" class="set-tab" data-set="acc-sn" aria-selected="false">Secret number</button>
+        </div>
+        <div class="acc-grid3 set-pane">
           <form class="form acc-card" id="acc-pw" novalidate>
             <h3 class="acc-h">Change password</h3>
             <div class="field" data-sn="yes"><label for="pw-sn">Secret number</label><input id="pw-sn" type="password" inputmode="numeric" autocomplete="off" maxlength="8"></div>
@@ -714,6 +753,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
             <button class="btn" type="submit" id="sn-btn">Save secret number</button>
             <p class="status" id="sn-status" role="status"></p>
           </form>
+        </div>
         </div>
       </div>
     </div>
@@ -1098,7 +1138,17 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   function checkStatus() { apiCall("/status", {}).then(function (j) { setStatus(!!(j && j.ok && j.online)); }, function () { setStatus(false); }); }
   checkStatus(); setInterval(checkStatus, 60000);
   function stat(id, t, err) { var e = document.getElementById(id); e.textContent = t; e.classList.toggle("err", !!err); }
-  function showLogin() { document.getElementById("acc-panel").classList.remove("wide"); document.getElementById("acc-login").hidden = false; document.getElementById("acc-recover").hidden = true; document.getElementById("acc-snrec").hidden = true; document.getElementById("acc-view").hidden = true; }
+  function setMode(on) { var v = document.getElementById("acc-view"), b = document.getElementById("acc-setbtn");
+    v.classList.toggle("show-set", !!on); b.setAttribute("aria-pressed", on ? "true" : "false");
+    document.getElementById("acc-setlbl").textContent = on ? "Dashboard" : "Account settings";
+    if (on) { var p = document.getElementById("acc-panel"); if (p.getBoundingClientRect().top < 0) p.scrollIntoView({ behavior: "smooth", block: "start" }); } }
+  function setTab(id) { document.querySelectorAll(".set-tab").forEach(function (t) { t.setAttribute("aria-selected", t.getAttribute("data-set") === id ? "true" : "false"); });
+    document.querySelectorAll(".set-pane .acc-card").forEach(function (f) { f.classList.toggle("on", f.id === id); }); }
+  document.getElementById("acc-setbtn").addEventListener("click", function () { setMode(!document.getElementById("acc-view").classList.contains("show-set")); });
+  document.getElementById("acc-setback").addEventListener("click", function () { setMode(false); });
+  document.querySelectorAll(".set-tab").forEach(function (t) { t.addEventListener("click", function () { setTab(t.getAttribute("data-set")); }); });
+  setTab("acc-pw");
+  function showLogin() { setMode(false); document.getElementById("acc-panel").classList.remove("wide"); document.getElementById("acc-login").hidden = false; document.getElementById("acc-recover").hidden = true; document.getElementById("acc-snrec").hidden = true; document.getElementById("acc-view").hidden = true; }
   function needRelogin(j) { if (j && j.relogin) { setTok(null); showLogin(); stat("acc-login-status", j.error, true); return true; } return false; }
   var ME = null;
   function fmtNum(n) { return (n == null || n === "") ? "–" : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
@@ -1288,6 +1338,8 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     apiCall("/me", { token: TOKEN }).then(function (j) { if (needRelogin(j)) return; if (j.ok) renderMe(j); else { showLogin(); stat("acc-login-status", j.error || "Error.", true); } })
       .catch(function (x) { showLogin(); stat("acc-login-status", x.msg || "Error.", true); });
   }
+  [["reg-eye", "reg-pass"]].forEach(function (x) { var eye = document.getElementById(x[0]), pw = document.getElementById(x[1]);
+    eye.addEventListener("click", function () { var show = pw.type === "password"; pw.type = show ? "text" : "password"; eye.setAttribute("aria-pressed", show ? "true" : "false"); eye.setAttribute("aria-label", show ? "Hide password" : "Show password"); }); });
   (function () { var eye = document.getElementById("acc-eye"), pw = document.getElementById("acc-pass");
     eye.addEventListener("click", function () { var show = pw.type === "password"; pw.type = show ? "text" : "password"; eye.setAttribute("aria-pressed", show ? "true" : "false"); eye.setAttribute("aria-label", show ? "Hide password" : "Show password"); }); })();
   document.getElementById("acc-login").addEventListener("submit", function (e) {
