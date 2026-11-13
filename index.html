@@ -479,6 +479,9 @@ td.r, th.r { text-align: right; }
 .lr .dot::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #3fae5a; }
 .lr td.spec { color: #4f9fd6; }
 .lr td.lvl { font-family: var(--f-mono); }
+.lr td.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.lr td.tag { color: var(--brass); letter-spacing: .04em; white-space: nowrap; }
+.lr td.tag.none { color: var(--ash); }
 .champs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0 0 22px; }
 .champs[hidden] { display: none; }
 .champ { position: relative; border: 1px solid var(--line); background: linear-gradient(180deg, rgba(30,20,14,.85), rgba(14,9,8,.92)); padding: 12px 12px 14px; text-align: center; border-radius: 6px; }
@@ -836,6 +839,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
       <div class="champs" id="champs" hidden aria-label="Best player of each class"></div>
       <div class="tabs" role="tablist" aria-label="Ranking type">
         <button class="tab" role="tab" data-rank="level" aria-selected="true" aria-controls="rank-panel">Level</button>
+        <button class="tab" role="tab" data-rank="honor" aria-selected="false" aria-controls="rank-panel">Honor</button>
         <button class="tab" role="tab" data-rank="class" aria-selected="false" aria-controls="rank-panel">Top per class</button>
         <button class="tab" role="tab" data-rank="guild" aria-selected="false" aria-controls="rank-panel">Guild</button>
       </div>
@@ -870,7 +874,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
 </section>
 </main>
 
-<script id="ranking-data" type="application/json">{"updated":null,"level":[],"class":[],"guild":[]}</script>
+<script id="ranking-data" type="application/json">{"updated":null,"level":[],"class":[],"guild":[],"honor":[]}</script>
 <script>
 (function () {
   /* Fill these in to activate the buttons. Server status is checked live below. */
@@ -1056,7 +1060,7 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   window.addEventListener("scroll", checkActive, { passive: true }); window.addEventListener("resize", checkActive); checkActive();
 
   /* Ranking */
-  var data = { updated: null, level: [], "class": [], guild: [] };
+  var data = { updated: null, level: [], "class": [], guild: [], honor: [] };
   try { data = JSON.parse(document.getElementById("ranking-data").textContent); } catch (e) {}
   var cols = {
     level: [["#", "pos"], ["Character", "name"], ["Class", "cls"], ["Level", "level"], ["Guild", "guild"]],
@@ -1103,6 +1107,35 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     inp.addEventListener("input", function () { lrQuery = inp.value; var pos = inp.selectionStart; renderLevel(panel); var n = document.getElementById("lr-q"); n.focus(); try { n.setSelectionRange(pos, pos); } catch (e) {} });
     panel.querySelectorAll("th.sort").forEach(function (th) { th.addEventListener("click", function () { var k = th.getAttribute("data-k"); lrSort = { key: k, dir: lrSort.key === k ? -lrSort.dir : (k === "level" || k === "prog" ? -1 : 1) }; renderLevel(panel); }); });
   }
+  /* Honor ranking: tags use the same Honor Point limits as the game server */
+  var HONOR_TAGS = [[111600, "General"], [78740, "Colonel"], [57970, "Major"], [44640, "Captain"], [35030, "Lieutenant"], [20150, "Sergeant"], [12090, "Corporal"], [7750, "Specialist"], [4960, "Private"], [2790, "Recruit"]];
+  function honorTag(hp) { hp = Number(hp) || 0; for (var i = 0; i < HONOR_TAGS.length; i++) if (hp >= HONOR_TAGS[i][0]) return HONOR_TAGS[i][1]; return "None"; }
+  function num(n) { return (Number(n) || 0).toLocaleString("en-US"); }
+  var hrSort = { key: "rank", dir: 1 }, hrQuery = "";
+  function renderHonor(panel) {
+    var rows = (data.honor || []).map(function (r, i) { return { r: r, rank: i + 1 }; });
+    var q = hrQuery.trim().toLowerCase();
+    if (q) rows = rows.filter(function (x) { return (x.r.name + " " + (x.r.cls || "") + " " + honorTag(x.r.hp)).toLowerCase().indexOf(q) >= 0; });
+    var key = hrSort.key, dir = hrSort.dir;
+    rows.sort(function (a, b) {
+      var va, vb;
+      if (key === "rank") { va = a.rank; vb = b.rank; }
+      else if (key === "tag") { va = Number(a.r.hp) || 0; vb = Number(b.r.hp) || 0; }
+      else if (key === "level" || key === "hp" || key === "hk" || key === "hd") { va = Number(a.r[key]) || 0; vb = Number(b.r[key]) || 0; }
+      else { va = String(a.r[key] || "").toLowerCase(); vb = String(b.r[key] || "").toLowerCase(); }
+      return (va < vb ? -1 : va > vb ? 1 : a.rank - b.rank) * dir;
+    });
+    var hd = [["rank", "Rank"], ["cls", "Class", "hide-s"], ["name", "Name"], ["level", "Level", "hide-s"], ["hp", "Honor Points"], ["hk", "Honor Kills", "hide-s"], ["hd", "Honor Deaths", "hide-s"], ["tag", "Tag"]];
+    var h = '<div class="lr-head"><h3 class="lr-title">Honor Ranking</h3><label class="lr-search">Search: <input type="search" id="hr-q" value="' + esc(hrQuery) + '" aria-label="Search honor ranking"></label></div>';
+    h += '<div class="rank-wrap"><table class="rank lr"><thead><tr>' + hd.map(function (x) { var s = hrSort.key === x[0] ? (hrSort.dir > 0 ? " asc" : " desc") : ""; return '<th class="sort' + s + (x[2] ? " " + x[2] : "") + '" data-k="' + x[0] + '">' + x[1] + "</th>"; }).join("") + "</tr></thead><tbody>";
+    if (!rows.length) h += '<tr><td colspan="8" style="text-align:center;color:var(--ash)">No characters found.</td></tr>';
+    rows.forEach(function (x) { var r = x.r, t = honorTag(r.hp);
+      h += '<tr><td class="rk">' + (x.rank <= 3 ? medal(x.rank) : x.rank) + '</td><td class="hide-s">' + classIcon(r.cls) + '</td><td><span class="nm">' + esc(r.name) + '</span></td><td class="lvl hide-s">' + esc(r.level) + '</td><td class="num">' + num(r.hp) + '</td><td class="num hide-s">' + num(r.hk) + '</td><td class="num hide-s">' + num(r.hd) + '</td><td class="tag' + (t === "None" ? " none" : "") + '">' + esc(t) + "</td></tr>"; });
+    panel.innerHTML = h + "</tbody></table></div>";
+    var inp = document.getElementById("hr-q");
+    inp.addEventListener("input", function () { hrQuery = inp.value; var pos = inp.selectionStart; renderHonor(panel); var n = document.getElementById("hr-q"); n.focus(); try { n.setSelectionRange(pos, pos); } catch (e) {} });
+    panel.querySelectorAll("th.sort").forEach(function (th) { th.addEventListener("click", function () { var k = th.getAttribute("data-k"); hrSort = { key: k, dir: hrSort.key === k ? -hrSort.dir : (k === "rank" || k === "name" || k === "cls" ? 1 : -1) }; renderHonor(panel); }); });
+  }
   var CHAMP_ORDER = ["Knight", "Archer", "Mage", "Thief"], CHAMP_FIG = { "Knight": 1, "Archer": 1, "Mage": 1, "Thief": 1 };
   var CROWN = '<svg class="crown" viewBox="0 0 26 22" aria-label="Number 1"><path d="M2 18 0 5l7 5 6-9 6 9 7-5-2 13z" fill="#f5c542" stroke="#9a6b10" stroke-width="1.2" stroke-linejoin="round"/><rect x="2" y="18.5" width="22" height="3" rx="1" fill="#d9a72c" stroke="#9a6b10" stroke-width=".8"/></svg>';
   function renderChamps() {
@@ -1116,15 +1149,16 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
     box.hidden = false;
   }
   function okCls(r) { return !r || !r.cls || CLSIMG[r.cls]; }
-  function cleanData() { ["level", "class"].forEach(function (k) { if (Array.isArray(data[k])) data[k] = data[k].filter(okCls); }); }
+  function cleanData() { ["level", "class", "honor"].forEach(function (k) { if (Array.isArray(data[k])) data[k] = data[k].filter(okCls); }); }
   function render(kind) {
     cleanData();
     renderChamps();
     curKind = kind;
     document.querySelectorAll(".tab").forEach(function (b) { b.setAttribute("aria-selected", b.getAttribute("data-rank") === kind ? "true" : "false"); });
     var rows = data[kind] || [], panel = document.getElementById("rank-panel");
-    panel.classList.toggle("rank-wrap", kind !== "level");
+    panel.classList.toggle("rank-wrap", kind !== "level" && kind !== "honor");
     if (kind === "level" && rows.length) { renderLevel(panel); }
+    else if (kind === "honor" && rows.length) { renderHonor(panel); }
     else if (!rows.length) { panel.innerHTML = '<div class="empty"><b>No ranking yet</b>Check back after the next update.</div>'; }
     else {
       var c = cols[kind], h = '<table class="rank"><thead><tr>' + c.map(function (x) { return "<th>" + x[0] + "</th>"; }).join("") + "</tr></thead><tbody>";
