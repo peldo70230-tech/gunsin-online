@@ -551,6 +551,13 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   th.hide, td.hide { display: none; }
   .logo .lat { display: none; }
 }
+
+/* One page at a time: no scrolling between sections */
+html.onepage { scroll-behavior: auto; scroll-snap-type: none; }
+html.onepage .scene { display: none; }
+html.onepage .scene.on { display: flex; }
+html.onepage .scene + .scene { border-top: 0; }
+html.onepage .scroll-hint { display: none; }
 </style>
 </head>
 <body>
@@ -1048,16 +1055,27 @@ footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-a
   mt.addEventListener("click", function () { var o = mm.classList.toggle("open"); mt.setAttribute("aria-expanded", o ? "true" : "false"); });
   mm.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { mm.classList.remove("open"); mt.setAttribute("aria-expanded", "false"); }); });
 
-  /* Active section (by position, works inside iframes) */
+  /* One section on screen at a time (no scrolling between sections) */
+  document.documentElement.classList.add("onepage");
   var scenesArr = [].slice.call(document.querySelectorAll(".scene")), activeId = null;
-  function checkActive() {
-    var mid = innerHeight / 2, act = scenesArr[0];
-    scenesArr.forEach(function (sc) { var r = sc.getBoundingClientRect(); if (r.top <= mid && r.bottom > mid) act = sc; });
-    if (act.id !== activeId) { activeId = act.id;
-      document.querySelectorAll('.menu a, .dots a').forEach(function (a) { a.classList.toggle("active", a.getAttribute("href") === "#" + act.id); });
-      if (GL) GL.place(act); }
+  function showScene(id) {
+    var act = id ? document.getElementById(id) : null; if (!act || scenesArr.indexOf(act) < 0) act = scenesArr[0];
+    scenesArr.forEach(function (sc) { sc.classList.toggle("on", sc === act); });
+    window.scrollTo(0, 0);
+    if (act.id === activeId) return; activeId = act.id;
+    document.querySelectorAll('.menu a, .dots a').forEach(function (a) { a.classList.toggle("active", a.getAttribute("href") === "#" + act.id); });
+    var ps = act.querySelectorAll(".panel"); [].forEach.call(ps, function (p) { p.classList.remove("in"); });
+    setTimeout(function () { [].forEach.call(ps, function (p) { p.classList.add("in"); }); }, 40);
+    if (GL) GL.place(act);
+    try { window.dispatchEvent(new Event("resize")); } catch (e) {}
   }
-  window.addEventListener("scroll", checkActive, { passive: true }); window.addEventListener("resize", checkActive); checkActive();
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null; if (!a) return;
+    var id = a.getAttribute("href").slice(1), el = id ? document.getElementById(id) : null; if (!el || scenesArr.indexOf(el) < 0) return;
+    e.preventDefault(); if (location.hash !== "#" + id) { try { history.pushState(null, "", "#" + id); } catch (x) {} } showScene(id);
+  });
+  function fromHash() { showScene(location.hash.slice(1)); }
+  window.addEventListener("hashchange", fromHash); window.addEventListener("popstate", fromHash); fromHash();
 
   /* Ranking */
   var data = { updated: null, level: [], "class": [], guild: [], honor: [] };
