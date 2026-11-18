@@ -1,5 +1,5 @@
-#GUNSIN-PATCHLIST 2026-11-18 09:37:31
-4940ecd9186bd51a412f024decae3439|1184179|data\Config\config.pk
+#GUNSIN-PATCHLIST 2026-11-18 10:07:26
+d3adc2dc5b5f7762c9bb75ed68ee13bd|1184505|data\Config\config.pk
 e144d9f670c0379e64471dd630ae450c|3126|data\HyperText\bof8005.bmp
 a45f85d1f7e8260d0cf32190e3259b83|921654|data\HyperText\event_bg.bmp
 02e574088770ae5c3374d04d46c135a0|3126|data\HyperText\item8000.bmp
@@ -34,7 +34,7 @@ f01dfea6463c1492e45dd3ee73e99932|6291584|data\HyperText\Loadbg2.gtx
 3dfbe0cf34559dea72b95eb40d04a885|6291584|data\HyperText\Loadbg9.gtx
 844a1f15ec8a67eaeb52dc6089ccad1e|216054|data\HyperText\logo-company.bmp
 25414e457c760fa43e16ff8334a65936|216054|data\HyperText\logo-portal.bmp
-2e91010705d55fd22bf6fa8b18d8acf3|2107782|data\HyperText\nui\script.pk
+4964dd669dac17af89360ba34122ff2e|2107745|data\HyperText\nui\script.pk
 70d0a60fb010e6d9e2daed8c6cebfc63|262272|data\MAPS\LightMap\2938.dds
 60d93d679b009230efdce22a69928808|787510|data\MAPS\n_027_027.kcm
 d33dc2a68c9a43f36568675d2d9ae3ed|179638|data\MAPS\n_028_028.opl
@@ -95,8 +95,8 @@ d4688ea031726514490602221c5877a9|808|data\profile\[1]HERMIT.sys
 3378dafabf202f32b7fafbca55ed8c4f|808|data\profile\[1]IG.sys
 b593096b589ea725f868b42aeb00520d|1412|data\profile\[1]IG_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]IG_QUEST.sys
-9756165f9229e20cc490f7d74b237a7e|808|data\profile\[1]Intense.sys
-fe27f144b18daa67f6a676779bcd7d8a|23044|data\profile\[1]Intense_Inven.sys
+fdcec56d850ff97848c078395b97fed0|808|data\profile\[1]Intense.sys
+92f04a26cce52b19ea5e186bef6ec568|23044|data\profile\[1]Intense_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]Intense_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|data\profile\[1]IntenseARCH.sys
 622dd874d471d6a77afa2d36d9b9760d|808|data\profile\[1]Intensee.sys
@@ -266,5 +266,5 @@ fc706669db936d3dc92d948c8ab28340|33974|data\UI\shop\shop9926.bmp
 18a15c0558b30442300ad5c99438098a|33974|data\UI\shop\shop9929.bmp
 1609662345ef6e485d7ab67b8d6e1d6d|233984|Engine.dll
 7a684bab81c38fb29c0beb9b65ab3e2a|5709824|engine.exe
-b2c430eb718ad55b3f26ed29e9ec1c79|140800|GunsinLauncher.exe
+8366471ee38efc0ddc7898705143611c|141312|GunsinLauncher.exe
 1b9e1ac2a41bfc5a15af3e6e6be60db0|30890|map\lib\stone01.gb
