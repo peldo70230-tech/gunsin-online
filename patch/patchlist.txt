@@ -1,6 +1,7 @@
-#GUNSIN-PATCHLIST 2026-11-18 15:35:11
-4e720ee0d5195346c20b50b39b1efa30|1184652|data\Config\config.pk
+#GUNSIN-PATCHLIST 2026-11-18 18:30:38
+528b2c78fe91882ab1c8b0f1ceba359b|1184930|data\Config\config.pk
 e144d9f670c0379e64471dd630ae450c|3126|data\HyperText\bof8005.bmp
+adaa11ca6da7afd007a8d443246de851|1782|data\HyperText\buff_honor.bmp
 a45f85d1f7e8260d0cf32190e3259b83|921654|data\HyperText\event_bg.bmp
 02e574088770ae5c3374d04d46c135a0|3126|data\HyperText\item8000.bmp
 eb0f5fe3ab910a32d0f46a0f93332f14|3126|data\HyperText\item8003.bmp
@@ -98,8 +99,8 @@ d4688ea031726514490602221c5877a9|808|data\profile\[1]HERMIT.sys
 3378dafabf202f32b7fafbca55ed8c4f|808|data\profile\[1]IG.sys
 b593096b589ea725f868b42aeb00520d|1412|data\profile\[1]IG_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]IG_QUEST.sys
-f712aea97e657cc9249f6665bffc197d|808|data\profile\[1]Intense.sys
-39e34f586533118d01743db542124420|23044|data\profile\[1]Intense_Inven.sys
+fdcec56d850ff97848c078395b97fed0|808|data\profile\[1]Intense.sys
+0be22b66935d711dae2b3fdae965e6e3|23044|data\profile\[1]Intense_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]Intense_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|data\profile\[1]IntenseARCH.sys
 622dd874d471d6a77afa2d36d9b9760d|808|data\profile\[1]Intensee.sys
