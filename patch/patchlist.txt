@@ -1,4 +1,4 @@
-#GUNSIN-PATCHLIST 2026-11-18 09:32:24
+#GUNSIN-PATCHLIST 2026-11-18 09:37:31
 4940ecd9186bd51a412f024decae3439|1184179|data\Config\config.pk
 e144d9f670c0379e64471dd630ae450c|3126|data\HyperText\bof8005.bmp
 a45f85d1f7e8260d0cf32190e3259b83|921654|data\HyperText\event_bg.bmp
@@ -266,5 +266,5 @@ fc706669db936d3dc92d948c8ab28340|33974|data\UI\shop\shop9926.bmp
 18a15c0558b30442300ad5c99438098a|33974|data\UI\shop\shop9929.bmp
 1609662345ef6e485d7ab67b8d6e1d6d|233984|Engine.dll
 7a684bab81c38fb29c0beb9b65ab3e2a|5709824|engine.exe
-f641fc811d2d1343326a4cf297a0f351|134144|GunsinLauncher.exe
+b2c430eb718ad55b3f26ed29e9ec1c79|140800|GunsinLauncher.exe
 1b9e1ac2a41bfc5a15af3e6e6be60db0|30890|map\lib\stone01.gb

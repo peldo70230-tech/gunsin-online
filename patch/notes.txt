@@ -1,0 +1,7 @@
+# Gunsin Online - sta je novo (launcher ovo prikazuje pod "Update notes")
+# Najnoviji update pisi NA VRH. Redovi koji pocinju sa # se ne prikazuju.
+# Poslije izmjene pokreni OBJAVI_UPDATE.bat
+
+2026-11-18
+- New launcher with automatic updates
+- Launcher settings: resolution, window mode, FPS limit
