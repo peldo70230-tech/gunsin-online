@@ -1,5 +1,5 @@
-#GUNSIN-PATCHLIST 2026-11-18 10:07:26
-d3adc2dc5b5f7762c9bb75ed68ee13bd|1184505|data\Config\config.pk
+#GUNSIN-PATCHLIST 2026-11-18 15:35:11
+4e720ee0d5195346c20b50b39b1efa30|1184652|data\Config\config.pk
 e144d9f670c0379e64471dd630ae450c|3126|data\HyperText\bof8005.bmp
 a45f85d1f7e8260d0cf32190e3259b83|921654|data\HyperText\event_bg.bmp
 02e574088770ae5c3374d04d46c135a0|3126|data\HyperText\item8000.bmp
@@ -22,6 +22,7 @@ d497d0501f604650f22fca93b4c507c2|3126|data\HyperText\item8071.bmp
 f5954b807ae555392f149c2e581f224e|3126|data\HyperText\item8076.bmp
 4de621cd24f600305cf2f5158da81328|3126|data\HyperText\item8077.bmp
 7f8f2da26b93f290bb4285bdeb59af05|3126|data\HyperText\item8078.bmp
+e5edcb0a175c624f92302810fac7f50d|3126|data\HyperText\item8079.bmp
 87606fddab8155dabd1594cb2e6a6dee|6291584|data\HyperText\Loadbg0.gtx
 ed6a4c7d0e715743a06281890276611b|6291584|data\HyperText\Loadbg1.gtx
 f01dfea6463c1492e45dd3ee73e99932|6291584|data\HyperText\Loadbg2.gtx
@@ -34,7 +35,9 @@ f01dfea6463c1492e45dd3ee73e99932|6291584|data\HyperText\Loadbg2.gtx
 3dfbe0cf34559dea72b95eb40d04a885|6291584|data\HyperText\Loadbg9.gtx
 844a1f15ec8a67eaeb52dc6089ccad1e|216054|data\HyperText\logo-company.bmp
 25414e457c760fa43e16ff8334a65936|216054|data\HyperText\logo-portal.bmp
-4964dd669dac17af89360ba34122ff2e|2107745|data\HyperText\nui\script.pk
+f0d76209d074b9660791a3758e1015f3|2109350|data\HyperText\nui\script.pk
+11e69dbf955dbfce402e2bce202b3cb7|6937|data\Item\Flag\Clothes\Eflag_08.gb
+0afd533329011be04c92f8d86bc6463b|65664|data\Item\Flag\Clothes\Tex\EflagBA.GTX
 70d0a60fb010e6d9e2daed8c6cebfc63|262272|data\MAPS\LightMap\2938.dds
 60d93d679b009230efdce22a69928808|787510|data\MAPS\n_027_027.kcm
 d33dc2a68c9a43f36568675d2d9ae3ed|179638|data\MAPS\n_028_028.opl
@@ -95,8 +98,8 @@ d4688ea031726514490602221c5877a9|808|data\profile\[1]HERMIT.sys
 3378dafabf202f32b7fafbca55ed8c4f|808|data\profile\[1]IG.sys
 b593096b589ea725f868b42aeb00520d|1412|data\profile\[1]IG_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]IG_QUEST.sys
-fdcec56d850ff97848c078395b97fed0|808|data\profile\[1]Intense.sys
-92f04a26cce52b19ea5e186bef6ec568|23044|data\profile\[1]Intense_Inven.sys
+f712aea97e657cc9249f6665bffc197d|808|data\profile\[1]Intense.sys
+39e34f586533118d01743db542124420|23044|data\profile\[1]Intense_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]Intense_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|data\profile\[1]IntenseARCH.sys
 622dd874d471d6a77afa2d36d9b9760d|808|data\profile\[1]Intensee.sys
@@ -264,7 +267,7 @@ fc706669db936d3dc92d948c8ab28340|33974|data\UI\shop\shop9926.bmp
 500696ae13835a07e040bd7ecd57199e|33974|data\UI\shop\shop9927.bmp
 6118d9045a943faac4ebe6aed16ee5ef|33974|data\UI\shop\shop9928.bmp
 18a15c0558b30442300ad5c99438098a|33974|data\UI\shop\shop9929.bmp
-1609662345ef6e485d7ab67b8d6e1d6d|233984|Engine.dll
+6cbe3610d58485259ad46e8b30a90221|234496|Engine.dll
 7a684bab81c38fb29c0beb9b65ab3e2a|5709824|engine.exe
 8366471ee38efc0ddc7898705143611c|141312|GunsinLauncher.exe
 1b9e1ac2a41bfc5a15af3e6e6be60db0|30890|map\lib\stone01.gb
