@@ -1,5 +1,5 @@
-#GUNSIN-PATCHLIST 2026-11-19 01:10:38
-f698e659199fe4e97558ab8753557d8e|1182970|data\Config\config.pk
+#GUNSIN-PATCHLIST 2026-11-19 01:50:21
+94a5005265e77e7929ee33b213900d5a|1182930|data\Config\config.pk
 e144d9f670c0379e64471dd630ae450c|3126|data\HyperText\bof8005.bmp
 adaa11ca6da7afd007a8d443246de851|1782|data\HyperText\buff_honor.bmp
 a45f85d1f7e8260d0cf32190e3259b83|921654|data\HyperText\event_bg.bmp
@@ -90,11 +90,11 @@ b1861eb2c943a9081a23ef31d4635d80|808|data\profile\[1]dss.sys
 dd82855341e9ddd1cf6787744dbe8fb1|1924|data\profile\[1]eldar_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]eldar_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|data\profile\[1]esae.sys
-aa41506f6d879cdd3f9b1d43dfb57881|808|data\profile\[1]GOB.sys
-e4fbcf38521020e4da8ef792c821b0a9|4100|data\profile\[1]GOB_Inven.sys
+98e318220a07f55dea12290f528aff18|808|data\profile\[1]GOB.sys
+11a4755b4f796f48257a0ccd41df245c|4100|data\profile\[1]GOB_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]GOB_QUEST.sys
-d4688ea031726514490602221c5877a9|808|data\profile\[1]HERMIT.sys
-7e8e521144b8d53cd7c4d8ea9cd46a9f|5124|data\profile\[1]HERMIT_Inven.sys
+a42e0e152fbf69701e30a9f78c671f01|808|data\profile\[1]HERMIT.sys
+47a99334555538ca1349e733d129f214|6020|data\profile\[1]HERMIT_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]HERMIT_QUEST.sys
 3378dafabf202f32b7fafbca55ed8c4f|808|data\profile\[1]IG.sys
 b593096b589ea725f868b42aeb00520d|1412|data\profile\[1]IG_Inven.sys
