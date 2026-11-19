@@ -1,5 +1,5 @@
-#GUNSIN-PATCHLIST 2026-11-18 18:30:38
-528b2c78fe91882ab1c8b0f1ceba359b|1184930|data\Config\config.pk
+#GUNSIN-PATCHLIST 2026-11-19 01:10:38
+f698e659199fe4e97558ab8753557d8e|1182970|data\Config\config.pk
 e144d9f670c0379e64471dd630ae450c|3126|data\HyperText\bof8005.bmp
 adaa11ca6da7afd007a8d443246de851|1782|data\HyperText\buff_honor.bmp
 a45f85d1f7e8260d0cf32190e3259b83|921654|data\HyperText\event_bg.bmp
@@ -65,8 +65,8 @@ c8cd723c2844e082f6b9be66b8643298|2692|data\profile\[1]adsd_Inven.sys
 e7c3cd1fbfa616fd12968138c2445ab0|808|data\profile\[1]CJB.sys
 c282ca45c0b1a4f2453cc4bef1d286dc|2948|data\profile\[1]CJB_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]CJB_QUEST.sys
-a9a6ffae399f1114174d70185065c909|808|data\profile\[1]COMMA.sys
-6ef51622a66a5a6b5e76b5817a604741|3076|data\profile\[1]COMMA_Inven.sys
+326a6b63932a041cd51c8df8d3274043|808|data\profile\[1]COMMA.sys
+87988c7152bebc5fca4f1f7a40697951|3076|data\profile\[1]COMMA_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]COMMA_QUEST.sys
 e5f2fbbc7d84d0e9aef5c6c7098d2080|808|data\profile\[1]ddd.sys
 3824504a3b8124297a7e2e3ac6402ba0|3844|data\profile\[1]ddd_Inven.sys
@@ -90,8 +90,8 @@ b1861eb2c943a9081a23ef31d4635d80|808|data\profile\[1]dss.sys
 dd82855341e9ddd1cf6787744dbe8fb1|1924|data\profile\[1]eldar_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]eldar_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|data\profile\[1]esae.sys
-9ae6dee89f8c2490c0cba59cd3127bed|808|data\profile\[1]GOB.sys
-98af48fa96236126c29b85eed3c2d25a|3076|data\profile\[1]GOB_Inven.sys
+aa41506f6d879cdd3f9b1d43dfb57881|808|data\profile\[1]GOB.sys
+e4fbcf38521020e4da8ef792c821b0a9|4100|data\profile\[1]GOB_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]GOB_QUEST.sys
 d4688ea031726514490602221c5877a9|808|data\profile\[1]HERMIT.sys
 7e8e521144b8d53cd7c4d8ea9cd46a9f|5124|data\profile\[1]HERMIT_Inven.sys
@@ -99,8 +99,8 @@ d4688ea031726514490602221c5877a9|808|data\profile\[1]HERMIT.sys
 3378dafabf202f32b7fafbca55ed8c4f|808|data\profile\[1]IG.sys
 b593096b589ea725f868b42aeb00520d|1412|data\profile\[1]IG_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]IG_QUEST.sys
-fdcec56d850ff97848c078395b97fed0|808|data\profile\[1]Intense.sys
-0be22b66935d711dae2b3fdae965e6e3|23044|data\profile\[1]Intense_Inven.sys
+9756165f9229e20cc490f7d74b237a7e|808|data\profile\[1]Intense.sys
+dad743b8906b795ec937b616b9aa4526|23044|data\profile\[1]Intense_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]Intense_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|data\profile\[1]IntenseARCH.sys
 622dd874d471d6a77afa2d36d9b9760d|808|data\profile\[1]Intensee.sys
@@ -134,7 +134,7 @@ d7128f9ab768ad507c010ce1f0770080|808|data\profile\[1]sss.sys
 45d6defa7694d36d20b860cfa4b11b19|2564|data\profile\[1]sss_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]sss_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|data\profile\[1]THIEF.sys
-33ee228c29f00f95267f3da233d572e0|1412|data\profile\[1]THIEF_Inven.sys
+e4ab6a4d598c0c90b183f56778d23b64|3588|data\profile\[1]THIEF_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]THIEF_QUEST.sys
 b41cf4a048d984b37311ca1279495889|808|data\profile\[1]THIEF1.sys
 704a260b19519ad27fea10ad021e5a82|1156|data\profile\[1]THIEF1_Inven.sys
