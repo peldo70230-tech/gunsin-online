@@ -359,6 +359,14 @@ input, textarea { cursor: text; }
 .vrow small { display: block; color: var(--ash); font-size: 12px; margin-top: 2px; }
 .vrow .btn { min-height: 36px; padding: 8px 14px; font-size: 13px; flex: none; }
 .d-vote .status { text-align: left; min-height: 0; margin: 8px 0 0; }
+.vtop { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+.vtop h4 { margin: 0 0 4px; font: 16px/1.2 var(--f-display); letter-spacing: .06em; color: var(--brass); }
+.vtop p { margin: 0 0 8px; color: var(--ash); font-size: 13px; }
+.vtop ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.vtop li { display: flex; justify-content: space-between; gap: 10px; padding: 6px 10px; border: 1px solid var(--line); background: rgba(0,0,0,.3); font-size: 14px; }
+.vtop li span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vtop li em { font-style: normal; color: var(--brass); margin-left: 8px; }
+.vtop li b { flex: none; font-weight: 500; }
 
 
 .vote-float { position: fixed; z-index: 45; right: max(18px, env(safe-area-inset-right, 0px)); top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 16px); display: inline-flex; align-items: center; gap: 8px;
@@ -785,6 +793,7 @@ html.onepage .scroll-hint { display: none; }
             <p class="acc-sub" id="vote-info">Vote for Gunsin Online on the top lists and get a reward for the selected character.</p>
             <div class="votes" id="vote-list"><p class="acc-sub">Voting is not open yet.</p></div>
             <p class="status" id="vote-status" role="status"></p>
+            <div class="vtop" id="vote-top" hidden></div>
           </section>
         </div>
         <div class="acc-settings" id="acc-settings">
@@ -1378,7 +1387,25 @@ html.onepage .scroll-hint { display: none; }
     });
     el.innerHTML = h;
   }
-  function loadVotes() { if (!TOKEN) return; apiCall("/vote/list", { token: TOKEN }).then(function (j) { if (!needRelogin(j)) voteRender(j); }).catch(function () {}); }
+  function voteTopRender(j) {
+    var el = document.getElementById("vote-top");
+    if (!j || !j.ok || !j.event) { el.hidden = true; el.innerHTML = ""; return; }
+    var pr = (j.prizes || []).join(" / ");
+    var h = "<h4>Vote Event</h4><p>" + (j.active ? "Vote every day until the server opens" + (j.to ? " (ends " + esc(j.to) + ")" : "") + "." : "The event has ended.")
+      + (pr ? " Top " + j.prizes.length + " voters win " + esc(pr) + " Donation Coins." : "") + " Every claimed vote counts, even before you have a character.</p>";
+    if (!j.top || !j.top.length) h += "<p>No votes yet. Be the first!</p>";
+    else {
+      h += "<ol>";
+      j.top.forEach(function (r, i) {
+        var p = j.prizes && j.prizes[i] ? "<em>" + esc(j.prizes[i]) + " DC</em>" : "";
+        h += "<li><span>" + (i + 1) + ". " + esc(r.name) + p + "</span><b>" + esc(r.votes) + (r.votes === 1 ? " vote" : " votes") + "</b></li>";
+      });
+      h += "</ol>";
+    }
+    el.innerHTML = h; el.hidden = false;
+  }
+  function loadVoteTop() { apiCall("/vote/top", {}).then(voteTopRender).catch(function () {}); }
+  function loadVotes() { if (!TOKEN) return; loadVoteTop(); apiCall("/vote/list", { token: TOKEN }).then(function (j) { if (!needRelogin(j)) voteRender(j); }).catch(function () {}); }
   document.getElementById("vote-list").addEventListener("click", function (e) {
     var b = e.target.closest ? e.target.closest("button") : null; if (!b) return;
     var vs = b.getAttribute("data-vote"), cs = b.getAttribute("data-claim");
@@ -1393,11 +1420,12 @@ html.onepage .scroll-hint { display: none; }
         loadVotes();
       }).catch(function (x) { if (win) win.close(); stat("vote-status", x.msg || "Error.", true); b.disabled = false; });
     } else if (cs) {
-      var c = curChar(); if (!c) return stat("vote-status", "Choose a character first.", true);
+      var c = curChar(); if (!c && ME && ME.chars && ME.chars.length) return stat("vote-status", "Choose a character first.", true);
       b.disabled = true; stat("vote-status", "Claiming…");
-      apiCall("/vote/claim", { token: TOKEN, site: +cs, pid: c.pid }).then(function (j) {
+      apiCall("/vote/claim", { token: TOKEN, site: +cs, pid: c ? c.pid : 0 }).then(function (j) {
         if (needRelogin(j)) return;
-        if (j.ok) { delete voteState[cs]; stat("vote-status", "Thank you! " + j.reward + " will arrive to " + j.character + " (log in to receive it)."); loadVotes(); loadMe(); }
+        if (j.ok && j.counted) { delete voteState[cs]; stat("vote-status", "Thank you! Your vote was counted for the Vote Event."); loadVotes(); }
+        else if (j.ok) { delete voteState[cs]; stat("vote-status", "Thank you! " + j.reward + " will arrive to " + j.character + " (log in to receive it)."); loadVotes(); loadMe(); }
         else { stat("vote-status", j.error || "Error.", true); b.disabled = false; }
       }).catch(function (x) { stat("vote-status", x.msg || "Error.", true); b.disabled = false; });
     }
