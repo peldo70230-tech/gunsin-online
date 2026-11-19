@@ -858,6 +858,7 @@ html.onepage .scroll-hint { display: none; }
         <button class="tab" role="tab" data-rank="honor" aria-selected="false" aria-controls="rank-panel">Honor</button>
         <button class="tab" role="tab" data-rank="class" aria-selected="false" aria-controls="rank-panel">Top per class</button>
         <button class="tab" role="tab" data-rank="guild" aria-selected="false" aria-controls="rank-panel">Guild</button>
+        <button class="tab" role="tab" data-rank="vote" aria-selected="false" aria-controls="rank-panel">Vote Event</button>
       </div>
       <div class="rank-wrap" id="rank-panel" role="tabpanel"></div>
       <p class="updated" id="rank-updated"></p>
@@ -1176,6 +1177,25 @@ html.onepage .scroll-hint { display: none; }
     box.hidden = false;
   }
   function okCls(r) { return !r || !r.cls || CLSIMG[r.cls]; }
+  /* Vote Event: top voters, read live from the account service */
+  var voteRank = null, voteRankErr = false;
+  function renderVoteRank(panel) {
+    var j = voteRank, h;
+    if (voteRankErr && !j) { panel.innerHTML = '<div class="empty"><b>Vote ranking is offline</b>Please try again in a few minutes.</div>'; return; }
+    if (!j) { panel.innerHTML = '<div class="empty"><b>Loading…</b></div>'; return; }
+    if (!j.ok || !j.event) { panel.innerHTML = '<div class="empty"><b>No vote event right now</b>Check back later.</div>'; return; }
+    var pr = (j.prizes || []).join(" / ");
+    var info = (j.active ? "Vote every day until the server opens" + (j.to ? " (ends " + esc(j.to) + ")" : "") + "." : "The event has ended.")
+      + (pr ? " Top " + j.prizes.length + " voters win " + esc(pr) + " Donation Coins." : "") + ' <a href="#account">Log in and vote</a>.';
+    if (!j.top || !j.top.length) { panel.innerHTML = '<div class="empty"><b>No votes yet</b>' + info + "</div>"; return; }
+    h = '<p class="updated" style="margin:0 0 10px">' + info + '</p><table class="rank"><thead><tr><th>#</th><th>Player</th><th>Votes</th><th>Prize</th></tr></thead><tbody>';
+    j.top.forEach(function (r, i) { h += '<tr><td class="pos">' + (i + 1) + "</td><td>" + esc(r.name) + "</td><td>" + esc(r.votes) + "</td><td>" + (j.prizes && j.prizes[i] ? esc(j.prizes[i]) + " DC" : "") + "</td></tr>"; });
+    panel.innerHTML = h + "</tbody></table>";
+  }
+  function loadVoteRank() {
+    apiCall("/vote/top", {}).then(function (j) { voteRank = j; voteRankErr = false; }, function () { voteRankErr = true; })
+      .then(function () { if (curKind === "vote") renderVoteRank(document.getElementById("rank-panel")); });
+  }
   function cleanData() { ["level", "class", "honor"].forEach(function (k) { if (Array.isArray(data[k])) data[k] = data[k].filter(okCls); }); }
   function render(kind) {
     cleanData();
@@ -1184,6 +1204,7 @@ html.onepage .scroll-hint { display: none; }
     document.querySelectorAll(".tab").forEach(function (b) { b.setAttribute("aria-selected", b.getAttribute("data-rank") === kind ? "true" : "false"); });
     var rows = data[kind] || [], panel = document.getElementById("rank-panel");
     panel.classList.toggle("rank-wrap", kind !== "level" && kind !== "honor");
+    if (kind === "vote") { renderVoteRank(panel); loadVoteRank(); document.getElementById("rank-updated").innerHTML = ""; return; }
     if (kind === "level" && rows.length) { renderLevel(panel); }
     else if (kind === "honor" && rows.length) { renderHonor(panel); }
     else if (!rows.length) { panel.innerHTML = '<div class="empty"><b>No ranking yet</b>Check back after the next update.</div>'; }
