@@ -1,0 +1,10 @@
+# Gunsin Online - sta je novo (launcher ovo prikazuje pod "Update notes")
+# Najnoviji update pisi NA VRH. Redovi koji pocinju sa # se ne prikazuju.
+# Poslije izmjene pokreni OBJAVI_UPDATE.bat
+
+2026-11-18
+- Honor Class Buff: your honor rank now gives a permanent bonus to all stats (+1 per rank), with its own buff icon
+- Server Time clock in the bottom right corner
+- Blessings of Asadal (15days) added to the Kal Shop (Buff Items)
+- New launcher with automatic updates
+- Launcher settings: resolution, window mode, FPS limit

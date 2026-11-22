@@ -1,0 +1,7 @@
+# Gunsin Online - vijesti na stranici
+# Svaka vijest je jedan red:  datum | oznaka | naslov | tekst
+# Najnovija vijest ide NA VRH. Stranica prikazuje 6 najnovijih.
+# Poslije izmjene pokreni OBJAVI_STRANICU.bat
+2026-11-09 | Update | Web shop & account panel | Create your account, check your characters and buy Donation Coins on the website.
+2026-11-01 | Update | Gunsin Online 1.0 | Battlefield arena, Duel Tournament, 3rd job and the first season are live.
+2026-10-28 | Event | Daily events | Duel Tournament every day at 16:00, Battlefield at 20:00.
