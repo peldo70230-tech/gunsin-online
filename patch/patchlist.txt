@@ -1,14 +1,5 @@
-#GUNSIN-PATCHLIST 2026-11-22 09:00:33
-c2a1ed65a69425e8d4aab4ed9a8deb45|117|_stari_ui\PRIMIJENI_STARI_UI.bat
-b0ffe1f2d8be0064f6c5518ed3f5f2ae|322|_stari_ui\PRIMIJENI_ZMAJEVE.bat
-e290fdc62fc8a586044b457500cf7627|1207|_stari_ui\prozirno.txt
-faf151724f41a847af7165c7714ad725|17015|_stari_ui\stari_ui.ps1
-97ac580bd94ab008a16af503274e59fc|555946|_stari_ui\stari_ui.zip
-f0c196c09f8854c24b5cc322348ed901|195|_stari_ui\VRATI_ENGINE.bat
-484ee586db3d29781d72f2e760dd821d|212|_stari_ui\VRATI_IKONE.bat
-de38a3e2145a567e0535a930be5ecbff|232|_stari_ui\VRATI_LOGIN.bat
-c1bcb7ca5a54b673cb4edaaadda95e9e|90|_stari_ui\VRATI_NOVI_UI.bat
-513ba4d5c8b8e535a16488354c6e6851|1182833|data\Config\config.pk
+#GUNSIN-PATCHLIST 2026-11-22 09:52:19
+a510e6bfd2af97ee7168f2f7125e0439|1182833|data\Config\config.pk
 e144d9f670c0379e64471dd630ae450c|3126|data\HyperText\bof8005.bmp
 adaa11ca6da7afd007a8d443246de851|1782|data\HyperText\buff_honor.bmp
 a45f85d1f7e8260d0cf32190e3259b83|921654|data\HyperText\event_bg.bmp
@@ -104,7 +95,7 @@ dd82855341e9ddd1cf6787744dbe8fb1|1924|data\profile\[1]eldar_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]eldar_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|data\profile\[1]esae.sys
 83045c737a7f4519f15eb12a3365f632|808|data\profile\[1]GOB.sys
-ff285bb66db39cf9089d5bfad2c39724|6404|data\profile\[1]GOB_Inven.sys
+cf6de2d254ffd3db2cc14c2d1b26ee2e|6404|data\profile\[1]GOB_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]GOB_QUEST.sys
 a7d01f17eaaea93924eac5253f0136b3|808|data\profile\[1]HERMIT.sys
 3d17431a46f75452927ba7f0be2b3cb6|6660|data\profile\[1]HERMIT_Inven.sys
@@ -813,12 +804,5 @@ c7ab2c303c7f1ddfd9f351aeddec7de3|251734|data\UI\warehouse-image.bmp
 19d567683f1f81f1978b4a31bbcafed4|53334|data\UI\yinyang_back.bmp
 68de36058381ec972fab38b332705da8|236032|Engine.dll
 b5870cb30e2f54ef45cdc9aa8c9a0c87|5709824|engine.exe
-9a1843c91e6b141e2c92127dbba68996|5709824|engine_dva_prozora.exe
-7a684bab81c38fb29c0beb9b65ab3e2a|5709824|engine_exp_centar.exe
-5deec432fd7964662988fd9d68f2b12a|5709824|engine_jedan_prozor_v1.exe
-ef4a15a301f7d26cb1ba7b7387b5d3ac|5709824|engine_jedan_prozor_v2.exe
-56ab67ed2b93a0228c979bfd16f68ec1|5709824|engine_spojeno_v1.exe
-f8ead7ca43d1a5d36f07d67b16a19b2a|5709824|engine_stari_inventar_radi.exe
-b5870cb30e2f54ef45cdc9aa8c9a0c87|5709824|engine_zmajevi.exe
 8366471ee38efc0ddc7898705143611c|141312|GunsinLauncher.exe
 1b9e1ac2a41bfc5a15af3e6e6be60db0|30890|map\lib\stone01.gb
