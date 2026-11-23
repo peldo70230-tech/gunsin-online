@@ -1,5 +1,5 @@
-#GUNSIN-PATCHLIST 2026-11-23 22:10:56
-17e08c7d28b2231f26ec39f0791b9dfa|1192737|data\Config\config.pk
+#GUNSIN-PATCHLIST 2026-11-23 22:42:00
+81d702bf51c2010d68f542f07e687160|1192733|data\Config\config.pk
 79526c429e0fa0f9c3627cc8f6fd86e9|6671|data\Config\GunsinQuestMobs.txt
 e144d9f670c0379e64471dd630ae450c|3126|data\HyperText\bof8005.bmp
 adaa11ca6da7afd007a8d443246de851|1782|data\HyperText\buff_honor.bmp
@@ -98,7 +98,7 @@ dd82855341e9ddd1cf6787744dbe8fb1|1924|data\profile\[1]eldar_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]eldar_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|data\profile\[1]esae.sys
 1223f99284fa6fc77a13025053ced43e|808|data\profile\[1]GOB.sys
-ff12cd8b24a4df409a78b46f6ce0e5a0|8324|data\profile\[1]GOB_Inven.sys
+ab19e83d6193c4b2a33c203592f7a876|9348|data\profile\[1]GOB_Inven.sys
 a9cec76d4f78b426d09b1dd4f9e6dddd|12|data\profile\[1]GOB_QUEST.sys
 a7d01f17eaaea93924eac5253f0136b3|808|data\profile\[1]HERMIT.sys
 c420e5b8b5f79cb5075c037db3bbfde5|6660|data\profile\[1]HERMIT_Inven.sys
