@@ -234,6 +234,10 @@ input, textarea { cursor: text; }
 /* Latest news: no frame, text straight on the picture */
 #news .panel { background: none; border: 0; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
 #news .panel h2, #news .news, #news .events { text-shadow: 0 1px 4px rgba(0,0,0,.9); }
+.uivid { margin: 18px 0 22px; background: rgba(10,6,5,.74); border: 1px solid var(--line); box-shadow: 0 10px 40px rgba(0,0,0,.5); }
+.uivid .dl-tabs { margin: 0 14px; }
+.uivid video { display: block; width: 100%; aspect-ratio: 16/9; background: #000; }
+.uivid .cap { margin: 0; padding: 10px 14px 12px; font-size: 14px; color: #e6dfd3; }
 #news .news p, #news .event .next { color: #e6dfd3; }
 #news .event { background: none; border: 0; border-top: 1px solid var(--line); padding: 12px 0 0; }
 /* Create account: same see-through look as Login */
@@ -637,6 +641,14 @@ html.onepage .scroll-hint { display: none; }
         <li><time datetime="2026-11-01">01 Nov 2026</time><div><span class="tag">Update</span><h3>Gunsin Online 1.0</h3><p>Battlefield arena, Duel Tournament, 3rd job and the first season are live.</p></div></li>
         <li><time datetime="2026-10-28">28 Oct 2026</time><div><span class="tag">Event</span><h3>Daily events</h3><p>Duel Tournament every day at 16:00, Battlefield at 20:00.</p></div></li>
       </ul>
+      <div class="uivid">
+        <div class="dl-tabs" role="tablist" aria-label="Interface">
+          <button type="button" role="tab" class="dl-tab ui-tab" data-ui="old" aria-selected="true">Old UI</button>
+          <button type="button" role="tab" class="dl-tab ui-tab" data-ui="new" aria-selected="false">New UI</button>
+        </div>
+        <video id="ui-video" src="assets/video/ui_old.mp4" poster="assets/video/ui_old.jpg" controls playsinline preload="none"></video>
+        <p class="cap">Pick your interface in the launcher: Settings &rarr; Interface &rarr; Old UI or New UI.</p>
+      </div>
       <div class="events">
         <div class="event"><div class="t">16:00</div><div class="n">Duel Tournament</div><div class="next" data-at="16:00">&nbsp;</div></div>
         <div class="event"><div class="t">20:00</div><div class="n">Battlefield</div><div class="next" data-at="20:00">&nbsp;</div></div>
@@ -1227,6 +1239,18 @@ html.onepage .scroll-hint { display: none; }
   loadRanking(); setInterval(loadRanking, 120000);
 
 
+  /* Old UI / New UI video tabs */
+  (function () {
+    var v = document.getElementById("ui-video"); if (!v) return;
+    document.querySelectorAll(".ui-tab").forEach(function (b) {
+      b.addEventListener("click", function () {
+        document.querySelectorAll(".ui-tab").forEach(function (x) { x.setAttribute("aria-selected", x === b ? "true" : "false"); });
+        var k = b.getAttribute("data-ui"), play = !v.paused;
+        v.src = "assets/video/ui_" + k + ".mp4"; v.poster = "assets/video/ui_" + k + ".jpg";
+        if (play) v.play().catch(function () {});
+      });
+    });
+  })();
   /* News from news.txt (one item per line: date | tag | title | text) */
   (function () {
     if (!window.fetch || location.protocol === "file:") return;
