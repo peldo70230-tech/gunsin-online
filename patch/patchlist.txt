@@ -1,5 +1,5 @@
-#GUNSIN-PATCHLIST 2026-11-23 22:42:00
-81d702bf51c2010d68f542f07e687160|1192733|data\Config\config.pk
+#GUNSIN-PATCHLIST 2026-11-23 22:57:39
+e6f083255274b437d3ba99f8dd420f24|1192733|data\Config\config.pk
 79526c429e0fa0f9c3627cc8f6fd86e9|6671|data\Config\GunsinQuestMobs.txt
 e144d9f670c0379e64471dd630ae450c|3126|data\HyperText\bof8005.bmp
 adaa11ca6da7afd007a8d443246de851|1782|data\HyperText\buff_honor.bmp
@@ -98,7 +98,7 @@ dd82855341e9ddd1cf6787744dbe8fb1|1924|data\profile\[1]eldar_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]eldar_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|data\profile\[1]esae.sys
 1223f99284fa6fc77a13025053ced43e|808|data\profile\[1]GOB.sys
-ab19e83d6193c4b2a33c203592f7a876|9348|data\profile\[1]GOB_Inven.sys
+e931d6ad7b5b4cc4fdfa04525b5584ba|11012|data\profile\[1]GOB_Inven.sys
 a9cec76d4f78b426d09b1dd4f9e6dddd|12|data\profile\[1]GOB_QUEST.sys
 a7d01f17eaaea93924eac5253f0136b3|808|data\profile\[1]HERMIT.sys
 c420e5b8b5f79cb5075c037db3bbfde5|6660|data\profile\[1]HERMIT_Inven.sys
@@ -349,7 +349,7 @@ a6335895ea1de4158063cfd1b908714e|1463768|data\UI\UI-Login-popup-image.bmp
 04075baf2d7e7bbce31313636d4d93ac|241152|Engine.dll
 33b651a9f6724b38a3ab5be0e7bfe25f|142848|GunsinLauncher.exe
 1b9e1ac2a41bfc5a15af3e6e6be60db0|30890|map\lib\stone01.gb
-4bdeefbf92250aec1c4350805feab00e|2140852|uiset\new\data\HyperText\nui\script.pk
+4d4ef92d5ba67171ce0433b22d547ddf|2762780|uiset\new\data\HyperText\nui\script.pk
 e24e5e930b3791f926112d1a15fa91f9|224|uiset\new\data\UI\action-prograss-l.bmp
 07df9f7157d44fab4fe867ab44d236ea|224|uiset\new\data\UI\action-prograss-r.bmp
 61c26164f9a324275c85e29cfb684d91|408714|uiset\new\data\UI\info-inventory-image_dva_prozora.bmp
@@ -367,7 +367,7 @@ d17ca667f42addfccf9498bbb7a11bf8|308|uiset\new\data\UI\main-prograss-red-c.bmp
 50037a6468db4e7de309e67ca1f35748|74|uiset\new\data\UI\main-prograss-target mophp-r.bmp
 b9e44d0ed3f9e19e87d1154d858d0ce9|16438|uiset\new\data\UI\stari-kompas.bmp
 5eba2b09a9a9a82ed98b83cdbc64373a|5709824|uiset\new\engine.exe
-c13d4b5441b139d5a465580f5917c0eb|1984413|uiset\old\data\HyperText\nui\script.pk
+3fb46305f2b6272162e00c33481d2b0f|2606341|uiset\old\data\HyperText\nui\script.pk
 eeea15ad0983516869a4e8da980554c1|18596|uiset\old\data\UI\700+_down.bmp
 9b482a579c523742d3a41fc903ac4c31|18596|uiset\old\data\UI\700+_nor.bmp
 edd01c86577677d1bf5fa56e4ab41ddc|18596|uiset\old\data\UI\700+_up.bmp
