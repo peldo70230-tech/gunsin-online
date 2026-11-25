@@ -1,6 +1,6 @@
-#GUNSIN-PATCHLIST 2026-11-25 06:41:40
-97fe24d162e3f12313dfa6fa392ca59d|1192927|data\Config\config.pk
-79526c429e0fa0f9c3627cc8f6fd86e9|6671|data\Config\GunsinQuestMobs.txt
+#GUNSIN-PATCHLIST 2026-11-25 07:12:31
+78f0783db290e8b80751eb0d1d845365|1193060|data\Config\config.pk
+e15365175370a59270115e1117ecb505|6866|data\Config\GunsinQuestMobs.txt
 532e7b73936b8983528bf46149e1c4bf|16512|data\Effect\Tex\Gunma028_01.gtx
 e144d9f670c0379e64471dd630ae450c|3126|data\HyperText\bof8005.bmp
 adaa11ca6da7afd007a8d443246de851|1782|data\HyperText\buff_honor.bmp
@@ -620,8 +620,8 @@ dd82855341e9ddd1cf6787744dbe8fb1|1924|data\profile\[1]eldar_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]eldar_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|data\profile\[1]esae.sys
 1223f99284fa6fc77a13025053ced43e|808|data\profile\[1]GOB.sys
-ab1b7363f37ef139eb7c32254d4d6382|13444|data\profile\[1]GOB_Inven.sys
-1243edad5f4868e8c32dbce34b7ceadd|12|data\profile\[1]GOB_QUEST.sys
+173334b43bee4d29daba714dfc7e8aeb|14212|data\profile\[1]GOB_Inven.sys
+eb7a191d2cc5365cce3756885945b233|20|data\profile\[1]GOB_QUEST.sys
 a7d01f17eaaea93924eac5253f0136b3|808|data\profile\[1]HERMIT.sys
 c420e5b8b5f79cb5075c037db3bbfde5|6660|data\profile\[1]HERMIT_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]HERMIT_QUEST.sys
@@ -894,7 +894,7 @@ d17ca667f42addfccf9498bbb7a11bf8|308|uiset\new\data\UI\main-prograss-red-c.bmp
 50037a6468db4e7de309e67ca1f35748|74|uiset\new\data\UI\main-prograss-target mophp-r.bmp
 b9e44d0ed3f9e19e87d1154d858d0ce9|16438|uiset\new\data\UI\stari-kompas.bmp
 5eba2b09a9a9a82ed98b83cdbc64373a|5709824|uiset\new\engine.exe
-50777713dbc04e6f20e4cbfc343fd84f|2732473|uiset\old\data\HyperText\nui\script.pk
+d0026aaa6e17de5fba53f7387627c3b9|2732492|uiset\old\data\HyperText\nui\script.pk
 eeea15ad0983516869a4e8da980554c1|18596|uiset\old\data\UI\700+_down.bmp
 9b482a579c523742d3a41fc903ac4c31|18596|uiset\old\data\UI\700+_nor.bmp
 edd01c86577677d1bf5fa56e4ab41ddc|18596|uiset\old\data\UI\700+_up.bmp

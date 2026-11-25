@@ -13,6 +13,7 @@
 12 1|Big Handed Red Warrior
 13 2|Demon Infantry
 14 1|Demon Throwing Soldier
+15 2|Wild Demon Soldier
 16 1|Demon Shock Trooper
 17 1|Demon Flag Bearer
 18 1|Demon Water Dragon|Hungry Demon Water Dragon|Demon Water Dragon Predator|Demon Water Dragon Commander
@@ -202,3 +203,6 @@
 4380 1|Devil Soldier with Twin Blades
 4381 1|Demon Shock Trooper
 4382 1|Demon Water Dragon
+27 2|Castoff Baby Ghost
+9004 2|Demon Commander
+9005 3|Castoff Baby Ghost|Ghost of Young Man|Ghost of Young Woman|Ghost of Blacksmith|Ghost of Guard|Sealed Ghost Troop
