@@ -1,5 +1,5 @@
-#GUNSIN-PATCHLIST 2026-11-25 16:30:39
-094a810f1b8561719bf3faed0ac62502|1193108|0|data\Config\config.pk
+#GUNSIN-PATCHLIST 2026-11-25 18:33:43
+fda0ca7d9fe30bbb38b2f13798c76b03|1193108|0|data\Config\config.pk
 e15365175370a59270115e1117ecb505|6866|1915|data\Config\GunsinQuestMobs.txt
 532e7b73936b8983528bf46149e1c4bf|16512|4517|data\Effect\Tex\Gunma028_01.gtx
 e144d9f670c0379e64471dd630ae450c|3126|0|data\HyperText\bof8005.bmp
@@ -1020,7 +1020,7 @@ d4a3f417aad25227bea9e60c360d0364|8456|314|data\UI\stari-tab1-on.bmp
 ab59a8d6c6f47b4b567e8a8cf2ee01e1|1134534|1170|data\UI\UI-boo-back.bmp
 a6335895ea1de4158063cfd1b908714e|1463768|42687|data\UI\UI-Login-popup-image.bmp
 f46d636cd43bd5eb3033672e4cc19d3c|244736|105138|Engine.dll
-4791a0dc2e73c4ab394bae86f7af0382|144896|0|GunsinLauncher.exe
+f931058553be255d8591b534c20b2fbc|144896|0|GunsinLauncher.exe
 1b9e1ac2a41bfc5a15af3e6e6be60db0|30890|13056|map\lib\stone01.gb
 a96737a08832e7b305705254f40c0607|2888253|2471253|uiset\new\data\HyperText\nui\script.pk
 e24e5e930b3791f926112d1a15fa91f9|224|0|uiset\new\data\UI\action-prograss-l.bmp
