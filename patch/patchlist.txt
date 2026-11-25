@@ -1,5 +1,5 @@
-#GUNSIN-PATCHLIST 2026-11-25 07:12:31
-78f0783db290e8b80751eb0d1d845365|1193060|data\Config\config.pk
+#GUNSIN-PATCHLIST 2026-11-25 13:36:14
+80b40be9eff5ab4aa47139d09840ae47|1193108|data\Config\config.pk
 e15365175370a59270115e1117ecb505|6866|data\Config\GunsinQuestMobs.txt
 532e7b73936b8983528bf46149e1c4bf|16512|data\Effect\Tex\Gunma028_01.gtx
 e144d9f670c0379e64471dd630ae450c|3126|data\HyperText\bof8005.bmp
@@ -578,6 +578,15 @@ ee064a7ff4075b3ced1c4aeecee149ec|174904|data\OBJECTS\common\tex\sample_sky_5.GTX
 bfe47fd79e5a20fa9b17852b7fa2dcc5|43833|data\OBJECTS\common\tex\tree_b_02.dds
 1a791770fa406d80e28454b6f54c05b0|43832|data\OBJECTS\common\tex\tree_b_02.GTX
 970d0a732469dcc916cc07792cea1048|808|data\profile\[1]aa.sys
+b0775343efb397d33e4bfd498b832221|808|data\profile\[1]aaa2.sys
+3675077d17b4f47544554440f44a1fbd|1156|data\profile\[1]aaa2_Inven.sys
+5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]aaa2_QUEST.sys
+b0775343efb397d33e4bfd498b832221|808|data\profile\[1]aaa3.sys
+d6989578ced7ea916fdb07dfc7439e45|1156|data\profile\[1]aaa3_Inven.sys
+5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]aaa3_QUEST.sys
+b0775343efb397d33e4bfd498b832221|808|data\profile\[1]aaaa1.sys
+59a7b35228311f58ef119e387c37b9af|1028|data\profile\[1]aaaa1_Inven.sys
+5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]aaaa1_QUEST.sys
 aa2189e0e4a54e4d6f3676ca35dd881f|808|data\profile\[1]aaaaa.sys
 d7feb0c6283957d9fecea2fda9d83568|2692|data\profile\[1]aaaaa_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]aaaaa_QUEST.sys
@@ -619,17 +628,17 @@ b1861eb2c943a9081a23ef31d4635d80|808|data\profile\[1]dss.sys
 dd82855341e9ddd1cf6787744dbe8fb1|1924|data\profile\[1]eldar_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]eldar_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|data\profile\[1]esae.sys
-1223f99284fa6fc77a13025053ced43e|808|data\profile\[1]GOB.sys
-173334b43bee4d29daba714dfc7e8aeb|14212|data\profile\[1]GOB_Inven.sys
-eb7a191d2cc5365cce3756885945b233|20|data\profile\[1]GOB_QUEST.sys
+b761e2195b2ad7941d14027f2fd64c00|808|data\profile\[1]GOB.sys
+a898ea272a37217d6c12ef0d72e3ea4c|17156|data\profile\[1]GOB_Inven.sys
+5307212e784903de70625a890b6130cc|12|data\profile\[1]GOB_QUEST.sys
 a7d01f17eaaea93924eac5253f0136b3|808|data\profile\[1]HERMIT.sys
-c420e5b8b5f79cb5075c037db3bbfde5|6660|data\profile\[1]HERMIT_Inven.sys
+4876528006a4c860c674f968a1bd7cb6|6532|data\profile\[1]HERMIT_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]HERMIT_QUEST.sys
 3378dafabf202f32b7fafbca55ed8c4f|808|data\profile\[1]IG.sys
 b593096b589ea725f868b42aeb00520d|1412|data\profile\[1]IG_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]IG_QUEST.sys
-fdcec56d850ff97848c078395b97fed0|808|data\profile\[1]Intense.sys
-acdc73af3e156ef1a765f6cda6ecb923|23044|data\profile\[1]Intense_Inven.sys
+f0b44020c3869054251c36e9bd0fa891|808|data\profile\[1]Intense.sys
+a3fc7f550231abbbcb1da0019319273e|23172|data\profile\[1]Intense_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|data\profile\[1]Intense_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|data\profile\[1]IntenseARCH.sys
 622dd874d471d6a77afa2d36d9b9760d|808|data\profile\[1]Intensee.sys
@@ -687,6 +696,10 @@ dc1e2d7625a047d096bbeae9ca6c6234|87536|data\Ride\Clothes\Tex\Tta002_b5.gtx
 059073fbf66409e3e2102952d4ae2739|162454|data\UI\_NUI_original\kal-shop-item-back.bmp
 6483e9c5ecbdc751f0e25fdc2cf51eae|178694|data\UI\_NUI_original\kal-shop-list.bmp
 6db8cbd3b023ccec844d345d8289d45e|102184|data\UI\_NUI_original\main-menu.bmp
+e62bb1e35a3873ea18934b7ebf0a70bd|81436|data\UI\action-image-focus.bmp
+26a029a0ef81bbe72fe8651fa0774614|222|data\UI\action-prograss-focus-C.bmp
+6165fd4fcad657711f74697f3c4d0b0f|222|data\UI\action-prograss-focus-L.bmp
+b3db5f788ce322c249d410448d981f89|222|data\UI\action-prograss-focus-R.bmp
 fc52b59e352636f346c561ff3c16da02|25165878|data\UI\background-image.bmp
 86129d0fc8dd28c51d032753b23f0935|1654|data\UI\CostumeIgnore_Empty.bmp
 dc7c778a77e677d2791450ecfceeb6f4|1654|data\UI\CostumeIgnore_OFF.bmp
@@ -873,7 +886,7 @@ d4a3f417aad25227bea9e60c360d0364|8456|data\UI\stari-tab1-on.bmp
 825a7bd39be861ce13266c78bd1d2a35|8454|data\UI\stari-tab2-on.bmp
 ab59a8d6c6f47b4b567e8a8cf2ee01e1|1134534|data\UI\UI-boo-back.bmp
 a6335895ea1de4158063cfd1b908714e|1463768|data\UI\UI-Login-popup-image.bmp
-c2c87476dc442011a939fb3d9e78984b|242176|Engine.dll
+f46d636cd43bd5eb3033672e4cc19d3c|244736|Engine.dll
 33b651a9f6724b38a3ab5be0e7bfe25f|142848|GunsinLauncher.exe
 1b9e1ac2a41bfc5a15af3e6e6be60db0|30890|map\lib\stone01.gb
 a96737a08832e7b305705254f40c0607|2888253|uiset\new\data\HyperText\nui\script.pk
@@ -894,15 +907,15 @@ d17ca667f42addfccf9498bbb7a11bf8|308|uiset\new\data\UI\main-prograss-red-c.bmp
 50037a6468db4e7de309e67ca1f35748|74|uiset\new\data\UI\main-prograss-target mophp-r.bmp
 b9e44d0ed3f9e19e87d1154d858d0ce9|16438|uiset\new\data\UI\stari-kompas.bmp
 5eba2b09a9a9a82ed98b83cdbc64373a|5709824|uiset\new\engine.exe
-d0026aaa6e17de5fba53f7387627c3b9|2732492|uiset\old\data\HyperText\nui\script.pk
+e8ea88733573ace4ce7c70b87d7904be|2765907|uiset\old\data\HyperText\nui\script.pk
 eeea15ad0983516869a4e8da980554c1|18596|uiset\old\data\UI\700+_down.bmp
 9b482a579c523742d3a41fc903ac4c31|18596|uiset\old\data\UI\700+_nor.bmp
 edd01c86577677d1bf5fa56e4ab41ddc|18596|uiset\old\data\UI\700+_up.bmp
-e62bb1e35a3873ea18934b7ebf0a70bd|81436|uiset\old\data\UI\action-image.bmp
-e62bb1e35a3873ea18934b7ebf0a70bd|81436|uiset\old\data\UI\action-image_notx.bmp
-26a029a0ef81bbe72fe8651fa0774614|222|uiset\old\data\UI\action-prograss-c.bmp
-6165fd4fcad657711f74697f3c4d0b0f|222|uiset\old\data\UI\action-prograss-l.bmp
-b3db5f788ce322c249d410448d981f89|222|uiset\old\data\UI\action-prograss-r.bmp
+5d398d24576f56a4d498046cf322bfad|81436|uiset\old\data\UI\action-image.bmp
+adf36d850629503a0829afff636cf423|81436|uiset\old\data\UI\action-image_notx.bmp
+11cfda6d3e96fb2aad279ad02b3919e6|224|uiset\old\data\UI\action-prograss-c.bmp
+e24e5e930b3791f926112d1a15fa91f9|224|uiset\old\data\UI\action-prograss-l.bmp
+07df9f7157d44fab4fe867ab44d236ea|224|uiset\old\data\UI\action-prograss-r.bmp
 904fe27abec484c0d8ffb583f2688523|318496|uiset\old\data\UI\area info-image.bmp
 e5b3d4663154b8914a4f3c1d44253164|177214|uiset\old\data\UI\auction(register)-image.bmp
 dd268414f2d90a52da44a06722a42096|67848|uiset\old\data\UI\auction(slot)-image.bmp
@@ -1370,4 +1383,4 @@ bcf3e17564a702293d98aa5eeadd078c|175448|uiset\old\data\UI\ui-server select list.
 501652a8ae69f4758bb4618c47e0a3f3|111656|uiset\old\data\UI\ui-server select-serverlist back.bmp
 c7ab2c303c7f1ddfd9f351aeddec7de3|251734|uiset\old\data\UI\warehouse-image.bmp
 19d567683f1f81f1978b4a31bbcafed4|53334|uiset\old\data\UI\yinyang_back.bmp
-352d3fb6d05a07337f4cac8278706c7a|5709824|uiset\old\engine.exe
+350d92edadcc8e5cecae0b5021f0660d|5709824|uiset\old\engine.exe
