@@ -1,5 +1,5 @@
-#GUNSIN-PATCHLIST 2026-11-25 18:33:43
-fda0ca7d9fe30bbb38b2f13798c76b03|1193108|0|data\Config\config.pk
+#GUNSIN-PATCHLIST 2026-11-26 22:43:18
+5ff5001eeef855f198bf43a943293b7b|1193801|0|data\Config\config.pk
 e15365175370a59270115e1117ecb505|6866|1915|data\Config\GunsinQuestMobs.txt
 532e7b73936b8983528bf46149e1c4bf|16512|4517|data\Effect\Tex\Gunma028_01.gtx
 e144d9f670c0379e64471dd630ae450c|3126|0|data\HyperText\bof8005.bmp
@@ -27,6 +27,11 @@ f5954b807ae555392f149c2e581f224e|3126|1768|data\HyperText\item8076.bmp
 4de621cd24f600305cf2f5158da81328|3126|1795|data\HyperText\item8077.bmp
 7f8f2da26b93f290bb4285bdeb59af05|3126|1465|data\HyperText\item8078.bmp
 e5edcb0a175c624f92302810fac7f50d|3126|1288|data\HyperText\item8079.bmp
+984e93f1bf5d3f4e8891b381923f3e85|3128|2364|data\HyperText\item9871.bmp
+18e1b62036b208a46ce582f466bbfdd1|3128|2346|data\HyperText\item9872.bmp
+a721c3d15f64ef8c843cfd1756e4576b|3128|2434|data\HyperText\item9873.bmp
+1dd6b33176241c4391b74f34e5ae65cf|3128|2291|data\HyperText\item9874.bmp
+6570979f61e3710533415c6e2a057bd2|3128|2106|data\HyperText\item9875.bmp
 87606fddab8155dabd1594cb2e6a6dee|6291584|5352137|data\HyperText\Loadbg0.gtx
 ed6a4c7d0e715743a06281890276611b|6291584|5244483|data\HyperText\Loadbg1.gtx
 f01dfea6463c1492e45dd3ee73e99932|6291584|5389398|data\HyperText\Loadbg2.gtx
@@ -39,6 +44,10 @@ f01dfea6463c1492e45dd3ee73e99932|6291584|5389398|data\HyperText\Loadbg2.gtx
 3dfbe0cf34559dea72b95eb40d04a885|6291584|5202682|data\HyperText\Loadbg9.gtx
 844a1f15ec8a67eaeb52dc6089ccad1e|216054|21636|data\HyperText\logo-company.bmp
 25414e457c760fa43e16ff8334a65936|216054|20346|data\HyperText\logo-portal.bmp
+d5fb98d6bf16ab7c61af4cfe7befaabe|43832|133|data\HyperText\MiniMap\minimap_Dungeon_HL-ALL_000.gtx
+d5fb98d6bf16ab7c61af4cfe7befaabe|43832|133|data\HyperText\MiniMap\minimap_Dungeon_HL-ALL_001.gtx
+d5fb98d6bf16ab7c61af4cfe7befaabe|43832|133|data\HyperText\MiniMap\minimap_Dungeon_HL-ALL_002.gtx
+d5fb98d6bf16ab7c61af4cfe7befaabe|43832|133|data\HyperText\MiniMap\minimap_Dungeon_HL-ALL_003.gtx
 d18b26fe6b91e8ab50c9135e10c8240b|1956163|0|data\HyperText\nui\script_dva_prozora.pk
 733b8f8a09ef823a3b44990f2c2c5a10|1956148|0|data\HyperText\nui\script_jedan_prozor_v1.pk
 c61c0b59ec013f96affff18d03d90214|1956147|0|data\HyperText\nui\script_spojeno_s_okvirima.pk
@@ -758,8 +767,8 @@ b1861eb2c943a9081a23ef31d4635d80|808|0|data\profile\[1]dss.sys
 dd82855341e9ddd1cf6787744dbe8fb1|1924|0|data\profile\[1]eldar_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|0|data\profile\[1]eldar_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|0|data\profile\[1]esae.sys
-b761e2195b2ad7941d14027f2fd64c00|808|0|data\profile\[1]GOB.sys
-a898ea272a37217d6c12ef0d72e3ea4c|17156|1473|data\profile\[1]GOB_Inven.sys
+1e3bd1d0416038a2fc30c57aade7a0d6|808|0|data\profile\[1]GOB.sys
+00a30e1a8523392fd13d5fed5f541a8a|18436|1560|data\profile\[1]GOB_Inven.sys
 5307212e784903de70625a890b6130cc|12|0|data\profile\[1]GOB_QUEST.sys
 a7d01f17eaaea93924eac5253f0136b3|808|0|data\profile\[1]HERMIT.sys
 4876528006a4c860c674f968a1bd7cb6|6532|691|data\profile\[1]HERMIT_Inven.sys
@@ -767,8 +776,8 @@ a7d01f17eaaea93924eac5253f0136b3|808|0|data\profile\[1]HERMIT.sys
 3378dafabf202f32b7fafbca55ed8c4f|808|0|data\profile\[1]IG.sys
 b593096b589ea725f868b42aeb00520d|1412|0|data\profile\[1]IG_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|0|data\profile\[1]IG_QUEST.sys
-0ab199d2e1b45570fa8f82035e17811f|808|0|data\profile\[1]Intense.sys
-d515a93c8c7ae81e84fd1aef0822b140|23044|1974|data\profile\[1]Intense_Inven.sys
+e30ae2514f0e94dda6b955fdd5fbb647|808|0|data\profile\[1]Intense.sys
+d9e9f38774a3121fbc311a49b0c2502a|23044|1954|data\profile\[1]Intense_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|0|data\profile\[1]Intense_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|0|data\profile\[1]IntenseARCH.sys
 622dd874d471d6a77afa2d36d9b9760d|808|0|data\profile\[1]Intensee.sys
@@ -1019,10 +1028,10 @@ d4a3f417aad25227bea9e60c360d0364|8456|314|data\UI\stari-tab1-on.bmp
 825a7bd39be861ce13266c78bd1d2a35|8454|321|data\UI\stari-tab2-on.bmp
 ab59a8d6c6f47b4b567e8a8cf2ee01e1|1134534|1170|data\UI\UI-boo-back.bmp
 a6335895ea1de4158063cfd1b908714e|1463768|42687|data\UI\UI-Login-popup-image.bmp
-f46d636cd43bd5eb3033672e4cc19d3c|244736|105138|Engine.dll
+142e9d66d4e277547ba6a65bd92e7280|246272|106045|Engine.dll
 f931058553be255d8591b534c20b2fbc|144896|0|GunsinLauncher.exe
 1b9e1ac2a41bfc5a15af3e6e6be60db0|30890|13056|map\lib\stone01.gb
-a96737a08832e7b305705254f40c0607|2888253|2471253|uiset\new\data\HyperText\nui\script.pk
+c1921f200bfd9729d0f2e837165bba54|2889482|2472615|uiset\new\data\HyperText\nui\script.pk
 e24e5e930b3791f926112d1a15fa91f9|224|0|uiset\new\data\UI\action-prograss-l.bmp
 07df9f7157d44fab4fe867ab44d236ea|224|0|uiset\new\data\UI\action-prograss-r.bmp
 61c26164f9a324275c85e29cfb684d91|408714|2383|uiset\new\data\UI\info-inventory-image_dva_prozora.bmp
@@ -1040,7 +1049,7 @@ d17ca667f42addfccf9498bbb7a11bf8|308|0|uiset\new\data\UI\main-prograss-red-c.bmp
 50037a6468db4e7de309e67ca1f35748|74|0|uiset\new\data\UI\main-prograss-target mophp-r.bmp
 b9e44d0ed3f9e19e87d1154d858d0ce9|16438|5543|uiset\new\data\UI\stari-kompas.bmp
 5eba2b09a9a9a82ed98b83cdbc64373a|5709824|2330598|uiset\new\engine.exe
-e8ea88733573ace4ce7c70b87d7904be|2765907|0|uiset\old\data\HyperText\nui\script.pk
+d14de6184a9877f53516cb9624bc7240|2767278|0|uiset\old\data\HyperText\nui\script.pk
 eeea15ad0983516869a4e8da980554c1|18596|3330|uiset\old\data\UI\700+_down.bmp
 9b482a579c523742d3a41fc903ac4c31|18596|3299|uiset\old\data\UI\700+_nor.bmp
 edd01c86577677d1bf5fa56e4ab41ddc|18596|2906|uiset\old\data\UI\700+_up.bmp
