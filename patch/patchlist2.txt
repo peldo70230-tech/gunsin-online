@@ -1,5 +1,5 @@
-#GUNSIN-PATCHLIST 2026-11-26 22:43:18
-5ff5001eeef855f198bf43a943293b7b|1193801|0|data\Config\config.pk
+#GUNSIN-PATCHLIST 2026-11-26 22:51:57
+c706d54d64825398a7e1956bbbae7705|1193801|0|data\Config\config.pk
 e15365175370a59270115e1117ecb505|6866|1915|data\Config\GunsinQuestMobs.txt
 532e7b73936b8983528bf46149e1c4bf|16512|4517|data\Effect\Tex\Gunma028_01.gtx
 e144d9f670c0379e64471dd630ae450c|3126|0|data\HyperText\bof8005.bmp
@@ -776,7 +776,7 @@ a7d01f17eaaea93924eac5253f0136b3|808|0|data\profile\[1]HERMIT.sys
 3378dafabf202f32b7fafbca55ed8c4f|808|0|data\profile\[1]IG.sys
 b593096b589ea725f868b42aeb00520d|1412|0|data\profile\[1]IG_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|0|data\profile\[1]IG_QUEST.sys
-e30ae2514f0e94dda6b955fdd5fbb647|808|0|data\profile\[1]Intense.sys
+f0b44020c3869054251c36e9bd0fa891|808|0|data\profile\[1]Intense.sys
 d9e9f38774a3121fbc311a49b0c2502a|23044|1954|data\profile\[1]Intense_Inven.sys
 5868f47b23d307e5748b82a3fe76acac|12|0|data\profile\[1]Intense_QUEST.sys
 970d0a732469dcc916cc07792cea1048|808|0|data\profile\[1]IntenseARCH.sys

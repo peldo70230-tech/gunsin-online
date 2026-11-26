@@ -8,3 +8,11 @@
 - Blessings of Asadal (15days) added to the Kal Shop (Buff Items)
 - New launcher with automatic updates
 - Launcher settings: resolution, window mode, FPS limit
+
+Update 26.11.2026
+- Picture of Hell now has three levels: 30-39, 40-49 and 50+ (party only, once every 12 hours, reward: 1 bar of EXP)
+- Fixed a client crash when entering Picture of Hell
+- The whole world is now covered in snow
+- Dungeon quests reworked: new names, new quest items and icons
+- Archer: Staggering Blow now repeats on the same target automatically
+- Faster launcher updates
